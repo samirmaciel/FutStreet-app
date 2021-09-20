@@ -7,31 +7,74 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
+        android:id="@+id/fragmentHost"
         android:layout_width="match_parent"
+        android:layout_height="310dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        android:background="@drawable/main_cardview_background"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            app:navGraph="@navigation/navfragment" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titleRecycler"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/last_games"
+        app:layout_constraintTop_toBottomOf="@id/fragmentHost"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+       android:layout_marginVertical="10dp"
+        android:fontFamily="@font/baloo2bold"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lastGamesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/titleRecycler" />
 
-        <LinearLayout
-            android:id="@+id/fragmentHost"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:orientation="vertical"
-            android:background="@drawable/main_cardview_background">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-            <fragment
-                android:id="@+id/fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
-                app:navGraph="@navigation/navfragment"/>
-
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ad"
+            android:textSize="20sp" />
 
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+
+
+
 
 
 
