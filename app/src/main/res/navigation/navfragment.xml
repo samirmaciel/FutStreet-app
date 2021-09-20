@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_gameSettingFragment"
-            app:destination="@id/gameSettingFragment" />
+            app:destination="@id/gameSettingFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
@@ -21,11 +23,19 @@
         tools:layout="@layout/fragment_gamesettings" >
         <action
             android:id="@+id/action_gameSettingFragment_to_gameReadyFragment"
-            app:destination="@id/gameReadyFragment" />
+            app:destination="@id/gameReadyFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
     </fragment>
     <fragment
         android:id="@+id/gameReadyFragment"
         android:name="com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment"
         android:label="fragment_gameready"
-        tools:layout="@layout/fragment_gameready" />
+        tools:layout="@layout/fragment_gameready" >
+        <action
+            android:id="@+id/action_gameReadyFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
+    </fragment>
 </navigation>

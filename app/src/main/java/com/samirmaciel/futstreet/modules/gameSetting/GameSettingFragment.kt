@@ -3,6 +3,7 @@ package com.samirmaciel.futstreet.modules.gameSetting
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
 
@@ -14,6 +15,8 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
       _binding = FragmentGamesettingsBinding.bind(view)
+
+        binding.titleText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_gameSettingFragment_to_gameReadyFragment))
     }
 
 

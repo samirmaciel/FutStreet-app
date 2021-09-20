@@ -3,6 +3,8 @@ package com.samirmaciel.futstreet.modules.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentHomeBinding
 
@@ -15,6 +17,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
 
+        binding.titleText.setOnClickListener{
+            it.findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment)
+        }
     }
 
 
