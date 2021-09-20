@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/drawable/main_cardview_background.xml" value="0.3953125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.37916666666666665" />
+        <entry key="app/src/main/res/layout/fragment_gameready.xml" value="0.37916666666666665" />
+        <entry key="app/src/main/res/layout/fragment_gamesettings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
       </map>
     </option>
   </component>

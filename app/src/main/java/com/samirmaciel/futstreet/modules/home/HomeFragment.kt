@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.homeFragment
+package com.samirmaciel.futstreet.modules.home
 
 import android.os.Bundle
 import android.view.View
