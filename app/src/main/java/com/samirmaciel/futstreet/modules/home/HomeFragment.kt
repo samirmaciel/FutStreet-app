@@ -3,28 +3,62 @@ package com.samirmaciel.futstreet.modules.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentHomeBinding
+import com.samirmaciel.futstreet.shared.adapter.SlideDescriptionPager
+import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding : FragmentHomeBinding get() = _binding!!
+    lateinit var mSlideAdapter : SlideDescriptionPager
+    private val timer = Timer()
+    private val viewModel : HomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
-
-        binding.titleText.setOnClickListener{
-            it.findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment)
-        }
+        initPagerSlide(viewModel.getDescriptions())
+        timer.scheduleAtFixedRate(SlideTimer(this), 4000, 6000)
     }
 
 
+    private fun initPagerSlide(mList : MutableList<Int>){
+       mSlideAdapter = SlideDescriptionPager(requireContext(), mList)
+       binding.viewPageDescription.adapter = mSlideAdapter
+        binding.tabIndicator.setupWithViewPager(binding.viewPageDescription)
+    }
+
+    inner class SlideTimer(private val fragment : Fragment) : TimerTask(){
+        override fun run() {
+            fragment.requireActivity().runOnUiThread(object : Runnable{
+                override fun run() {
+                    if(mSlideAdapter.mStringList.size > 0){
+                        if(binding.viewPageDescription.currentItem < mSlideAdapter.mStringList.size - 1){
+                            binding.viewPageDescription.currentItem = binding.viewPageDescription.currentItem + 1
+                        }else{
+                            binding.viewPageDescription.currentItem = 0
+                        }
+                    }
+                }
+
+            })
+        }
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        timer.cancel()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        timer.cancel()
         _binding = null
     }
 }

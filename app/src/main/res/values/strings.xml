@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">FutStreet</string>
     <string name="last_games">Últimos jogos</string>
+
+
+
+    // Descriptions of slide on HomeFragment
+    <string name="description_one">Organize suas partidas de forma rápida e prática.</string>
+    <string name="description_two">Personalize as opções de seu jogo da melhor maneira.</string>
+    <string name="description_three">Notificação com informações em tempo real de seu jogo.</string>
 </resources>
