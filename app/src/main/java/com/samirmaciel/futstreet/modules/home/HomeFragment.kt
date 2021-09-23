@@ -31,7 +31,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onStart() {
         super.onStart()
-        timer.scheduleAtFixedRate(SlideTimer(this), 4000, 6000)
         Log.d("HOMEFRAGMENT", "onStart: ")
         binding.buttonNewPlay.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment)
@@ -51,7 +50,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 override fun run() {
                     if(mSlideAdapter.mStringList.size > 0){
                         if(binding.viewPageDescription.currentItem < mSlideAdapter.mStringList.size - 1){
-                            binding.viewPageDescription.currentItem = binding.viewPageDescription.currentItem + 1
+                            binding.viewPageDescription.currentItem++
+
                         }else{
                             binding.viewPageDescription.currentItem = 0
                         }
