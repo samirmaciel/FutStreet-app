@@ -1,9 +1,11 @@
 package com.samirmaciel.futstreet.modules.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
@@ -23,7 +25,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
         initPagerSlide(viewModel.getDescriptions())
+        Log.d("HOMEFRAGMENT", "onViewCreated: "+ binding.viewPageDescription.currentItem )
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         timer.scheduleAtFixedRate(SlideTimer(this), 4000, 6000)
+        Log.d("HOMEFRAGMENT", "onStart: ")
+        binding.buttonNewPlay.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment)
+        }
     }
 
 
@@ -51,13 +63,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        timer.scheduleAtFixedRate(SlideTimer(this), 4000, 6000 )
+    }
+
     override fun onPause() {
         super.onPause()
+        Log.d("HOMEFRAGMENT", "onPause: ")
         timer.cancel()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d("HOMEFRAGMENT", "onDestroy: ")
         timer.cancel()
         _binding = null
     }

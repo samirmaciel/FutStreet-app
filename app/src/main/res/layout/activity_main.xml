@@ -37,7 +37,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
        android:layout_marginVertical="10dp"
-        android:fontFamily="@font/baloo2bold"
+        android:fontFamily="@font/baloo2regular"
         app:layout_constraintStart_toStartOf="parent"/>
 
 

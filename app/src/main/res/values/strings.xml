@@ -8,4 +8,7 @@
     <string name="description_one">Organize suas partidas de forma rápida e prática.</string>
     <string name="description_two">Personalize as opções de seu jogo da melhor maneira.</string>
     <string name="description_three">Notificação com informações em tempo real de seu jogo.</string>
+    <string name="new_play">Nova Partida</string>
+    <string name="championship">Campeonato</string>
+    <string name="about">Sobre</string>
 </resources>
