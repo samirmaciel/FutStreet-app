@@ -5,20 +5,28 @@ import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.DialogFragmentNavigatorDestinationBuilder
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
+import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.GameSettingViewModel
+import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
 
 class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
     private var _binding : FragmentGamesettingsBinding? = null
     private val binding : FragmentGamesettingsBinding get() = _binding!!
+    private val viewModel : GameSettingViewModel by activityViewModels()
+
+    private val SHIRT_SELECTION_FRAGMENT = "SHIRT_SELECTION_FRAGMENT"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,20 +38,27 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         super.onStart()
 
         binding.selectShirtTeam1.setOnClickListener{
-
-            val layoutInflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view = layoutInflater.inflate(R.layout.select_shirt_grid, null)
-
-            val alert = AlertDialog.Builder(requireContext()).apply {
-                setView(view)
+            val shirtSelection = ShirtSelectionDialog {
+                for ((k, v) in viewModel.getListOfShirts()) {
+                    if (it == k) {
+                        binding.selectShirtTeam1.setImageResource(v)
+                    }
+                }
             }
-            alert.create()
-            alert.show()
-            val shirtBlue = view.findViewById<ImageView>(R.id.shirtBlue)
 
-            shirtBlue.setOnClickListener{
-                Toast.makeText(requireContext(), "Camisa Azul Selecionada", Toast.LENGTH_SHORT).show()
+            shirtSelection.show(childFragmentManager, SHIRT_SELECTION_FRAGMENT)
+        }
+
+        binding.selectShirtTeam2.setOnClickListener{
+            val shirtSelectionDialog = ShirtSelectionDialog{
+                for((k , v) in viewModel.getListOfShirts()){
+                    if(it == k){
+                        binding.selectShirtTeam2.setImageResource(v)
+                    }
+                }
             }
+
+            shirtSelectionDialog.show(childFragmentManager, SHIRT_SELECTION_FRAGMENT)
         }
 
         binding.buttonReady.setOnClickListener{

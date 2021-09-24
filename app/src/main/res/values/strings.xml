@@ -20,4 +20,5 @@
     <string name="hint_minutes">Minutos</string>
     <string name="button_ready">Pronto</string>
     <string name="button_cancel">Cancelar</string>
+    <string name="select_shirt_title">Selecione a camisa</string>
 </resources>
