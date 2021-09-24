@@ -11,4 +11,13 @@
     <string name="new_play">Nova Partida</string>
     <string name="championship">Campeonato</string>
     <string name="about">Sobre</string>
+    <string name="game_settings">Configuração de jogo</string>
+    <string name="hint_teamone">Time1</string>
+    <string name="hint_teamtwo">Time2</string>
+    <string name="hint_number">Número</string>
+    <string name="number_of_times">Números de tempos:</string>
+    <string name="time_of_round">Tempo de partida:</string>
+    <string name="hint_minutes">Minutos</string>
+    <string name="button_ready">Pronto</string>
+    <string name="button_cancel">Cancelar</string>
 </resources>

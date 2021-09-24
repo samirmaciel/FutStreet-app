@@ -26,6 +26,11 @@
             app:destination="@id/gameReadyFragment"
             app:enterAnim="@anim/enter_animation"
             app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_gameSettingFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/exit_animation"
+            app:exitAnim="@anim/enter_animation"/>/>
     </fragment>
     <fragment
         android:id="@+id/gameReadyFragment"
@@ -37,5 +42,8 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/enter_animation"
             app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_gameReadyFragment_to_gameSettingFragment"
+            app:destination="@id/gameSettingFragment" />
     </fragment>
 </navigation>

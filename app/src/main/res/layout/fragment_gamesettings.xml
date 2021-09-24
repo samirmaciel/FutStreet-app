@@ -7,20 +7,166 @@
     android:background="@color/blue"
     tools:context=".modules.gameSetting.GameSettingFragment">
 
+
     <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo2regular"
-        android:text="FragmentGameSetting"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/textView2"
+        style="@style/head_title"
+        android:text="@string/game_settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.596"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam1"
+            style="@style/shirt_select"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/shirt_select" />
+
+        <EditText
+            style="@style/inputText"
+            android:hint="@string/hint_teamone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:fontFamily="@font/baloo2semibold"
+            android:text="X"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <EditText
+            style="@style/inputText"
+            android:hint="@string/hint_teamtwo" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam2"
+            style="@style/shirt_select"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/shirt_select" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewTimes"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/yellow">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:fontFamily="@font/baloo2regular"
+                android:textSize="18sp"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_times"/>
+
+            <EditText
+                android:id="@+id/inputNumberOfTimes"
+                style="@style/inputText"
+                android:textColor="@color/black"
+                android:inputType="number"
+                android:layout_width="50dp"
+                android:maxLength="1"
+                android:layout_marginEnd="20dp"
+                android:hint="0"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewTimeRounds"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cardViewTimes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/yellow">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:fontFamily="@font/baloo2regular"
+                android:textSize="18sp"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_of_round"/>
+
+            <EditText
+                android:id="@+id/inputMinutesOfRound"
+                style="@style/inputText"
+                android:textColor="@color/black"
+                android:inputType="number"
+                android:layout_width="wrap_content"
+                android:maxLength="2"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:hint="@string/hint_minutes"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cardViewTimeRounds"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonReady"
+            style="@style/button_menu"
+            android:text="@string/button_ready"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="10dp"
+            android:backgroundTint="@color/green"
+            app:cornerRadius="15dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCancel"
+            style="@style/button_menu"
+            app:cornerRadius="15dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/button_cancel"
+            app:layout_constraintStart_toEndOf="@id/buttonReady"
+            app:layout_constraintTop_toTopOf="@id/buttonReady"/>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

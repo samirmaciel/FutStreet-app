@@ -3,11 +3,44 @@
 
     <style name="button_menu">
         <item name="android:layout_width">130dp</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">45dp</item>
         <item name="android:backgroundTint">@color/yellow</item>
         <item name="android:fontFamily">@font/baloo2semibold</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="head_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:fontFamily">@font/baloo2regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="shirt_imageView">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">90dp</item>
+    </style>
+
+    <style name="shirt_select" parent="shirt_imageView">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
+    <style name="inputText">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/baloo2regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLength">8</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 

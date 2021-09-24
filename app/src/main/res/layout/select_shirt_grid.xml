@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="186dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                style="@style/head_title"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:text="Seleciona a camsisa"/>
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="4">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtBlue"
+                    android:src="@drawable/shirt_blue"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtRed"
+                    android:src="@drawable/shirt_red"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtOrange"
+                    android:src="@drawable/shirt_orange"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtBrown"
+                    android:src="@drawable/shirt_brown"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtBlack"
+                    android:src="@drawable/shirt_black"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtPink"
+                    android:src="@drawable/shirt_pink"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtGreen"
+                    android:src="@drawable/shirt_green"
+                    style="@style/shirt_imageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shirtYellow"
+                    android:src="@drawable/shirt_yellow"
+                    style="@style/shirt_imageView" />
+
+            </GridLayout>
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</LinearLayout>
