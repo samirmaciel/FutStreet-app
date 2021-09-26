@@ -1,5 +1,7 @@
 package com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
@@ -15,6 +17,11 @@ class ShirtSelectionDialog(private val onClick : (Int) -> Unit) : DialogFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = SelectShirtGridBinding.bind(view)
+        dialog?.window?.setBackgroundDrawable(
+            ColorDrawable(
+                Color
+            .TRANSPARENT)
+        )
     }
 
     override fun onStart() {

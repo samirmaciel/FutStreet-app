@@ -1,23 +1,12 @@
 package com.samirmaciel.futstreet.modules.gameSetting
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import android.text.Layout
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.DialogFragmentNavigatorDestinationBuilder
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
-import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.GameSettingViewModel
 import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
 
 class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){

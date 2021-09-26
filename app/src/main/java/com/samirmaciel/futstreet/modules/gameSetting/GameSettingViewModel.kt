@@ -1,6 +1,5 @@
-package com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment
+package com.samirmaciel.futstreet.modules.gameSetting
 
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
 
