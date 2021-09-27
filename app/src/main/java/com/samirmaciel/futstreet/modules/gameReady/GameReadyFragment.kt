@@ -1,6 +1,7 @@
 package com.samirmaciel.futstreet.modules.gameReady
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,7 +20,11 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         getSettings()
 
         binding.buttonStart.setOnClickListener{
-            findNavController().navigate(R.id.action_gameReadyFragment_to_homeFragment)
+
+        }
+
+        binding.buttonGameCancel.setOnClickListener{
+            findNavController().navigate(R.id.action_gameReadyFragment_to_gameSettingFragment)
         }
     }
 
@@ -32,6 +37,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
                 it
             )
         }
+
         arguments?.getInt("ShirtTeamTwo", R.drawable.shirt_select)?.let{
             binding.imageShirtTeamTwo.setImageResource(
                 it

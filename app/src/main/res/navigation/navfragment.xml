@@ -43,6 +43,8 @@
             app:enterAnim="@anim/enter_animation"
             app:exitAnim="@anim/exit_animation"/>
         <action
+            app:enterAnim="@anim/enter_animation_inverted"
+            app:exitAnim="@anim/exit_animation_inverted"
             android:id="@+id/action_gameReadyFragment_to_gameSettingFragment"
             app:destination="@id/gameSettingFragment" />
     </fragment>
