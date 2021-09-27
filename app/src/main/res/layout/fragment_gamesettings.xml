@@ -34,6 +34,7 @@
             android:src="@drawable/shirt_select" />
 
         <EditText
+            android:id="@+id/inputNameTeamOne"
             style="@style/inputText"
             android:hint="@string/hint_teamone" />
 
@@ -47,6 +48,7 @@
             android:textSize="25sp" />
 
         <EditText
+            android:id="@+id/inputNameTeamTwo"
             style="@style/inputText"
             android:hint="@string/hint_teamtwo" />
 

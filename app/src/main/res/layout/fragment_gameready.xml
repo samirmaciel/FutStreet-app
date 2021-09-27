@@ -45,6 +45,7 @@
                 android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageShirtTeamOne"
                 style="@style/shirt_select"
                 android:src="@drawable/shirt_select" />
 
@@ -140,6 +141,7 @@
                 android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageShirtTeamTwo"
                 style="@style/shirt_select"
                 android:src="@drawable/shirt_select" />
 

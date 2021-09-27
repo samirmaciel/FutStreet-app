@@ -65,7 +65,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onResume() {
         super.onResume()
-        timer.scheduleAtFixedRate(SlideTimer(this), 4000, 6000 )
+        timer.scheduleAtFixedRate(SlideTimer(this), 2000, 4000 )
     }
 
     override fun onPause() {

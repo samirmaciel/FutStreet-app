@@ -31,6 +31,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
                 for ((k, v) in viewModel.getListOfShirts()) {
                     if (it == k) {
                         binding.selectShirtTeam1.setImageResource(v)
+                        viewModel.shirtTeamOne = v
                     }
                 }
             }
@@ -43,6 +44,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
                 for((k , v) in viewModel.getListOfShirts()){
                     if(it == k){
                         binding.selectShirtTeam2.setImageResource(v)
+                        viewModel.shirtTeamTwo = v
                     }
                 }
             }
@@ -51,7 +53,15 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
 
         binding.buttonReady.setOnClickListener{
-            findNavController().navigate(R.id.action_gameSettingFragment_to_gameReadyFragment)
+            val arguments = Bundle().apply {
+                putString("NameTeamOne", binding.inputNameTeamOne.text.toString())
+                putString("NameTeamTwo", binding.inputNameTeamTwo.text.toString())
+                putInt("ShirtTeamOne", viewModel.shirtTeamOne)
+                putInt("ShirtTeamTwo", viewModel.shirtTeamTwo)
+                putString("Rounds", binding.inputNumberOfTimes.text.toString())
+                putString("Time", binding.inputMinutesOfRound.text.toString())
+            }
+            findNavController().navigate(R.id.action_gameSettingFragment_to_gameReadyFragment, arguments)
         }
 
         binding.buttonCancel.setOnClickListener{
