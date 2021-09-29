@@ -77,7 +77,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
                 viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
             }
             if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
-                viewModel.timeForRound.value = binding.inputMinutesOfRound.text.toString().toDouble()
+                viewModel.timeForRound.value = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
             }
 
             return true
@@ -124,8 +124,8 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
 
         viewModel.timeForRound.observe(this){
-            if(it.roundToInt() > 0){
-                binding.inputMinutesOfRound.setText(it.roundToInt().toString())
+            if(it > 0){
+                binding.inputMinutesOfRound.setText(it.toString())
             }
 
         }
@@ -138,7 +138,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
             putInt("ShirtTeamOne", viewModel.shirtTeamOne.value!!)
             putInt("ShirtTeamTwo", viewModel.shirtTeamTwo.value!!)
             putInt("Rounds", viewModel.roundsOfPlay.value!!)
-            putDouble("Time", viewModel.timeForRound.value!!)
+            putDouble("roundTime", viewModel.timeForRound.value!!)
         }
 
         return arguments
