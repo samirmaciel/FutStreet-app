@@ -31,7 +31,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("TIMESERVICE", "onCreate: ")
+        Log.d("DEBUGTESTE", "FRAGMENT onCreate: ")
         serviceIntent = Intent(requireContext().applicationContext, BackgroundService::class.java)
         requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
 
@@ -47,6 +47,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         binding.buttonGameCancel.setOnClickListener{
+            requireActivity().stopService(serviceIntent)
             findNavController().navigate(R.id.action_gameReadyFragment_to_gameSettingFragment)
         }
     }
@@ -90,6 +91,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
     override fun onResume() {
         super.onResume()
+        Log.d("DEBUGTESTE", "FRAGMENT onResume: ")
         requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
         viewModel.timeLimit.observe(this){
             binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
@@ -98,14 +100,15 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
     override fun onStop() {
         super.onStop()
-        Log.d("TIMESERVICE", "onStop: ")
+        Log.d("DEUBGTESTE", "FRAGMENT onStop: ")
         requireActivity().unregisterReceiver(updateTime)
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("TIMESERVICE", "onDestroy: ")
+        requireActivity().unregisterReceiver(updateTime)
+        Log.d("DEBUGTESTE", "FRAGMENT onDestroy: ")
         _binding = null
     }
 }

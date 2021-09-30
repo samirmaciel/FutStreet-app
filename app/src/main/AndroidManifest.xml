@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FutStreet">
         <activity
+            android:launchMode="singleInstance"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
