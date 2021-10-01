@@ -41,7 +41,12 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentGamereadyBinding.bind(view)
         getSettings()
+
         binding.buttonStart.setOnClickListener{
+            serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeamOne.value)
+            serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeamTwo.value)
+            serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeamOne.value)
+            serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeamTwo.value)
             serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModel.timeLimit.value)
             requireActivity().startService(serviceIntent)
         }
@@ -61,8 +66,14 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     }
 
     private fun getSettings() {
-        binding.textNameTeamOne.setText(arguments?.getString("NameTeamOne"))
-        binding.textNameTeamTwo.setText(arguments?.getString("NameTeamTwo"))
+
+        arguments?.getString("NameTeamOne")?.let {
+            viewModel.nameTeamOne.value = it
+        }
+
+        arguments?.getString("NameTeamTwo")?.let {
+            viewModel.nameTeamTwo.value = it
+        }
 
         arguments?.getDouble("roundTime")?.let {
             viewModel.timeLimit.value = it
@@ -73,15 +84,11 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         arguments?.getInt("ShirtTeamOne", R.drawable.shirt_select)?.let {
-            binding.imageShirtTeamOne.setImageResource(
-                it
-            )
+            viewModel.shirtTeamOne.value = it
         }
 
         arguments?.getInt("ShirtTeamTwo", R.drawable.shirt_select)?.let{
-            binding.imageShirtTeamTwo.setImageResource(
-                it
-            )
+            viewModel.shirtTeamTwo.value = it
         }
 
         binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
@@ -93,6 +100,23 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         super.onResume()
         Log.d("DEBUGTESTE", "FRAGMENT onResume: ")
         requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
+
+        viewModel.nameTeamOne.observe(this){
+            binding.textNameTeamOne.setText(it)
+        }
+
+        viewModel.nameTeamTwo.observe(this){
+            binding.textNameTeamTwo.setText(it)
+        }
+
+        viewModel.shirtTeamOne.observe(this){
+            binding.imageShirtTeamOne.setImageResource(it)
+        }
+
+        viewModel.shirtTeamTwo.observe(this){
+            binding.imageShirtTeamTwo.setImageResource(it)
+        }
+
         viewModel.timeLimit.observe(this){
             binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
         }

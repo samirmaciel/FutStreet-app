@@ -1,15 +1,13 @@
 package com.samirmaciel.futstreet.shared.service
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.MainActivity
 import com.samirmaciel.futstreet.R
@@ -23,6 +21,12 @@ class BackgroundService : Service(){
     private val timer = Timer()
 
     var timeLimit : Double = 0.0
+
+    var nameTeamOne : String = "TeamOne"
+    var nameTeamTwo : String = "TeamTwo"
+
+    var shirtTeamOne : Int = R.drawable.shirt_select
+    var shirtTeamTwo : Int = R.drawable.shirt_select
 
     var scoreTeamOne : Int = 0
     var scoreTeamTwo : Int = 0
@@ -38,6 +42,10 @@ class BackgroundService : Service(){
     companion object {
         const val SCORE_T1 = "SCORE_T1"
         const val SCORE_T2 = "SCORE_T2"
+        const val NAME_TEAMONE = "NAME_TEAMONE"
+        const val NAME_TEAMTWO = "NAME_TEAMTWO"
+        const val SHIRT_TEAMONE = "SHIRT_TEAMONE"
+        const val SHIRT_TEAMTWO = "SHIRT_TEAMTWO"
         const val TIME_LIMIT = "TIME_LIMIT"
         const val CURRENT_ROUND = "CURRENT_ROUND"
         const val UPDATE_TIME = "UPDATE_TIME"
@@ -55,6 +63,10 @@ class BackgroundService : Service(){
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
+        nameTeamOne = intent.getStringExtra(NAME_TEAMONE).toString()
+        nameTeamTwo = intent.getStringExtra(NAME_TEAMTWO).toString()
+        shirtTeamOne = intent.getIntExtra(SHIRT_TEAMONE, R.drawable.shirt_pink)
+        shirtTeamTwo = intent.getIntExtra(SHIRT_TEAMTWO, R.drawable.shirt_pink)
         timer.scheduleAtFixedRate(TimerLine(), 0, 1000)
         Log.d("TIMESERVICE", "onStartCommand: ")
         return START_NOT_STICKY
@@ -76,26 +88,36 @@ class BackgroundService : Service(){
                 intentUpdate.putExtra(SCORE_T1, scoreTeamOne)
                 intentUpdate.putExtra(SCORE_T2, scoreTeamTwo)
                 intentUpdate.putExtra(CURRENT_ROUND, currentRound)
-                callNotification(getTimeStringFromDouble(timeLimit))
+                callNotification(getTimeStringFromDouble(timeLimit), nameTeamOne, nameTeamTwo, 1, 2, shirtTeamOne, shirtTeamTwo)
                 sendBroadcast(intentUpdate)
                 Log.d("TIMESERVICE", "run: " + timeLimit)
             }
         }
     }
 
-    private fun callNotification(notificationString : String){
+    @SuppressLint("RemoteViewLayout")
+    private fun callNotification(time : String, nameTeamOne : String, nameTeamTwo : String, scoreTeamOne : Int, scoreTeamTwo : Int, shirtTeamOne : Int, shirtTeamTwo : Int){
 
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
         val pedingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
 
+        val notificationLayout = RemoteViews(packageName, R.layout.notification_layout)
+        notificationLayout.setTextViewText(R.id.textTime, time)
+        notificationLayout.setTextViewText(R.id.textTeamOneName, nameTeamOne)
+        notificationLayout.setTextViewText(R.id.textTeamTwoName, nameTeamTwo)
+        notificationLayout.setImageViewResource(R.id.shirtTeamOne, shirtTeamOne)
+        notificationLayout.setImageViewResource(R.id.shirtTeamTwo, shirtTeamTwo)
+        notificationLayout.setTextViewText(R.id.textScore, "$scoreTeamOne X $scoreTeamTwo")
+
         var notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_sports_soccer_24)
-            .setContentTitle("FutStreet")
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+            .setCustomContentView(notificationLayout)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setContentIntent(pedingIntent)
             .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setContentText(notificationString)
+            .setContentText(time)
         startForeground(NOTIFICATION_ID, notification.build())
     }
 
@@ -120,7 +142,6 @@ class BackgroundService : Service(){
         val seconds = resultInt % 86400 % 3600 % 60
 
         return makeTimeString( minutes, seconds)
-
     }
 
     private fun makeTimeString( minutes: Int, seconds: Int) : String{
