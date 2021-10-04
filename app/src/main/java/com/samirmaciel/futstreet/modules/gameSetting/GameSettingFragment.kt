@@ -118,9 +118,14 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
                 viewModel.nameTeamTwo.value = binding.inputNameTeamTwo.text.toString()
             }
 
+            if(binding.inputNumberOfTimes.text.isNotEmpty()){
+                viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
+            }
+
             if(binding.inputNumberOfTimes.text.toString().isNotEmpty()){
                 viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
             }
+
             if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
                 viewModel.timeForRound.value = binding.inputMinutesOfRound.text.toString().toInt()
             }

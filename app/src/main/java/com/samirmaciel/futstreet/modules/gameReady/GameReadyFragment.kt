@@ -28,7 +28,10 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 viewModel.timeLimit.value = 0.0
+                viewModel.timeLimit.value = viewModel.timeLimitPresentation.value
+                binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimitPresentation.value!!))
                 viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
+                requireActivity().stopService(serviceIntent)
             }
         }
     }
@@ -43,14 +46,18 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentGamereadyBinding.bind(view)
+
         getSettings()
 
         binding.buttonStart.setOnClickListener{
+
             serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeamOne.value)
             serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeamTwo.value)
             serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeamOne.value)
             serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeamTwo.value)
             serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModel.timeLimit.value)
+            serviceIntent.putExtra(BackgroundService.ROUND_LIMIT, viewModel.roundsLimit.value)
+            serviceIntent.putExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value)
             requireActivity().startService(serviceIntent)
         }
 
@@ -64,7 +71,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         super.onStart()
 
         viewModel.timeLimit.observe(this){
-            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
+            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!))
         }
     }
 
@@ -89,7 +96,10 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         viewModel.timeLimit.observe(this){
-            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
+            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!))
+        }
+        viewModel.currentRound.observe(this){
+            binding.textCurrentRound.setText("${viewModel.currentRound.value}°")
         }
     }
 
@@ -105,6 +115,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         arguments?.getDouble("roundTime")?.let {
             viewModel.timeLimit.value = it
+            viewModel.timeLimitPresentation.value = it
         }
 
         arguments?.getInt("Rounds")?.let {
@@ -119,7 +130,11 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             viewModel.shirtTeamTwo.value = it
         }
 
-        binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
+        arguments?.getInt("Rounds", 1)?.let {
+            viewModel.roundsLimit.value = it
+        }
+
+        binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimitPresentation.value!!))
 
     }
 

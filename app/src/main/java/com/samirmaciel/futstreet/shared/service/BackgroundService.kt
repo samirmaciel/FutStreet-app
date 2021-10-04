@@ -2,8 +2,10 @@ package com.samirmaciel.futstreet.shared.service
 
 import android.annotation.SuppressLint
 import android.app.*
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
@@ -11,6 +13,7 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.MainActivity
 import com.samirmaciel.futstreet.R
+import com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID
 import com.samirmaciel.futstreet.shared.const.NOTIFICATION_ID
 import java.util.*
@@ -47,12 +50,14 @@ class BackgroundService : Service(){
         const val SHIRT_TEAMONE = "SHIRT_TEAMONE"
         const val SHIRT_TEAMTWO = "SHIRT_TEAMTWO"
         const val TIME_LIMIT = "TIME_LIMIT"
+        const val ROUND_LIMIT = "ROUND_LIMIT"
         const val CURRENT_ROUND = "CURRENT_ROUND"
         const val UPDATE_TIME = "UPDATE_TIME"
         const val UPDATE_ALL = "UPDATE_ALL"
         const val END_TIME = "END_TIME"
         const val IS_TIME_ENDED = "IS_TIME_ENDED"
     }
+
 
 
     override fun onCreate() {
@@ -63,12 +68,14 @@ class BackgroundService : Service(){
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
+        timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
+        roundLimit = intent.getIntExtra(ROUND_LIMIT, 1)
+        currentRound = intent.getIntExtra(CURRENT_ROUND, 1)
         nameTeamOne = intent.getStringExtra(NAME_TEAMONE).toString()
         nameTeamTwo = intent.getStringExtra(NAME_TEAMTWO).toString()
         shirtTeamOne = intent.getIntExtra(SHIRT_TEAMONE, R.drawable.shirt_pink)
         shirtTeamTwo = intent.getIntExtra(SHIRT_TEAMTWO, R.drawable.shirt_pink)
         timer.scheduleAtFixedRate(TimerLine(), 0, 1000)
-        Log.d("TIMESERVICE", "onStartCommand: ")
         return START_NOT_STICKY
     }
 
@@ -81,7 +88,7 @@ class BackgroundService : Service(){
                 intentTimeEnd.putExtra(CURRENT_ROUND, currentRound)
                 intentTimeEnd.putExtra(IS_TIME_ENDED, true)
                 sendBroadcast(intentTimeEnd)
-
+                timer.cancel()
             }else{
                 timeLimit--
                 intentUpdate.putExtra(UPDATE_TIME, timeLimit)

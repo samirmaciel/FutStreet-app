@@ -16,11 +16,12 @@ class GameReadyViewModel : ViewModel(){
     var currentRound : MutableLiveData<Int> = MutableLiveData(1)
     var roundsLimit  : MutableLiveData<Int> = MutableLiveData(1)
     var timeLimit : MutableLiveData<Double> = MutableLiveData(0.0)
+    var timeLimitPresentation : MutableLiveData<Double> = MutableLiveData(0.0)
 
 
 
-    fun getTimeStringFromDouble() : String{
-        val resultInt = timeLimit.value!!.roundToInt()
+    fun getTimeStringFromDouble(time : Double) : String{
+        val resultInt = time.roundToInt()
         val minutes = resultInt %  86400 % 3600 / 60
         val seconds = resultInt % 86400 % 3600 % 60
         return makeTimeString( minutes, seconds)
