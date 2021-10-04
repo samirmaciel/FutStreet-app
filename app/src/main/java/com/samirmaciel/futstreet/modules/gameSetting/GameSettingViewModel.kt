@@ -10,11 +10,11 @@ class GameSettingViewModel : ViewModel() {
     var shirtTeamOne : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
     var shirtTeamTwo : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
 
-    var nameTeamOne : MutableLiveData<String> = MutableLiveData()
-    var nameTeamTwo : MutableLiveData<String> = MutableLiveData()
+    var nameTeamOne : MutableLiveData<String> = MutableLiveData("Time1")
+    var nameTeamTwo : MutableLiveData<String> = MutableLiveData("Time2")
 
     var roundsOfPlay : MutableLiveData<Int> = MutableLiveData(1)
-    var timeForRound : MutableLiveData<Double> = MutableLiveData(0.0)
+    var timeForRound : MutableLiveData<Int> = MutableLiveData(0)
 
 
     fun getListOfShirts() : Map<Int, Int>{

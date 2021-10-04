@@ -35,7 +35,7 @@ class BackgroundService : Service(){
     var roundLimit : Int = 1
 
     val intentUpdate = Intent(UPDATE_ALL)
-    val intentTimeEnd = Intent(END_TIME)
+    val intentTimeEnd = Intent(UPDATE_ALL)
 
 
 

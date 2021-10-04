@@ -25,13 +25,16 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
     private val updateTime : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
-            viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, viewModel.timeLimit.value!!)
+            viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
+            if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
+                viewModel.timeLimit.value = 0.0
+                viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
+            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("DEBUGTESTE", "FRAGMENT onCreate: ")
         serviceIntent = Intent(requireContext().applicationContext, BackgroundService::class.java)
         requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
 
@@ -59,6 +62,31 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
     override fun onStart() {
         super.onStart()
+
+        viewModel.timeLimit.observe(this){
+            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
+
+        viewModel.nameTeamOne.observe(this){
+            binding.textNameTeamOne.setText(it)
+        }
+
+        viewModel.nameTeamTwo.observe(this){
+            binding.textNameTeamTwo.setText(it)
+        }
+
+        viewModel.shirtTeamOne.observe(this){
+            binding.imageShirtTeamOne.setImageResource(it)
+        }
+
+        viewModel.shirtTeamTwo.observe(this){
+            binding.imageShirtTeamTwo.setImageResource(it)
+        }
 
         viewModel.timeLimit.observe(this){
             binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
@@ -93,46 +121,18 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
 
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("DEBUGTESTE", "FRAGMENT onResume: ")
-        requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
-
-        viewModel.nameTeamOne.observe(this){
-            binding.textNameTeamOne.setText(it)
-        }
-
-        viewModel.nameTeamTwo.observe(this){
-            binding.textNameTeamTwo.setText(it)
-        }
-
-        viewModel.shirtTeamOne.observe(this){
-            binding.imageShirtTeamOne.setImageResource(it)
-        }
-
-        viewModel.shirtTeamTwo.observe(this){
-            binding.imageShirtTeamTwo.setImageResource(it)
-        }
-
-        viewModel.timeLimit.observe(this){
-            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble())
-        }
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("DEUBGTESTE", "FRAGMENT onStop: ")
         requireActivity().unregisterReceiver(updateTime)
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
+        requireActivity().stopService(serviceIntent)
         requireActivity().unregisterReceiver(updateTime)
-        Log.d("DEBUGTESTE", "FRAGMENT onDestroy: ")
         _binding = null
     }
 }

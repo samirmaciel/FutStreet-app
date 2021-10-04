@@ -64,41 +64,15 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
 
         binding.buttonCancel.setOnClickListener{
+            cleanViewModelData()
             findNavController().navigate(R.id.action_gameSettingFragment_to_homeFragment)
         }
     }
 
 
-    private fun saveTempData() : Boolean{
-        if (checkInputs()){
-            viewModel.nameTeamOne.value = binding.inputNameTeamOne.text.toString()
-            viewModel.nameTeamTwo.value = binding.inputNameTeamTwo.text.toString()
-            if(binding.inputNumberOfTimes.text.toString().isNotEmpty()){
-                viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
-            }
-            if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
-                viewModel.timeForRound.value = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
-            }
-
-            return true
-        }else{
-            Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
-    }
-
-    private fun checkInputs() : Boolean{
-        if(binding.inputNameTeamOne.text.toString().isNotEmpty() && binding.inputNameTeamTwo.text.toString().isNotEmpty()){
-            return binding.inputMinutesOfRound.text.toString().isNotEmpty()
-        }else{
-            return false
-        }
-
-    }
-
     override fun onResume() {
         super.onResume()
+        Log.d("TESTEVIEWMODEL", "onResume: " + viewModel.timeForRound.value)
 
         viewModel.shirtTeamTwo.observe(this){
             binding.selectShirtTeam2.setImageResource(it)
@@ -109,11 +83,15 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
 
         viewModel.nameTeamOne.observe(this){
-            binding.inputNameTeamOne.setText(it)
+            if(!it.equals(resources.getText(R.string.hint_teamone))){
+                binding.inputNameTeamOne.setText(it)
+            }
         }
 
         viewModel.nameTeamTwo.observe(this){
-            binding.inputNameTeamTwo.setText(it)
+            if(!it.equals(resources.getText(R.string.hint_teamtwo))){
+                binding.inputNameTeamTwo.setText(it)
+            }
         }
 
         viewModel.roundsOfPlay.observe(this){
@@ -131,6 +109,31 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
     }
 
+    private fun saveTempData() : Boolean{
+        if (checkInputs()){
+            if(binding.inputNameTeamOne.text.isNotEmpty()){
+                viewModel.nameTeamOne.value = binding.inputNameTeamOne.text.toString()
+            }
+            if(binding.inputNameTeamTwo.text.isNotEmpty()){
+                viewModel.nameTeamTwo.value = binding.inputNameTeamTwo.text.toString()
+            }
+
+            if(binding.inputNumberOfTimes.text.toString().isNotEmpty()){
+                viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
+            }
+            if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
+                viewModel.timeForRound.value = binding.inputMinutesOfRound.text.toString().toInt()
+            }
+            return true
+        }else{
+            Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+            return false
+        }
+    }
+
+    private fun checkInputs() = binding.inputMinutesOfRound.text.toString().isNotEmpty()
+
+
     private fun getBundleWithArguments() : Bundle {
         val arguments = Bundle().apply {
             putString("NameTeamOne", viewModel.nameTeamOne.value!!)
@@ -138,10 +141,24 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
             putInt("ShirtTeamOne", viewModel.shirtTeamOne.value!!)
             putInt("ShirtTeamTwo", viewModel.shirtTeamTwo.value!!)
             putInt("Rounds", viewModel.roundsOfPlay.value!!)
-            putDouble("roundTime", viewModel.timeForRound.value!!)
+            putDouble("roundTime", viewModel.timeForRound.value!!.toDouble() * 60)
         }
 
         return arguments
+    }
+
+    private fun cleanViewModelData(){
+        viewModel.nameTeamOne.value = ""
+        viewModel.nameTeamTwo.value = ""
+        viewModel.shirtTeamOne.value = R.drawable.shirt_select
+        viewModel.shirtTeamTwo.value = R.drawable.shirt_select
+        viewModel.timeForRound.value = 0
+        viewModel.roundsOfPlay.value = 1
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("TESTEVIEWMODEL", "onStop: " + viewModel.timeForRound.value)
     }
 
 
