@@ -27,7 +27,6 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         override fun onReceive(context: Context, intent: Intent) {
             viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
-                viewModel.timeLimit.value = 0.0
                 viewModel.timeLimit.value = viewModel.timeLimitPresentation.value
                 binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimitPresentation.value!!))
                 viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
@@ -62,6 +61,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         binding.buttonGameCancel.setOnClickListener{
+            cleanViewModelData()
             requireActivity().stopService(serviceIntent)
             findNavController().navigate(R.id.action_gameReadyFragment_to_gameSettingFragment)
         }
@@ -136,6 +136,10 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimitPresentation.value!!))
 
+    }
+
+    private fun cleanViewModelData(){
+        viewModel.currentRound.value = 1
     }
 
     override fun onStop() {

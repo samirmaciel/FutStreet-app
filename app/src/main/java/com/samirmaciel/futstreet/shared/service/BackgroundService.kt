@@ -2,10 +2,8 @@ package com.samirmaciel.futstreet.shared.service
 
 import android.annotation.SuppressLint
 import android.app.*
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
@@ -13,7 +11,6 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.MainActivity
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID
 import com.samirmaciel.futstreet.shared.const.NOTIFICATION_ID
 import java.util.*
@@ -22,6 +19,8 @@ import kotlin.math.roundToInt
 class BackgroundService : Service(){
 
     private val timer = Timer()
+
+    var isTimeEnded : Boolean = false
 
     var timeLimit : Double = 0.0
 
@@ -82,13 +81,16 @@ class BackgroundService : Service(){
     private inner class TimerLine : TimerTask(){
         override fun run() {
             if(timeLimit == 0.0) {
-                if(currentRound < roundLimit){
-                    currentRound++
+                if(!isTimeEnded){
+                    if(currentRound < roundLimit){
+                        currentRound++
+                        isTimeEnded = true
+                    }
                 }
                 intentTimeEnd.putExtra(CURRENT_ROUND, currentRound)
                 intentTimeEnd.putExtra(IS_TIME_ENDED, true)
                 sendBroadcast(intentTimeEnd)
-                timer.cancel()
+                //timer.cancel()
             }else{
                 timeLimit--
                 intentUpdate.putExtra(UPDATE_TIME, timeLimit)
@@ -123,6 +125,8 @@ class BackgroundService : Service(){
             .setCustomContentView(notificationLayout)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setContentIntent(pedingIntent)
+            .setColor(resources.getColor(R.color.blue))
+            .setColorized(true)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentText(time)
         startForeground(NOTIFICATION_ID, notification.build())
