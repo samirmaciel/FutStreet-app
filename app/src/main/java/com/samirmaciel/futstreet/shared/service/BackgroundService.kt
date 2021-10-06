@@ -89,16 +89,14 @@ class BackgroundService : Service(){
                 intentTimeEnd.putExtra(CURRENT_ROUND, currentRound)
                 intentTimeEnd.putExtra(IS_TIME_ENDED, true)
                 sendBroadcast(intentTimeEnd)
-                //timer.cancel()
             }else{
                 timeLimit--
                 intentUpdate.putExtra(UPDATE_TIME, timeLimit)
                 intentUpdate.putExtra(SCORE_T1, scoreTeamOne)
                 intentUpdate.putExtra(SCORE_T2, scoreTeamTwo)
                 intentUpdate.putExtra(CURRENT_ROUND, currentRound)
-                callNotification(getTimeStringFromDouble(timeLimit), nameTeamOne, nameTeamTwo, 1, 2, shirtTeamOne, shirtTeamTwo)
+                callNotification(getTimeStringFromDouble(timeLimit), nameTeamOne, nameTeamTwo, scoreTeamOne, scoreTeamTwo, shirtTeamOne, shirtTeamTwo)
                 sendBroadcast(intentUpdate)
-                Log.d("TIMESERVICE", "run: " + timeLimit)
             }
         }
     }

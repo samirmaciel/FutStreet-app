@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="horizontal">
 
     <ImageView
@@ -20,7 +21,7 @@
         android:fontFamily="@font/baloo2regular"
         android:text="TeamOne"
         android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/textTeamOneName"
             android:text="00:00"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="12sp" />
 
         <TextView
@@ -46,7 +47,7 @@
             android:layout_toEndOf="@id/shirtTeamOne"
             android:text="0X0"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -61,7 +62,7 @@
         android:fontFamily="@font/baloo2regular"
         android:text="TeamTwo"
         android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <ImageView
         android:id="@+id/shirtTeamTwo"

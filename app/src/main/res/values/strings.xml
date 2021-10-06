@@ -23,4 +23,5 @@
     <string name="select_shirt_title">Selecione a camisa</string>
     <string name="button_text_cancel">Cancelar</string>
     <string name="hint_history_empity">Nenhum jogo salvo no histórico</string>
+    <string name="text_end_game">Fim de jogo</string>
 </resources>

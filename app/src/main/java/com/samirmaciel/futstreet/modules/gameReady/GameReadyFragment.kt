@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamereadyBinding
 import com.samirmaciel.futstreet.shared.service.BackgroundService
-import kotlin.math.roundToInt
 
 class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
@@ -26,9 +25,17 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     private val updateTime : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
             viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
+            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!)
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
-                viewModel.timeLimit.value = viewModel.timeLimitPresentation.value
-                binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimitPresentation.value!!))
+                if(viewModel.roundsLimit.value == viewModel.currentRound.value){
+                    viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
+                    viewModel.isGameEnded = true
+
+                }else{
+                    viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
+
+                }
+                viewModel.timeLimit.value = viewModel.timeLimitParams.value
                 viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
                 requireActivity().stopService(serviceIntent)
             }
@@ -49,15 +56,17 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         getSettings()
 
         binding.buttonStart.setOnClickListener{
+            if(!viewModel.isGameEnded){
+                serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeamOne.value)
+                serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeamTwo.value)
+                serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeamOne.value)
+                serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeamTwo.value)
+                serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModel.timeLimit.value)
+                serviceIntent.putExtra(BackgroundService.ROUND_LIMIT, viewModel.roundsLimit.value)
+                serviceIntent.putExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value)
+                requireActivity().startService(serviceIntent)
+            }
 
-            serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeamOne.value)
-            serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeamTwo.value)
-            serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeamOne.value)
-            serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeamTwo.value)
-            serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModel.timeLimit.value)
-            serviceIntent.putExtra(BackgroundService.ROUND_LIMIT, viewModel.roundsLimit.value)
-            serviceIntent.putExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value)
-            requireActivity().startService(serviceIntent)
         }
 
         binding.buttonGameCancel.setOnClickListener{
@@ -70,9 +79,6 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     override fun onStart() {
         super.onStart()
 
-        viewModel.timeLimit.observe(this){
-            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!))
-        }
     }
 
     override fun onResume() {
@@ -95,9 +101,10 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             binding.imageShirtTeamTwo.setImageResource(it)
         }
 
-        viewModel.timeLimit.observe(this){
-            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!))
+        viewModel.textTimeView.observe(this){
+            binding.textCurrentTime.setText(it)
         }
+
         viewModel.currentRound.observe(this){
             binding.textCurrentRound.setText("${viewModel.currentRound.value}°")
         }
@@ -115,7 +122,8 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         arguments?.getDouble("roundTime")?.let {
             viewModel.timeLimit.value = it
-            viewModel.timeLimitPresentation.value = it
+            viewModel.timeLimitParams.value = it
+            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(it)
         }
 
         arguments?.getInt("Rounds")?.let {
@@ -134,7 +142,6 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             viewModel.roundsLimit.value = it
         }
 
-        binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(viewModel.timeLimitPresentation.value!!))
 
     }
 

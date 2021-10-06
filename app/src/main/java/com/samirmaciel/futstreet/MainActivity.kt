@@ -16,21 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         //val navController = findNavController(R.id.fragment)
     }
-
-    override fun onCreateView(
-        parent: View?,
-        name: String,
-        context: Context,
-        attrs: AttributeSet
-    ): View? {
-        _binding = ActivityMainBinding.bind(parent!!)
-        return super.onCreateView(parent, name, context, attrs)
-    }
-
 
     private fun histoyIsEmpty(isEmpity : Boolean){
         if(isEmpity){

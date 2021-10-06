@@ -16,7 +16,10 @@ class GameReadyViewModel : ViewModel(){
     var currentRound : MutableLiveData<Int> = MutableLiveData(1)
     var roundsLimit  : MutableLiveData<Int> = MutableLiveData(1)
     var timeLimit : MutableLiveData<Double> = MutableLiveData(0.0)
-    var timeLimitPresentation : MutableLiveData<Double> = MutableLiveData(0.0)
+    var timeLimitParams : MutableLiveData<Double> = MutableLiveData(0.0)
+    var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
+
+    var isGameEnded : Boolean = false
 
 
 
