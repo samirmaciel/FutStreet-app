@@ -53,7 +53,6 @@ class BackgroundService : Service(){
         const val CURRENT_ROUND = "CURRENT_ROUND"
         const val UPDATE_TIME = "UPDATE_TIME"
         const val UPDATE_ALL = "UPDATE_ALL"
-        const val END_TIME = "END_TIME"
         const val IS_TIME_ENDED = "IS_TIME_ENDED"
     }
 
