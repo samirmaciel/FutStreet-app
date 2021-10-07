@@ -1,12 +1,10 @@
 package com.samirmaciel.futstreet.modules.gameReady
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -70,10 +68,23 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         binding.buttonGameCancel.setOnClickListener{
-            cleanViewModelData()
-            requireActivity().stopService(serviceIntent)
-            findNavController().navigate(R.id.action_gameReadyFragment_to_gameSettingFragment)
+            val alertCancel = AlertDialog.Builder(requireContext()).apply {
+                setTitle("Deseja cancelar esse jogo?")
+                setPositiveButton("Sim", object : DialogInterface.OnClickListener{
+                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                        onCancelGame()
+                    }
+                })
+            }
+            alertCancel.create().show()
+
         }
+    }
+
+    private fun onCancelGame() {
+        cleanViewModelData()
+        requireActivity().stopService(serviceIntent)
+        findNavController().navigate(R.id.action_gameReadyFragment_to_gameSettingFragment)
     }
 
     override fun onStart() {
