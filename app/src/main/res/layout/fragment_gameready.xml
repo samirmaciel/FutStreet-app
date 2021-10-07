@@ -20,13 +20,12 @@
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textHead"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="40dp">
+        app:layout_constraintTop_toBottomOf="@+id/textCurrentTime">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -53,7 +52,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/textAddGoalTeamOne"
+            android:id="@+id/buttonAddGoalTeamOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -66,14 +65,6 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textCurrentTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo2regular"
-                android:text="00:00"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -119,7 +110,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/textAddGoalTeamTwo"
+            android:id="@+id/buttonAddGoalTeamTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -177,6 +168,19 @@
             android:text="@string/button_text_cancel"
             android:backgroundTint="@color/yellow"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textCurrentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/baloo2regular"
+        android:text="00:00"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/textHead"
+        app:layout_constraintStart_toStartOf="@+id/textHead"
+        app:layout_constraintTop_toBottomOf="@+id/textHead" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

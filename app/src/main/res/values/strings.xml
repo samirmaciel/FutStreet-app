@@ -24,4 +24,11 @@
     <string name="button_text_cancel">Cancelar</string>
     <string name="hint_history_empity">Nenhum jogo salvo no histórico</string>
     <string name="text_end_game">Fim de jogo</string>
+
+
+    //Ask questions
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="text_ask_cancel_game">Deseja cancelar o jogo?</string>
+    <string name="text_add_gol">Marcar gol para </string>
 </resources>

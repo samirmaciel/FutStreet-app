@@ -2,8 +2,10 @@ package com.samirmaciel.futstreet.shared.service
 
 import android.annotation.SuppressLint
 import android.app.*
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
@@ -11,6 +13,7 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.MainActivity
 import com.samirmaciel.futstreet.R
+import com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID
 import com.samirmaciel.futstreet.shared.const.NOTIFICATION_ID
 import java.util.*
@@ -60,11 +63,13 @@ class BackgroundService : Service(){
 
     override fun onCreate() {
         super.onCreate()
-
+        registerReceiver(scoreObserve, IntentFilter(GameReadyFragment.SCORE_OBSERVE))
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
+        scoreTeamOne = intent.getIntExtra(SCORE_T1, 0)
+        scoreTeamTwo = intent.getIntExtra(SCORE_T2, 0)
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
         roundLimit = intent.getIntExtra(ROUND_LIMIT, 1)
@@ -75,6 +80,14 @@ class BackgroundService : Service(){
         shirtTeamTwo = intent.getIntExtra(SHIRT_TEAMTWO, R.drawable.shirt_pink)
         timer.scheduleAtFixedRate(TimerLine(), 0, 1000)
         return START_NOT_STICKY
+    }
+
+    private val scoreObserve : BroadcastReceiver = object : BroadcastReceiver(){
+        override fun onReceive(context: Context, intent: Intent) {
+            scoreTeamOne = intent.getIntExtra(SCORE_T1, scoreTeamOne)
+            scoreTeamTwo = intent.getIntExtra(SCORE_T2, scoreTeamTwo)
+        }
+
     }
 
     private inner class TimerLine : TimerTask(){
@@ -164,6 +177,7 @@ class BackgroundService : Service(){
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(scoreObserve)
         stopForeground(true)
         timer.cancel()
         Log.d("DEBUGTESTE", "SERVICE onDestroy: ")

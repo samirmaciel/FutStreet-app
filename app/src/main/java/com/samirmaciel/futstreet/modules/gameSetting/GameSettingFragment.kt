@@ -143,10 +143,13 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         val arguments = Bundle().apply {
             putString("NameTeamOne", viewModel.nameTeamOne.value!!)
             putString("NameTeamTwo", viewModel.nameTeamTwo.value!!)
+            putInt("ScoreTeamOne", 0)
+            putInt("ScoreTeamTwo", 0)
             putInt("ShirtTeamOne", viewModel.shirtTeamOne.value!!)
             putInt("ShirtTeamTwo", viewModel.shirtTeamTwo.value!!)
             putInt("Rounds", viewModel.roundsOfPlay.value!!)
-            putDouble("roundTime", viewModel.timeForRound.value!!.toDouble() * 60)
+            putInt("CurrentRound", 1)
+            putDouble("RoundTime", viewModel.timeForRound.value!!.toDouble() * 60)
         }
 
         return arguments
