@@ -3,6 +3,7 @@ package com.samirmaciel.futstreet.modules.gameReady
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
+import com.samirmaciel.futstreet.shared.const.PREPLAY
 import kotlin.math.roundToInt
 
 class GameReadyViewModel : ViewModel(){
@@ -19,7 +20,7 @@ class GameReadyViewModel : ViewModel(){
     var timeLimitParams : MutableLiveData<Double> = MutableLiveData(0.0)
     var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
 
-    var isGameEnded : Boolean = false
+    var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
 
 
 

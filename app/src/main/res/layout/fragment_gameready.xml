@@ -154,7 +154,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonStart"
             style="@style/button_menu"
-            android:text="Começar"
+            android:text="@string/Start"
             app:cornerRadius="15dp"
             android:backgroundTint="@color/green"
             android:layout_marginEnd="10dp"
@@ -165,7 +165,7 @@
             style="@style/button_menu"
             app:cornerRadius="15dp"
             android:layout_marginStart="10dp"
-            android:text="@string/button_text_cancel"
+            android:text="@string/Cancel"
             android:backgroundTint="@color/yellow"/>
     </LinearLayout>
 

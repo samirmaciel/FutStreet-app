@@ -31,4 +31,11 @@
     <string name="no">Não</string>
     <string name="text_ask_cancel_game">Deseja cancelar o jogo?</string>
     <string name="text_add_gol">Marcar gol para </string>
+
+
+    //UI text
+    <string name="Start">Começar</string>
+    <string name="Pause">Pausar</string>
+    <string name="Restart">Reiniciar</string>
+    <string name="Cancel">Cancelar</string>
 </resources>

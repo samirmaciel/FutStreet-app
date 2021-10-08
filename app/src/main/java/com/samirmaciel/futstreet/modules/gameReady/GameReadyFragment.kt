@@ -10,6 +10,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamereadyBinding
+import com.samirmaciel.futstreet.shared.const.PAUSED
+import com.samirmaciel.futstreet.shared.const.PLAYING
+import com.samirmaciel.futstreet.shared.const.PREPLAY
+import com.samirmaciel.futstreet.shared.const.RESTART
 import com.samirmaciel.futstreet.shared.service.BackgroundService
 
 class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
@@ -18,6 +22,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     private val binding : FragmentGamereadyBinding get() = _binding!!
     lateinit var serviceIntent : Intent
     private val viewModel : GameReadyViewModel by activityViewModels()
+
 
     companion object {
         const val SCORE_OBSERVE = "SCORE_OBSERVE"
@@ -31,11 +36,10 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
                     viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
-                    viewModel.isGameEnded = true
-
+                    viewModel.gameState.value = RESTART
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
-
+                    viewModel.gameState.value = PREPLAY
                 }
                 viewModel.timeLimit.value = viewModel.timeLimitParams.value
                 viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
@@ -81,9 +85,28 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         binding.buttonStart.setOnClickListener{
-            if(!viewModel.isGameEnded){
-                startBackgroundService()
+            when(viewModel.gameState.value!!){
+                PREPLAY -> {
+                    startBackgroundService()
+                    viewModel.gameState.value = PLAYING
+                }
+
+                PLAYING ->{
+                    requireActivity().stopService(serviceIntent)
+                    viewModel.gameState.value = PAUSED
+                }
+
+                PAUSED ->{
+                    startBackgroundService()
+                    viewModel.gameState.value = PLAYING
+                }
+
+                RESTART -> {
+                    restartBackgroundService()
+                    viewModel.gameState.value = PREPLAY
+                }
             }
+
 
         }
 
@@ -128,6 +151,33 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         viewModel.scoreTeamTwo.observe(this){
             binding.textScoreTeamTwo.setText(it.toString())
         }
+
+        viewModel.gameState.observe(this){
+            when(viewModel.gameState.value!!){
+                PREPLAY -> {
+                    binding.buttonStart.setText(resources.getText(R.string.Start))
+                }
+
+                PLAYING ->{
+                    binding.buttonStart.setText(resources.getText(R.string.Pause))
+                }
+
+                PAUSED ->{
+                    binding.buttonStart.setText(resources.getText(R.string.Start))
+                }
+
+                RESTART -> {
+                    binding.buttonStart.setText(resources.getText(R.string.Restart))
+                }
+            }
+        }
+    }
+
+    private fun restartBackgroundService(){
+        viewModel.scoreTeamOne.value = 0
+        viewModel.scoreTeamTwo.value = 0
+        viewModel.currentRound.value = 1
+        viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
     }
 
     private fun startBackgroundService() {
