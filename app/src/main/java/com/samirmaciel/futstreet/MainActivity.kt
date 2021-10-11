@@ -1,12 +1,17 @@
 package com.samirmaciel.futstreet
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.samirmaciel.futstreet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +23,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val navController = findNavController(R.id.fragment)
+
+        findNavController(R.id.fragment).addOnDestinationChangedListener(object : NavController.OnDestinationChangedListener{
+            @SuppressLint("ResourceType")
+            override fun onDestinationChanged(
+                controller: NavController,
+                destination: NavDestination,
+                arguments: Bundle?
+            ) {
+                binding.appBarTitle.setText(destination.label)
+            }
+
+        })
     }
+
+
 
     private fun histoyIsEmpty(isEmpity : Boolean){
         if(isEmpity){

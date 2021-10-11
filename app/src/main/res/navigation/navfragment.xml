@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.samirmaciel.futstreet.modules.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_gameSettingFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/gameSettingFragment"
         android:name="com.samirmaciel.futstreet.modules.gameSetting.GameSettingFragment"
-        android:label="fragment_gamesettings"
+        android:label="@string/settings"
         tools:layout="@layout/fragment_gamesettings" >
         <action
             android:id="@+id/action_gameSettingFragment_to_gameReadyFragment"
@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/gameReadyFragment"
         android:name="com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment"
-        android:label="fragment_gameready"
+        android:label="@string/currentGame"
         tools:layout="@layout/fragment_gameready" >
         <action
             android:id="@+id/action_gameReadyFragment_to_homeFragment"

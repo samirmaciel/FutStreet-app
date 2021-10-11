@@ -8,14 +8,6 @@
     android:background="@color/blue">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:text="@string/app_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/head_title" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPageDescription"
         android:layout_width="160dp"
@@ -23,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="65dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabIndicator"
@@ -46,12 +38,13 @@
         android:text="@string/new_play"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonChampionship"
         style="@style/button_menu"
         android:text="@string/championship"
+        android:enabled="false"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="@+id/buttonNewPlay"
         app:layout_constraintStart_toStartOf="@+id/buttonNewPlay"

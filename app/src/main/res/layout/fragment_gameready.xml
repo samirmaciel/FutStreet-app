@@ -7,14 +7,6 @@
     tools:context=".modules.gameReady.GameReadyFragment"
     android:background="@color/blue">
 
-    <TextView
-        android:id="@+id/textHead"
-        style="@style/head_title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Partida em andamento"/>
-
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -178,9 +170,9 @@
         android:text="00:00"
         android:textColor="@color/white"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/textHead"
-        app:layout_constraintStart_toStartOf="@+id/textHead"
-        app:layout_constraintTop_toBottomOf="@+id/textHead" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

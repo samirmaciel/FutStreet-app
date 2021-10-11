@@ -38,4 +38,8 @@
     <string name="Pause">Pausar</string>
     <string name="Restart">Reiniciar</string>
     <string name="Cancel">Cancelar</string>
+
+    //Navigation titles
+    <string name="settings">Configuração de jogo</string>
+    <string name="currentGame">Partida em Andamento</string>
 </resources>

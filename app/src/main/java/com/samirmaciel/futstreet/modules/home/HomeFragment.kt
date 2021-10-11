@@ -70,7 +70,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onPause() {
         super.onPause()
-        Log.d("HOMEFRAGMENT", "onPause: ")
+        timer.cancel()
+    }
+
+    override fun onStop() {
+        super.onStop()
         timer.cancel()
     }
 
