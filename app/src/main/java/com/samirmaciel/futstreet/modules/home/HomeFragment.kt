@@ -25,16 +25,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
         initPagerSlide(viewModel.getDescriptions())
-        Log.d("HOMEFRAGMENT", "onViewCreated: "+ binding.viewPageDescription.currentItem )
+
 
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d("HOMEFRAGMENT", "onStart: ")
-        binding.buttonNewPlay.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment)
-        }
+
+
+        binding.buttonNewPlay.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment) }
     }
 
 
@@ -80,7 +79,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("HOMEFRAGMENT", "onDestroy: ")
         timer.cancel()
         _binding = null
     }

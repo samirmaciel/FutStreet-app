@@ -15,6 +15,7 @@ import com.samirmaciel.futstreet.shared.const.PLAYING
 import com.samirmaciel.futstreet.shared.const.PREPLAY
 import com.samirmaciel.futstreet.shared.const.RESTART
 import com.samirmaciel.futstreet.shared.service.BackgroundService
+import kotlinx.coroutines.delay
 
 class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
@@ -77,7 +78,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         binding.buttonAddGoalTeamTwo.setOnClickListener{
             val alertScore = AlertDialog.Builder(requireContext()).apply {
-                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeamTwo}?")
+                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeamTwo.value.toString()}?")
                 setPositiveButton(resources.getText(R.string.yes)){ _, _  -> addGolTeamTwo() }
                 setNegativeButton(resources.getText(R.string.no), null)
             }
@@ -163,7 +164,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
                 }
 
                 PAUSED ->{
-                    binding.buttonStart.setText(resources.getText(R.string.Start))
+                    binding.buttonStart.setText(resources.getText(R.string.Continue))
                 }
 
                 RESTART -> {
@@ -194,14 +195,38 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     }
 
     private fun addGolTeamOne() {
-        viewModel.scoreTeamOne.value = viewModel.scoreTeamOne.value!! + 1
+        binding.textScoreTeamOne.animate().apply {
+            duration = 150
+            scaleXBy(0.5f)
+            scaleYBy(0.5f)
+
+        }.withEndAction {
+            viewModel.scoreTeamOne.value = viewModel.scoreTeamOne.value!! + 1
+            binding.textScoreTeamOne.animate().apply {
+                duration = 150
+                scaleXBy(-0.5f)
+                scaleYBy(-0.5f)
+            }
+        }.start()
+
         val scoreIntent = Intent(SCORE_OBSERVE)
         scoreIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeamOne.value!!)
         requireActivity().sendBroadcast(scoreIntent)
     }
 
     private fun addGolTeamTwo() {
-        viewModel.scoreTeamTwo.value = viewModel.scoreTeamTwo.value!! + 1
+        binding.textScoreTeamTwo.animate().apply {
+            duration = 150
+            scaleYBy(0.5f)
+            scaleXBy(0.5f)
+        }.withEndAction {
+            viewModel.scoreTeamTwo.value = viewModel.scoreTeamTwo.value!! + 1
+            binding.textScoreTeamTwo.animate().apply {
+                duration = 150
+                scaleXBy(-0.5f)
+                scaleYBy(-0.5f)
+            }
+        }.start()
         val scoreIntent = Intent(SCORE_OBSERVE)
         scoreIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeamTwo.value!!)
         requireActivity().sendBroadcast(scoreIntent)

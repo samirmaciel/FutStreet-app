@@ -12,25 +12,33 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/selectShirtTeam1"
-            style="@style/shirt_select"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/shirt_select" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/selectShirtTeam1"
+                style="@style/shirt_select"
+                android:src="@drawable/shirt_select"
+                tools:layout_editor_absoluteX="78dp"
+                tools:layout_editor_absoluteY="346dp" />
 
-        <EditText
-            android:id="@+id/inputNameTeamOne"
-            style="@style/inputText"
-            android:hint="@string/hint_teamone" />
+            <EditText
+                android:id="@+id/inputNameTeamOne"
+                style="@style/inputText"
+                android:hint="@string/hint_teamone" />
 
-        <com.google.android.material.textview.MaterialTextView
+        </LinearLayout>
+
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
@@ -39,28 +47,39 @@
             android:textColor="@color/white"
             android:textSize="25sp" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam2"
+            style="@style/shirt_select"
+            android:src="@drawable/shirt_select"
+            tools:layout_editor_absoluteX="266dp"
+            tools:layout_editor_absoluteY="359dp" />
+
         <EditText
             android:id="@+id/inputNameTeamTwo"
             style="@style/inputText"
             android:hint="@string/hint_teamtwo" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/selectShirtTeam2"
-            style="@style/shirt_select"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/shirt_select" />
+    </LinearLayout>
+
+
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewTimes"
         android:layout_width="wrap_content"
-        android:layout_marginTop="15dp"
-        app:cardCornerRadius="15dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout1"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/yellow"
+        app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/yellow">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -69,23 +88,23 @@
             android:orientation="horizontal">
 
             <TextView
-                android:fontFamily="@font/baloo2regular"
-                android:textSize="18sp"
-                android:layout_marginStart="15dp"
-                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/number_of_times"/>
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/baloo2regular"
+                android:text="@string/number_of_times"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/inputNumberOfTimes"
                 style="@style/inputText"
-                android:textColor="@color/black"
-                android:inputType="number"
                 android:layout_width="50dp"
-                android:maxLength="1"
                 android:layout_marginEnd="20dp"
-                android:hint="1"/>
+                android:hint="1"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -161,6 +180,7 @@
             app:layout_constraintStart_toEndOf="@id/buttonReady"
             app:layout_constraintTop_toTopOf="@id/buttonReady"/>
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

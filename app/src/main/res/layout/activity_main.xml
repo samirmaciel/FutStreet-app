@@ -27,7 +27,7 @@
     <LinearLayout
         android:id="@+id/fragmentHost"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="280dp"
         android:background="@drawable/main_cardview_background"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             android:id="@+id/fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="240dp"
             app:navGraph="@navigation/navfragment" />
 
     </LinearLayout>

@@ -72,14 +72,37 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
     override fun onResume() {
         super.onResume()
-        Log.d("TESTEVIEWMODEL", "onResume: " + viewModel.timeForRound.value)
 
         viewModel.shirtTeamTwo.observe(this){
-            binding.selectShirtTeam2.setImageResource(it)
+            binding.selectShirtTeam2.animate().apply {
+                duration = 100
+                scaleXBy(0.5f)
+                scaleYBy(0.5f)
+            }.withEndAction {
+                binding.selectShirtTeam2.setImageResource(it)
+                binding.selectShirtTeam2.animate().apply {
+                    duration = 100
+                    scaleYBy(-0.5f)
+                    scaleXBy(-0.5f)
+                }
+            }.start()
+
         }
 
         viewModel.shirtTeamOne.observe(this){
-            binding.selectShirtTeam1.setImageResource(it)
+            binding.selectShirtTeam1.animate().apply {
+                duration = 100
+                scaleYBy(0.5f)
+                scaleXBy(0.5f)
+            }.withEndAction {
+                binding.selectShirtTeam1.setImageResource(it)
+                binding.selectShirtTeam1.animate().apply {
+                    duration = 100
+                    scaleYBy(-0.5f)
+                    scaleXBy(-0.5f)
+                }
+            }.start()
+
         }
 
         viewModel.nameTeamOne.observe(this){

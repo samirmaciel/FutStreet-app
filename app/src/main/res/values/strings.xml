@@ -36,6 +36,7 @@
     //UI text
     <string name="Start">Começar</string>
     <string name="Pause">Pausar</string>
+    <string name="Continue">Continuar</string>
     <string name="Restart">Reiniciar</string>
     <string name="Cancel">Cancelar</string>
 
