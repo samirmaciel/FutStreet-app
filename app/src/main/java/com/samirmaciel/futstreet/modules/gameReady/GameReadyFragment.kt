@@ -160,26 +160,21 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         viewModel.gameState.observe(this){
             when(viewModel.gameState.value!!){
                 PREPLAY -> {
-                    binding.buttonAddGoalTeamOne.isVisible = false
-                    binding.buttonAddGoalTeamTwo.isVisible = false
+                    binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.Start))
                 }
 
                 PLAYING ->{
-                    binding.buttonAddGoalTeamOne.isVisible = true
-                    binding.buttonAddGoalTeamTwo.isVisible = true
+                    binding.motionLayoutButtonsGoals.transitionToEnd()
                     binding.buttonStart.setText(resources.getText(R.string.Pause))
                 }
 
                 PAUSED ->{
-                    binding.buttonAddGoalTeamOne.isVisible = true
-                    binding.buttonAddGoalTeamTwo.isVisible = true
                     binding.buttonStart.setText(resources.getText(R.string.Continue))
                 }
 
                 FINISH -> {
-                    binding.buttonAddGoalTeamOne.isVisible = false
-                    binding.buttonAddGoalTeamTwo.isVisible = false
+                    binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.Restart))
                 }
             }
