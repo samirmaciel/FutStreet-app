@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    fun godgjog(){
+
+        Toast.makeText(this, "dsdsd", Toast.LENGTH_SHORT).show()
     }
 
 
