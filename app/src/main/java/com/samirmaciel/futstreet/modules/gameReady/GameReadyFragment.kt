@@ -2,9 +2,12 @@ package com.samirmaciel.futstreet.modules.gameReady
 
 import android.content.*
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,9 +16,8 @@ import com.samirmaciel.futstreet.databinding.FragmentGamereadyBinding
 import com.samirmaciel.futstreet.shared.const.PAUSED
 import com.samirmaciel.futstreet.shared.const.PLAYING
 import com.samirmaciel.futstreet.shared.const.PREPLAY
-import com.samirmaciel.futstreet.shared.const.RESTART
+import com.samirmaciel.futstreet.shared.const.FINISH
 import com.samirmaciel.futstreet.shared.service.BackgroundService
-import kotlinx.coroutines.delay
 
 class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
@@ -37,7 +39,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
                     viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
-                    viewModel.gameState.value = RESTART
+                    viewModel.gameState.value = FINISH
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
                     viewModel.gameState.value = PREPLAY
@@ -68,12 +70,14 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         requireActivity().registerReceiver(updateTime, IntentFilter(BackgroundService.UPDATE_ALL))
 
         binding.buttonAddGoalTeamOne.setOnClickListener{
+
             val alertScore = AlertDialog.Builder(requireContext()).apply {
                 setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeamOne.value.toString()}?")
                 setPositiveButton(resources.getText(R.string.yes)) { _, _ -> addGolTeamOne() }
                 setNegativeButton(resources.getText(R.string.no), null)
             }
             alertScore.create().show()
+
         }
 
         binding.buttonAddGoalTeamTwo.setOnClickListener{
@@ -102,7 +106,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
                     viewModel.gameState.value = PLAYING
                 }
 
-                RESTART -> {
+                FINISH -> {
                     restartBackgroundService()
                     viewModel.gameState.value = PREPLAY
                 }
@@ -156,21 +160,39 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         viewModel.gameState.observe(this){
             when(viewModel.gameState.value!!){
                 PREPLAY -> {
+                    binding.buttonAddGoalTeamOne.isVisible = false
+                    binding.buttonAddGoalTeamTwo.isVisible = false
                     binding.buttonStart.setText(resources.getText(R.string.Start))
                 }
 
                 PLAYING ->{
+                    binding.buttonAddGoalTeamOne.isVisible = true
+                    binding.buttonAddGoalTeamTwo.isVisible = true
                     binding.buttonStart.setText(resources.getText(R.string.Pause))
                 }
 
                 PAUSED ->{
+                    binding.buttonAddGoalTeamOne.isVisible = true
+                    binding.buttonAddGoalTeamTwo.isVisible = true
                     binding.buttonStart.setText(resources.getText(R.string.Continue))
                 }
 
-                RESTART -> {
+                FINISH -> {
+                    binding.buttonAddGoalTeamOne.isVisible = false
+                    binding.buttonAddGoalTeamTwo.isVisible = false
                     binding.buttonStart.setText(resources.getText(R.string.Restart))
                 }
             }
+        }
+    }
+
+    private fun buttonAnimateVisibility(button : Button){
+        button.animate().apply {
+            duration = 100
+            scaleXBy(2f)
+            scaleY(2f)
+            setInterpolator(AccelerateDecelerateInterpolator())
+
         }
     }
 
@@ -286,6 +308,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     }
 
     private fun cleanViewModelData(){
+        viewModel.gameState.value = PREPLAY
         viewModel.currentRound.value = 1
     }
 
