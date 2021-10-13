@@ -7,6 +7,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -160,11 +161,15 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         viewModel.gameState.observe(this){
             when(viewModel.gameState.value!!){
                 PREPLAY -> {
+                    binding.buttonAddGoalTeamOne.isEnabled = false
+                    binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.Start))
                 }
 
                 PLAYING ->{
+                    binding.buttonAddGoalTeamOne.isEnabled = true
+                    binding.buttonAddGoalTeamTwo.isEnabled = true
                     binding.motionLayoutButtonsGoals.transitionToEnd()
                     binding.buttonStart.setText(resources.getText(R.string.Pause))
                 }
@@ -174,6 +179,8 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
                 }
 
                 FINISH -> {
+                    binding.buttonAddGoalTeamOne.isEnabled = false
+                    binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.Restart))
                 }
