@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionMainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_main_scene"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -23,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/fragmentHost"
@@ -44,18 +47,28 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="245dp"
+        android:alpha="0"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="@id/fragmentHost"
+        app:layout_constraintStart_toStartOf="@+id/fragmentHost"
+        app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
     <TextView
         android:id="@+id/titleRecycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/last_games"
-        app:layout_constraintTop_toBottomOf="@id/fragmentHost"
+        android:layout_marginVertical="10dp"
         android:layout_marginStart="20dp"
+        android:fontFamily="@font/baloo2regular"
+        android:text="@string/last_games"
         android:textColor="@color/black"
         android:textSize="20sp"
-       android:layout_marginVertical="10dp"
-        android:fontFamily="@font/baloo2regular"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragmentHost" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -74,10 +87,10 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
         android:background="@android:color/darker_gray"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -104,10 +117,4 @@
         app:layout_constraintTop_toTopOf="@+id/lastGamesRecycler" />
 
 
-
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

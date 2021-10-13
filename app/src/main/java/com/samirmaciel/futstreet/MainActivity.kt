@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -38,12 +39,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun godgjog(){
-
-        Toast.makeText(this, "dsdsd", Toast.LENGTH_SHORT).show()
+    override fun onResume() {
+        super.onResume()
+        Handler().postDelayed({
+            binding.motionMainActivity.transitionToEnd()
+        }, 2000)
     }
-
-
 
     private fun histoyIsEmpty(isEmpity : Boolean){
         if(isEmpity){
@@ -58,6 +59,5 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         _binding = null
     }
-
 
 }
