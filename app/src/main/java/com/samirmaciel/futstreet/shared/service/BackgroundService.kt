@@ -11,6 +11,7 @@ import android.os.IBinder
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.MutableLiveData
 import com.samirmaciel.futstreet.MainActivity
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment
@@ -64,6 +65,7 @@ class BackgroundService : Service(){
     override fun onCreate() {
         super.onCreate()
         registerReceiver(scoreObserve, IntentFilter(GameReadyFragment.SCORE_OBSERVE))
+
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -93,12 +95,16 @@ class BackgroundService : Service(){
     private inner class TimerLine : TimerTask(){
         override fun run() {
             if(timeLimit == 0.0) {
+                if(currentRound == roundLimit){
+                    callNotification(resources.getText(R.string.text_match_finish) as String, nameTeamOne, nameTeamTwo, scoreTeamOne, scoreTeamTwo, shirtTeamOne, shirtTeamTwo)
+                }
                 if(!isTimeEnded){
                     if(currentRound < roundLimit){
                         currentRound++
                         isTimeEnded = true
                     }
                 }
+
                 intentTimeEnd.putExtra(CURRENT_ROUND, currentRound)
                 intentTimeEnd.putExtra(IS_TIME_ENDED, true)
                 sendBroadcast(intentTimeEnd)
