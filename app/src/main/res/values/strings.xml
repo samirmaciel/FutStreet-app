@@ -25,6 +25,7 @@
     <string name="hint_history_empity">Nenhum jogo salvo no histórico</string>
     <string name="text_end_game">Fim de jogo</string>
     <string name="text_match_finish">Partida terminada</string>
+    <string name="match_draw">Empate</string>
 
 
 

@@ -18,6 +18,7 @@ import com.samirmaciel.futstreet.shared.const.PAUSED
 import com.samirmaciel.futstreet.shared.const.PLAYING
 import com.samirmaciel.futstreet.shared.const.PREPLAY
 import com.samirmaciel.futstreet.shared.const.FINISH
+import com.samirmaciel.futstreet.shared.model.Match
 import com.samirmaciel.futstreet.shared.service.BackgroundService
 
 class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
@@ -183,8 +184,28 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.Restart))
+                    viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeamOne.value!!, viewModel.scoreTeamTwo.value!!),
+                        nameTeamOne = viewModel.nameTeamOne.value!!,
+                        nameTeamTwo = viewModel.nameTeamTwo.value!!,
+                        scoreTeamOne = viewModel.scoreTeamOne.value!!,
+                        scoreTeamTwo = viewModel.scoreTeamTwo.value!!,
+                        shirtTeamOne = viewModel.shirtTeamOne.value!!,
+                        shirtTeamTwo = viewModel.scoreTeamTwo.value!!,
+                        rounds = viewModel.roundsLimit.value!!,
+                        time = viewModel.timeLimitParams.value!!
+                    ))
                 }
             }
+        }
+    }
+
+    private fun getWinnerMath(teamOne : Int, teamTwo : Int) : Int {
+        if(teamOne > teamTwo){
+            return 1
+        }else if(teamOne < teamTwo){
+            return 2
+        }else{
+            return 0
         }
     }
 
