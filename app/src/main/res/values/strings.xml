@@ -1,42 +1,43 @@
 <resources>
     <string name="app_name">FutStreet</string>
-    <string name="last_games">Últimos jogos</string>
-
 
 
     // Descriptions of slide on HomeFragment
     <string name="description_one">Organize suas partidas de forma rápida e prática.</string>
     <string name="description_two">Personalize as opções de seu jogo da melhor maneira.</string>
     <string name="description_three">Notificação com informações em tempo real de seu jogo.</string>
-    <string name="new_play">Nova Partida</string>
-    <string name="championship">Campeonato</string>
-    <string name="about">Sobre</string>
-    <string name="game_settings">Configuração de jogo</string>
-    <string name="hint_teamone">Time1</string>
-    <string name="hint_teamtwo">Time2</string>
-    <string name="hint_number">Número</string>
-    <string name="number_of_times">Números de tempos:</string>
-    <string name="time_of_round">Tempo de partida:</string>
-    <string name="hint_minutes">Minutos</string>
-    <string name="button_ready">Pronto</string>
-    <string name="button_cancel">Cancelar</string>
-    <string name="select_shirt_title">Selecione a camisa</string>
-    <string name="button_text_cancel">Cancelar</string>
+
+
+    //Game Settings misc
+    <string name="input_text_number_of_times">Números de tempos:</string>
+    <string name="input_text_time_of_round">Tempo de partida:</string>
+    <string name="input_hint_teamone">Time1</string>
+    <string name="input_hint_teamtwo">Time2</string>
+    <string name="input_hint_minutes">Minutos</string>
+    <string name="alert_title_select_shirt_title">Selecione a camisa</string>
+
+    //MainActitivty misc
     <string name="hint_history_empity">Nenhum jogo salvo no histórico</string>
-    <string name="text_end_game">Fim de jogo</string>
-    <string name="text_match_finish">Partida terminada</string>
+    <string name="last_games">Últimos jogos</string>
+
+    // Match titles
     <string name="match_draw">Empate</string>
+    <string name="text_match_finish">Partida terminada</string>
+    <string name="text_end_game">Fim de jogo</string>
 
+    //Hint menu buttons
+    <string name="hint_menu_button_newmatch">Amistoso</string>
+    <string name="hint_menu_button_tournament">Torneio</string>
+    <string name="hint_menu_button_about">Sobre</string>
 
-
-    //Ask questions
+    //Questions
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="text_ask_cancel_game">Deseja cancelar o jogo?</string>
     <string name="text_add_gol">Marcar gol para </string>
 
-
-    //UI text
+    //UI buttons text
+    <string name="Ready">Pronto</string>
     <string name="Start">Começar</string>
     <string name="Pause">Pausar</string>
     <string name="Continue">Continuar</string>
@@ -44,6 +45,6 @@
     <string name="Cancel">Cancelar</string>
 
     //Navigation titles
-    <string name="settings">Configuração de jogo</string>
-    <string name="currentGame">Partida em Andamento</string>
+    <string name="title_game_settings">Configuração de jogo</string>
+    <string name="title_currentGame">Partida em Andamento</string>
 </resources>

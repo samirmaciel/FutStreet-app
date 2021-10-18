@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/motionMainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_main_scene"
-    tools:context=".MainActivity">
+    tools:context=".modules.MainActivity">
 
     <LinearLayout
         android:id="@+id/appBar"
@@ -28,7 +26,7 @@
 
 
     <LinearLayout
-        android:id="@+id/fragmentHost"
+        android:id="@+id/topFragmentLinearlayout"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:background="@drawable/main_cardview_background"
@@ -39,16 +37,16 @@
         app:layout_constraintTop_toBottomOf="@+id/appBar">
 
         <fragment
-            android:id="@+id/fragment"
+            android:id="@+id/topFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            app:navGraph="@navigation/navfragment" />
+            app:navGraph="@navigation/topnavigation" />
 
     </LinearLayout>
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,42 +55,28 @@
         android:background="@color/blue" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/overlayTopFragment"
         android:layout_width="match_parent"
         android:layout_height="245dp"
         android:alpha="0"
         android:background="@color/blue"
-        app:layout_constraintEnd_toEndOf="@id/fragmentHost"
-        app:layout_constraintStart_toStartOf="@+id/fragmentHost"
+        app:layout_constraintEnd_toEndOf="@id/topFragmentLinearlayout"
+        app:layout_constraintStart_toStartOf="@+id/topFragmentLinearlayout"
         app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
-    <TextView
-        android:id="@+id/titleRecycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginStart="20dp"
-        android:fontFamily="@font/baloo2regular"
-        android:text="@string/last_games"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragmentHost" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lastGamesRecycler"
+    <fragment
+        android:id="@+id/bottomFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/bottomnavigation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/adMob"
+        app:layout_constraintTop_toBottomOf="@id/topFragmentLinearlayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleRecycler" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/adMob"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginHorizontal="10dp"
@@ -109,21 +93,8 @@
             android:layout_height="wrap_content"
             android:text="Ad"
             android:textSize="20sp" />
-
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/textHintEmptyHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hint_history_empity"
-        android:textColor="@color/gray"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lastGamesRecycler" />
 
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

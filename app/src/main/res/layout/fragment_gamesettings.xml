@@ -33,7 +33,7 @@
             <EditText
                 android:id="@+id/inputNameTeamOne"
                 style="@style/inputText"
-                android:hint="@string/hint_teamone" />
+                android:hint="@string/input_hint_teamone" />
 
         </LinearLayout>
 
@@ -63,7 +63,7 @@
         <EditText
             android:id="@+id/inputNameTeamTwo"
             style="@style/inputText"
-            android:hint="@string/hint_teamtwo" />
+            android:hint="@string/input_hint_teamtwo" />
 
     </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/baloo2regular"
-                android:text="@string/number_of_times"
+                android:text="@string/input_text_number_of_times"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -134,7 +134,7 @@
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/time_of_round"/>
+                android:text="@string/input_text_time_of_round"/>
 
             <EditText
                 android:id="@+id/inputMinutesOfRound"
@@ -145,7 +145,7 @@
                 android:maxLength="2"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:hint="@string/hint_minutes"/>
+                android:hint="@string/input_hint_minutes"/>
 
         </LinearLayout>
 
@@ -165,7 +165,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonReady"
             style="@style/button_menu"
-            android:text="@string/button_ready"
+            android:text="@string/Ready"
             android:textColor="@color/white"
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="@color/green"
@@ -176,7 +176,7 @@
             style="@style/button_menu"
             app:cornerRadius="15dp"
             android:layout_marginHorizontal="10dp"
-            android:text="@string/button_cancel"
+            android:text="@string/Cancel"
             app:layout_constraintStart_toEndOf="@id/buttonReady"
             app:layout_constraintTop_toTopOf="@id/buttonReady"/>
     </LinearLayout>

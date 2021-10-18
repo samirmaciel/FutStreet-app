@@ -106,13 +106,13 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
 
         viewModel.nameTeamOne.observe(this){
-            if(!it.equals(resources.getText(R.string.hint_teamone))){
+            if(!it.equals(resources.getText(R.string.input_hint_teamone))){
                 binding.inputNameTeamOne.setText(it)
             }
         }
 
         viewModel.nameTeamTwo.observe(this){
-            if(!it.equals(resources.getText(R.string.hint_teamtwo))){
+            if(!it.equals(resources.getText(R.string.input_hint_teamtwo))){
                 binding.inputNameTeamTwo.setText(it)
             }
         }

@@ -11,8 +11,7 @@ import android.os.IBinder
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.MutableLiveData
-import com.samirmaciel.futstreet.MainActivity
+import com.samirmaciel.futstreet.modules.MainActivity
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID

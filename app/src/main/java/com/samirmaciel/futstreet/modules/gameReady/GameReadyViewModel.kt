@@ -23,14 +23,11 @@ class GameReadyViewModel : ViewModel(){
 
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
 
-
-
     fun getTimeStringFromDouble(time : Double) : String{
         val resultInt = time.roundToInt()
         val minutes = resultInt %  86400 % 3600 / 60
         val seconds = resultInt % 86400 % 3600 % 60
         return makeTimeString( minutes, seconds)
-
     }
 
     fun saveMatch(match : Match){
@@ -42,7 +39,6 @@ class GameReadyViewModel : ViewModel(){
             2 -> println(match.nameTeamTwo)
         }
     }
-
 
     private fun makeTimeString( minutes: Int, seconds: Int) : String{
 

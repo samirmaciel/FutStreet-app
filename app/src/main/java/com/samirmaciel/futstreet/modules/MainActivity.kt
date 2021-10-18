@@ -1,19 +1,13 @@
-package com.samirmaciel.futstreet
+package com.samirmaciel.futstreet.modules
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.AttributeSet
-import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        findNavController(R.id.fragment).addOnDestinationChangedListener(object : NavController.OnDestinationChangedListener{
+        findNavController(R.id.topFragment).addOnDestinationChangedListener(object : NavController.OnDestinationChangedListener{
             @SuppressLint("ResourceType")
             override fun onDestinationChanged(
                 controller: NavController,
@@ -42,15 +36,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Handler().postDelayed({
-            binding.motionMainActivity.transitionToEnd()
+            //binding.motionMainActivity.transitionToEnd()
         }, 2000)
     }
 
     private fun histoyIsEmpty(isEmpity : Boolean){
         if(isEmpity){
-            binding.textHintEmptyHistory.visibility = View.VISIBLE
+            //binding.textHintEmptyHistory.visibility = View.VISIBLE
         }else{
-            binding.textHintEmptyHistory.visibility = View.GONE
+            //binding.textHintEmptyHistory.visibility = View.GONE
         }
 
     }

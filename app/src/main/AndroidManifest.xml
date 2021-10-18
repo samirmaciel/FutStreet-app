@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FutStreet">
         <activity
             android:launchMode="singleInstance"
-            android:name=".MainActivity"
+            android:name=".modules.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
