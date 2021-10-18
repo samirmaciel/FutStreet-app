@@ -3,6 +3,14 @@ package com.samirmaciel.futstreet.shared.const
 
 
 
-
+// ROUT
 const val GO_TO_TOURNAMENET_PAGE = "GO_TO_TOURNAMENET_PAGE"
 const val GOT_TO_LASTMATCHES_PAGE = "GOT_TO_LASTMATCHES_PAGE"
+
+
+// PAGES
+const val HOME_FRAGMENT = 111
+const val MATCH_SETTINGS_FRAGMENT = 222
+const val MATCH_READY_FRAGMENT = 333
+const val LAST_MATCHES_FRAGMENT = 444
+const val TOURNAMENT_FRAGMENT = 555
