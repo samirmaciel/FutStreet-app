@@ -7,12 +7,19 @@
     <string name="description_two">Personalize as opções de seu jogo da melhor maneira.</string>
     <string name="description_three">Notificação com informações em tempo real de seu jogo.</string>
 
+    //Hint teams names
+    <string name="input_hint_team1">Time1</string>
+    <string name="input_hint_team2">Time2</string>
+    <string name="input_hint_team3">Time3</string>
+    <string name="input_hint_team4">Time4</string>
+    <string name="input_hint_team5">Time5</string>
+    <string name="input_hint_team6">Time6</string>
+    <string name="input_hint_team7">Time7</string>
+    <string name="input_hint_team8">Time8</string>
 
     //Game Settings misc
     <string name="input_text_number_of_times">Números de tempos:</string>
     <string name="input_text_time_of_round">Tempo de partida:</string>
-    <string name="input_hint_teamone">Time1</string>
-    <string name="input_hint_teamtwo">Time2</string>
     <string name="input_hint_minutes">Minutos</string>
     <string name="alert_title_select_shirt_title">Selecione a camisa</string>
 
@@ -45,6 +52,7 @@
     <string name="Cancel">Cancelar</string>
 
     //Navigation titles
+    <string name="title_tournament_select">Configuração de times</string>
     <string name="title_game_settings">Configuração de jogo</string>
     <string name="title_currentGame">Partida em Andamento</string>
 </resources>

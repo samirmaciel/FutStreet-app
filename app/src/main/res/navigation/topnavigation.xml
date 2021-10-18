@@ -15,6 +15,11 @@
             app:destination="@id/gameSettingFragment"
             app:enterAnim="@anim/enter_animation"
             app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_homeFragment_to_tournamentSelectFragment"
+            app:destination="@id/tournamentSelectFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
@@ -48,4 +53,9 @@
             android:id="@+id/action_gameReadyFragment_to_gameSettingFragment"
             app:destination="@id/gameSettingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tournamentSelectFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournamentSelect.TournamentSelectFragment"
+        android:label="@string/title_tournament_select"
+        tools:layout="@layout/fragment_tournamentselect" />
 </navigation>

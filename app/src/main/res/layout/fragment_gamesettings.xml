@@ -33,7 +33,7 @@
             <EditText
                 android:id="@+id/inputNameTeamOne"
                 style="@style/inputText"
-                android:hint="@string/input_hint_teamone" />
+                android:hint="@string/input_hint_team1" />
 
         </LinearLayout>
 
@@ -63,7 +63,7 @@
         <EditText
             android:id="@+id/inputNameTeamTwo"
             style="@style/inputText"
-            android:hint="@string/input_hint_teamtwo" />
+            android:hint="@string/input_hint_team2" />
 
     </LinearLayout>
 

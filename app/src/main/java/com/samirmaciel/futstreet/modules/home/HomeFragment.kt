@@ -1,5 +1,6 @@
 package com.samirmaciel.futstreet.modules.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentHomeBinding
+import com.samirmaciel.futstreet.modules.MainActivity
 import com.samirmaciel.futstreet.shared.adapter.SlideDescriptionPager
 import java.util.*
 
@@ -25,15 +27,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
         initPagerSlide(viewModel.getDescriptions())
-
-
     }
 
     override fun onStart() {
         super.onStart()
 
 
-        binding.buttonNewPlay.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment) }
+        binding.buttonNewPlay.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment) }
+        binding.buttonChampionship.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_tournamentSelectFragment)
+            val intent = Intent(MainActivity.ACTION_TO_TORUNAMENT)
+            requireActivity().sendBroadcast(intent)
+        }
     }
 
 

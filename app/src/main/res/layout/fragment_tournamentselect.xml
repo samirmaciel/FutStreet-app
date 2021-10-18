@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".modules.tournamentSelect.TournamentSelectFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/blue">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam1Torunament"
+            style="@style/shirt_select_tournament"
+            android:src="@drawable/shirt_select"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/tournamentInputTeamName1"
+            style="@style/inputText"
+            android:hint="@string/input_hint_team1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam5Torunament"
+            style="@style/shirt_select_tournament"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/shirt_select" />
+
+        <EditText
+            android:id="@+id/torunamentInputTeamName5"
+            style="@style/inputText"
+            android:layout_marginStart="16dp"
+            android:hint="@string/input_hint_team5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam2Torunament"
+            style="@style/shirt_select_tournament"
+            android:src="@drawable/shirt_select"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/tournamentInputTeamName2"
+            style="@style/inputText"
+            android:hint="@string/input_hint_team2" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam6Torunament"
+            style="@style/shirt_select_tournament"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/shirt_select" />
+
+        <EditText
+            android:id="@+id/torunamentInputTeamName6"
+            style="@style/inputText"
+            android:layout_marginStart="16dp"
+            android:hint="@string/input_hint_team6" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam3Torunament"
+            style="@style/shirt_select_tournament"
+            android:src="@drawable/shirt_select"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/tournamentInputTeamName3"
+            style="@style/inputText"
+            android:hint="@string/input_hint_team3" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam7Torunament"
+            style="@style/shirt_select_tournament"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/shirt_select" />
+
+        <EditText
+            android:id="@+id/torunamentInputTeamNam7"
+            style="@style/inputText"
+            android:layout_marginStart="16dp"
+            android:hint="@string/input_hint_team7" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam4Torunament"
+            style="@style/shirt_select_tournament"
+            android:src="@drawable/shirt_select"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/tournamentInputTeamName4"
+            style="@style/inputText"
+            android:hint="@string/input_hint_team4" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selectShirtTeam8Torunament"
+            style="@style/shirt_select_tournament"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/shirt_select" />
+
+        <EditText
+            android:id="@+id/torunamentInputTeamNam8"
+            style="@style/inputText"
+            android:layout_marginStart="16dp"
+            android:hint="@string/input_hint_team8" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonReadyTournament"
+        style="@style/button_menu"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/green"
+        android:text="@string/Ready"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout4" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

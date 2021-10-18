@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_lastgames.xml" value="0.37916666666666665" />
         <entry key="app/src/main/res/layout/fragment_tournament.xml" value="0.37916666666666665" />
+        <entry key="app/src/main/res/layout/fragment_tournamentselect.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/select_shirt_grid.xml" value="0.33" />
         <entry key="app/src/main/res/layout/slide_description.xml" value="0.37916666666666665" />

@@ -44,7 +44,6 @@
         android:id="@+id/buttonChampionship"
         style="@style/button_menu"
         android:text="@string/hint_menu_button_tournament"
-        android:enabled="false"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="@+id/buttonNewPlay"
         app:layout_constraintStart_toStartOf="@+id/buttonNewPlay"

@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
 import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
-import kotlin.math.roundToInt
 
 class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
@@ -106,13 +105,13 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
 
         viewModel.nameTeamOne.observe(this){
-            if(!it.equals(resources.getText(R.string.input_hint_teamone))){
+            if(!it.equals(resources.getText(R.string.input_hint_team1))){
                 binding.inputNameTeamOne.setText(it)
             }
         }
 
         viewModel.nameTeamTwo.observe(this){
-            if(!it.equals(resources.getText(R.string.input_hint_teamtwo))){
+            if(!it.equals(resources.getText(R.string.input_hint_team2))){
                 binding.inputNameTeamTwo.setText(it)
             }
         }
