@@ -6,12 +6,9 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentHomeBinding
-import com.samirmaciel.futstreet.modules.MainActivity
 import com.samirmaciel.futstreet.shared.adapter.SlideDescriptionPager
 import java.util.*
 
@@ -37,8 +34,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment) }
         binding.buttonChampionship.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_tournamentSelectFragment)
-            val intent = Intent(MainActivity.ACTION_TO_TORUNAMENT)
-            requireActivity().sendBroadcast(intent)
         }
     }
 

@@ -57,5 +57,11 @@
         android:id="@+id/tournamentSelectFragment"
         android:name="com.samirmaciel.futstreet.modules.tournamentSelect.TournamentSelectFragment"
         android:label="@string/title_tournament_select"
-        tools:layout="@layout/fragment_tournamentselect" />
+        tools:layout="@layout/fragment_tournamentselect" >
+        <action
+            android:id="@+id/action_tournamentSelectFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_animation_inverted"
+            app:exitAnim="@anim/exit_animation_inverted"/>
+    </fragment>
 </navigation>

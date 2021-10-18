@@ -41,6 +41,7 @@
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="text_ask_cancel_game">Deseja cancelar o jogo?</string>
+    <string name="text_ask_cancel_tournament">Deseja cancelar o torneio?</string>
     <string name="text_add_gol">Marcar gol para </string>
 
     //UI buttons text
