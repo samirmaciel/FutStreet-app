@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
 import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
+import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT
 
 class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
@@ -17,7 +18,6 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
     private val binding : FragmentGamesettingsBinding get() = _binding!!
     private val viewModel : GameSettingViewModel by activityViewModels()
 
-    private val SHIRT_SELECTION_FRAGMENT = "SHIRT_SELECTION_FRAGMENT"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

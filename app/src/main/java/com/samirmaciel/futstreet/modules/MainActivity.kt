@@ -61,15 +61,11 @@ class MainActivity : AppCompatActivity() {
                     "fragment_lastgames" ->{
                         bottomFragmentCurrentPage = LAST_MATCHES_FRAGMENT
                     }
-
                     "fragment_tournament" ->{
                         bottomFragmentCurrentPage = TOURNAMENT_FRAGMENT
                     }
-
-
                 }
             }
-
         })
     }
 
