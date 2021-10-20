@@ -63,4 +63,11 @@
     </style>
 
 
+    <style name="tournament_tab_style" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/baloo2regular</item>
+    </style>
+
+
 </resources>
