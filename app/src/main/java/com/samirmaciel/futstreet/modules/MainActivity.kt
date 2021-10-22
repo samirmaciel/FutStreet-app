@@ -29,12 +29,6 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Handler().postDelayed( object : Runnable{
-            override fun run() {
-                binding.motionLayoutMainActivity.transitionToEnd()
-            }
-
-        }, 2000)
         registerReceiver(receiverToTournamentPage, IntentFilter(GO_TO_TOURNAMENET_PAGE))
         registerReceiver(receiverToLastMatchesPage, IntentFilter(GOT_TO_LASTMATCHES_PAGE))
 
