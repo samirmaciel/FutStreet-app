@@ -26,10 +26,17 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="hint_text_state_torunament_match">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/baloo2regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="stages_tournament_team_name">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">5dp</item>
         <item name="android:fontFamily">@font/baloo2regular</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>

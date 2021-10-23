@@ -56,4 +56,5 @@
     <string name="title_tournament_select">Configuração de times</string>
     <string name="title_game_settings">Configuração de jogo</string>
     <string name="title_currentGame">Partida em Andamento</string>
+    <string name="hint_state_torunament_match_start">Começar partida</string>
 </resources>
