@@ -56,5 +56,10 @@
     <string name="title_tournament_select">Configuração de times</string>
     <string name="title_game_settings">Configuração de jogo</string>
     <string name="title_currentGame">Partida em Andamento</string>
-    <string name="hint_state_torunament_match_start">Começar partida</string>
+    
+    //Tournament stage of matchs
+    <string name="title_state_tournament_match_start">Começar partida</string>
+    <string name="title_state_tournament_match_in_progress">Em andamento</string>
+    <string name="title_state_tournament_match_closed">Encerrado</string>
+    <string name="title_final">Final</string>
 </resources>

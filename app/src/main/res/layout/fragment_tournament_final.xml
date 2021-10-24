@@ -8,16 +8,127 @@
     android:layout_height="match_parent">
 
 
-    <TextView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/stageCardView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Final"
-        android:fontFamily="@font/baloo2semibold"
-        android:textSize="25sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/black"/>
+        android:backgroundTint="@color/blue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:background="@color/green">
+
+                <TextView
+                    android:id="@+id/textStageMatch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/hint_text_state_torunament_match"
+                    android:text="@string/title_state_tournament_match_start"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="6dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/stageTeamShirt11"
+                    style="@style/shirt_stage_tournament"
+                    android:src="@drawable/shirt_select" />
+
+                <TextView
+                    android:id="@+id/stageTeamName11"
+                    style="@style/stages_tournament_team_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="TeamName"
+                    android:textColor="@color/white" />
+
+
+
+                <TextView
+                    android:id="@+id/score11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo2regular"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="X"
+                        android:layout_marginHorizontal="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/score12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/baloo2regular"/>
+
+                    <TextView
+                        android:id="@+id/stageTeamName12"
+                        style="@style/stages_tournament_team_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TeamName"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/white" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/stageTeamShirt12"
+                        style="@style/shirt_stage_tournament"
+                        android:src="@drawable/shirt_select" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_final"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                style="@style/hint_text_state_torunament_match"/>
+
+
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

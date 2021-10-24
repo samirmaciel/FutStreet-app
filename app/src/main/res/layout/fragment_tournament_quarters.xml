@@ -38,10 +38,11 @@
                             android:background="@color/green">
 
                             <TextView
+                                android:id="@+id/textStageMatch1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/hint_text_state_torunament_match"
-                                android:text="@string/hint_state_torunament_match_start"/>
+                                android:text="@string/title_state_tournament_match_start"/>
 
                         </LinearLayout>
 
@@ -66,6 +67,7 @@
                                 android:src="@drawable/shirt_select" />
 
                             <TextView
+                                android:id="@+id/score11"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -118,6 +120,7 @@
                                 android:src="@drawable/shirt_select" />
 
                             <TextView
+                                android:id="@+id/score12"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -151,10 +154,11 @@
                         android:background="@color/green">
 
                         <TextView
+                            android:id="@+id/textStageMatch2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
-                            android:text="@string/hint_state_torunament_match_start"/>
+                            android:text="@string/title_state_tournament_match_start"/>
 
                     </LinearLayout>
 
@@ -179,6 +183,7 @@
                             android:src="@drawable/shirt_select" />
 
                         <TextView
+                            android:id="@+id/score21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -231,6 +236,7 @@
                             android:src="@drawable/shirt_select" />
 
                         <TextView
+                            android:id="@+id/score22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -300,10 +306,11 @@
                         android:background="@color/green">
 
                         <TextView
+                            android:id="@+id/textStageMatch3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
-                            android:text="@string/hint_state_torunament_match_start"/>
+                            android:text="@string/title_state_tournament_match_start"/>
 
                     </LinearLayout>
 
@@ -328,6 +335,7 @@
                             android:src="@drawable/shirt_select" />
 
                         <TextView
+                            android:id="@+id/score31"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -380,6 +388,7 @@
                             android:src="@drawable/shirt_select" />
 
                         <TextView
+                            android:id="@+id/score32"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -412,10 +421,11 @@
                         android:background="@color/green">
 
                         <TextView
+                            android:id="@+id/textStageMatch4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
-                            android:text="@string/hint_state_torunament_match_start"/>
+                            android:text="@string/title_state_tournament_match_start"/>
 
                     </LinearLayout>
 
@@ -440,6 +450,7 @@
                             android:src="@drawable/shirt_select" />
 
                         <TextView
+                            android:id="@+id/score41"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -492,6 +503,7 @@
                             android:src="@drawable/shirt_select" />
 
                         <TextView
+                            android:id="@+id/score42"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"

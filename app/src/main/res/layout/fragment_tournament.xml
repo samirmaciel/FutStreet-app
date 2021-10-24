@@ -8,7 +8,10 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tournamentTab"
-        style="@style/tournament_tab_style"
+        app:tabTextAppearance="@style/tournament_tab_style"
+        android:layout_marginHorizontal="16dp"
+        app:tabSelectedTextColor="@color/white"
+        app:tabBackground="@drawable/tournament_tab_selector"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
