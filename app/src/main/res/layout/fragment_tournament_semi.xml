@@ -55,7 +55,7 @@
                         style="@style/stages_tournament_team_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TeamName"
+                        android:text="@string/title_team_name_waiting"
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -106,7 +106,7 @@
                         style="@style/stages_tournament_team_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TeamName"
+                        android:text="@string/title_team_name_waiting"
                         android:textColor="@color/white"
                         tools:layout_editor_absoluteX="16dp"
                         tools:layout_editor_absoluteY="16dp" />
@@ -171,7 +171,7 @@
                         style="@style/stages_tournament_team_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TeamName"
+                        android:text="@string/title_team_name_waiting"
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -222,7 +222,7 @@
                         style="@style/stages_tournament_team_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TeamName"
+                        android:text="@string/title_team_name_waiting"
                         android:textColor="@color/white"
                         tools:layout_editor_absoluteX="16dp"
                         tools:layout_editor_absoluteY="16dp" />

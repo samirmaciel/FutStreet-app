@@ -16,6 +16,7 @@
     <string name="input_hint_team6">Time6</string>
     <string name="input_hint_team7">Time7</string>
     <string name="input_hint_team8">Time8</string>
+    <string name="title_team_name_waiting">Aguardando</string>
 
     //Game Settings misc
     <string name="input_text_number_of_times">Números de tempos:</string>
