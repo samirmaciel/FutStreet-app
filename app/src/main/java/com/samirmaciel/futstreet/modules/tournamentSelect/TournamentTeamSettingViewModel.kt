@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
 
 class TournamentTeamSettingViewModel : ViewModel() {
-
+    //Teams shirts color
     var shirtTeam1 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
     var shirtTeam2 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
     var shirtTeam3 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
@@ -14,6 +14,18 @@ class TournamentTeamSettingViewModel : ViewModel() {
     var shirtTeam6 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
     var shirtTeam7 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
     var shirtTeam8 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
+
+    // Teams names strings
+    var teamName1 : MutableLiveData<String> = MutableLiveData()
+    var teamName2 : MutableLiveData<String> = MutableLiveData()
+    var teamName3 : MutableLiveData<String> = MutableLiveData()
+    var teamName4 : MutableLiveData<String> = MutableLiveData()
+    var teamName5 : MutableLiveData<String> = MutableLiveData()
+    var teamName6 : MutableLiveData<String> = MutableLiveData()
+    var teamName7 : MutableLiveData<String> = MutableLiveData()
+    var teamName8 : MutableLiveData<String> = MutableLiveData()
+
+
 
     fun getListOfShirts() : Map<Int, Int>{
         return mapOf(

@@ -56,7 +56,6 @@
                             <TextView
                                 android:id="@+id/stageTeamName11"
                                 style="@style/stages_tournament_team_name"
-                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/title_team_name_waiting"
                                 android:textColor="@color/white" />
@@ -91,7 +90,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="X"
-                                android:layout_marginStart="8dp"
+                                android:layout_marginStart="15dp"
                                 android:textColor="@color/white"
                                 android:textSize="12sp"/>
                         </LinearLayout>
@@ -105,9 +104,8 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/stageTeamName12"
+                                android:id="@+id/stageTeamName21"
                                 style="@style/stages_tournament_team_name"
-                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/title_team_name_waiting"
                                 android:textColor="@color/white"
@@ -115,12 +113,12 @@
                                 tools:layout_editor_absoluteY="16dp" />
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/stageTeamShirt12"
+                                android:id="@+id/stageTeamShirt21"
                                 style="@style/shirt_stage_tournament"
                                 android:src="@drawable/shirt_select" />
 
                             <TextView
-                                android:id="@+id/score12"
+                                android:id="@+id/score21"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -170,20 +168,19 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stageTeamName21"
+                            android:id="@+id/stageTeamName32"
                             style="@style/stages_tournament_team_name"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/title_team_name_waiting"
                             android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/stageTeamShirt21"
+                            android:id="@+id/stageTeamShirt32"
                             style="@style/shirt_stage_tournament"
                             android:src="@drawable/shirt_select" />
 
                         <TextView
-                            android:id="@+id/score21"
+                            android:id="@+id/score32"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -207,7 +204,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="X"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="15dp"
                             android:textColor="@color/white"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -221,9 +218,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stageTeamName22"
+                            android:id="@+id/stageTeamName42"
                             style="@style/stages_tournament_team_name"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/title_team_name_waiting"
                             android:textColor="@color/white"
@@ -231,12 +227,12 @@
                             tools:layout_editor_absoluteY="16dp" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/stageTeamShirt22"
+                            android:id="@+id/stageTeamShirt42"
                             style="@style/shirt_stage_tournament"
                             android:src="@drawable/shirt_select" />
 
                         <TextView
-                            android:id="@+id/score22"
+                            android:id="@+id/score42"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -322,20 +318,19 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stageTeamName31"
+                            android:id="@+id/stageTeamName53"
                             style="@style/stages_tournament_team_name"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/title_team_name_waiting"
                             android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/stageTeamShirt31"
+                            android:id="@+id/stageTeamShirt53"
                             style="@style/shirt_stage_tournament"
                             android:src="@drawable/shirt_select" />
 
                         <TextView
-                            android:id="@+id/score31"
+                            android:id="@+id/score53"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -359,7 +354,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="X"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="15dp"
                             android:textColor="@color/white"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -373,9 +368,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stageTeamName32"
+                            android:id="@+id/stageTeamName63"
                             style="@style/stages_tournament_team_name"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/title_team_name_waiting"
                             android:textColor="@color/white"
@@ -383,12 +377,12 @@
                             tools:layout_editor_absoluteY="16dp" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/stageTeamShirt32"
+                            android:id="@+id/stageTeamShirt63"
                             style="@style/shirt_stage_tournament"
                             android:src="@drawable/shirt_select" />
 
                         <TextView
-                            android:id="@+id/score32"
+                            android:id="@+id/score63"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -437,20 +431,19 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stageTeamName41"
+                            android:id="@+id/stageTeamName74"
                             style="@style/stages_tournament_team_name"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/title_team_name_waiting"
                             android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/stageTeamShirt41"
+                            android:id="@+id/stageTeamShirt74"
                             style="@style/shirt_stage_tournament"
                             android:src="@drawable/shirt_select" />
 
                         <TextView
-                            android:id="@+id/score41"
+                            android:id="@+id/score74"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -474,7 +467,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="X"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="15dp"
                             android:textColor="@color/white"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -488,9 +481,8 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/stageTeamName42"
+                            android:id="@+id/stageTeamName84"
                             style="@style/stages_tournament_team_name"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/title_team_name_waiting"
                             android:textColor="@color/white"
@@ -498,12 +490,12 @@
                             tools:layout_editor_absoluteY="16dp" />
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/stageTeamShirt42"
+                            android:id="@+id/stageTeamShirt84"
                             style="@style/shirt_stage_tournament"
                             android:src="@drawable/shirt_select" />
 
                         <TextView
-                            android:id="@+id/score42"
+                            android:id="@+id/score84"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"

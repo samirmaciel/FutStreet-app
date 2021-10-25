@@ -36,7 +36,7 @@
             android:src="@drawable/shirt_select" />
 
         <EditText
-            android:id="@+id/torunamentInputTeamName5"
+            android:id="@+id/tournamentInputTeamName5"
             style="@style/inputText"
             android:layout_marginStart="16dp"
             android:hint="@string/input_hint_team5" />
@@ -73,7 +73,7 @@
             android:src="@drawable/shirt_select" />
 
         <EditText
-            android:id="@+id/torunamentInputTeamName6"
+            android:id="@+id/tournamentInputTeamName6"
             style="@style/inputText"
             android:layout_marginStart="16dp"
             android:hint="@string/input_hint_team6" />
@@ -110,7 +110,7 @@
             android:src="@drawable/shirt_select" />
 
         <EditText
-            android:id="@+id/torunamentInputTeamNam7"
+            android:id="@+id/tournamentInputTeamName7"
             style="@style/inputText"
             android:layout_marginStart="16dp"
             android:hint="@string/input_hint_team7" />
@@ -148,7 +148,7 @@
             android:src="@drawable/shirt_select" />
 
         <EditText
-            android:id="@+id/torunamentInputTeamNam8"
+            android:id="@+id/tournamentInputTeamName8"
             style="@style/inputText"
             android:layout_marginStart="16dp"
             android:hint="@string/input_hint_team8" />
