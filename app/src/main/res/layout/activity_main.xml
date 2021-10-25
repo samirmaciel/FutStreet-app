@@ -28,7 +28,7 @@
     <LinearLayout
         android:id="@+id/topFragmentLinearlayout"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/main_cardview_background"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,8 @@
             android:id="@+id/topFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
             app:navGraph="@navigation/topnavigation" />
 
     </LinearLayout>

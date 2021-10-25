@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
 import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
+import com.samirmaciel.futstreet.shared.const.MATCH_FRIENDLY
+import com.samirmaciel.futstreet.shared.const.MATCH_TOURNAMENT
 import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT
 
 class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
@@ -23,6 +25,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         super.onViewCreated(view, savedInstanceState)
       _binding = FragmentGamesettingsBinding.bind(view)
 
+
     }
 
     override fun onStart() {
@@ -34,7 +37,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
                 for ((k, v) in viewModel.getListOfShirts()) {
                     if (it == k) {
                         binding.selectShirtTeam1.setImageResource(v)
-                        viewModel.shirtTeamOne.value = v
+                        viewModel.shirtTeam1.value = v
                     }
                 }
             }
@@ -47,7 +50,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
                 for((k , v) in viewModel.getListOfShirts()){
                     if(it == k){
                         binding.selectShirtTeam2.setImageResource(v)
-                        viewModel.shirtTeamTwo.value = v
+                        viewModel.shirtTeam2.value = v
                     }
                 }
             }
@@ -57,7 +60,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
         binding.buttonReady.setOnClickListener{
             if(saveTempData()){
-                findNavController().navigate(R.id.action_gameSettingFragment_to_gameReadyFragment, getBundleWithArguments())
+                findNavController().navigate(R.id.action_gameSettingFragment_to_gameReadyFragment, setBundleWithArguments())
             }
 
         }
@@ -72,7 +75,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
     override fun onResume() {
         super.onResume()
 
-        viewModel.shirtTeamTwo.observe(this){
+        viewModel.shirtTeam2.observe(this){
             binding.selectShirtTeam2.animate().apply {
                 duration = 100
                 scaleXBy(0.5f)
@@ -88,7 +91,7 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
         }
 
-        viewModel.shirtTeamOne.observe(this){
+        viewModel.shirtTeam1.observe(this){
             binding.selectShirtTeam1.animate().apply {
                 duration = 100
                 scaleYBy(0.5f)
@@ -104,13 +107,13 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
 
         }
 
-        viewModel.nameTeamOne.observe(this){
+        viewModel.teamName1.observe(this){
             if(!it.equals(resources.getText(R.string.input_hint_team1))){
                 binding.inputNameTeamOne.setText(it)
             }
         }
 
-        viewModel.nameTeamTwo.observe(this){
+        viewModel.teamName2.observe(this){
             if(!it.equals(resources.getText(R.string.input_hint_team2))){
                 binding.inputNameTeamTwo.setText(it)
             }
@@ -132,12 +135,12 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
     }
 
     private fun saveTempData() : Boolean{
-        if (checkInputs()){
+        if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
             if(binding.inputNameTeamOne.text.isNotEmpty()){
-                viewModel.nameTeamOne.value = binding.inputNameTeamOne.text.toString()
+                viewModel.teamName1.value = binding.inputNameTeamOne.text.toString()
             }
             if(binding.inputNameTeamTwo.text.isNotEmpty()){
-                viewModel.nameTeamTwo.value = binding.inputNameTeamTwo.text.toString()
+                viewModel.teamName2.value = binding.inputNameTeamTwo.text.toString()
             }
 
             if(binding.inputNumberOfTimes.text.isNotEmpty()){
@@ -158,17 +161,14 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         }
     }
 
-    private fun checkInputs() = binding.inputMinutesOfRound.text.toString().isNotEmpty()
 
 
-    private fun getBundleWithArguments() : Bundle {
+    private fun setBundleWithArguments() : Bundle {
         val arguments = Bundle().apply {
-            putString("NameTeamOne", viewModel.nameTeamOne.value!!)
-            putString("NameTeamTwo", viewModel.nameTeamTwo.value!!)
-            putInt("ScoreTeamOne", 0)
-            putInt("ScoreTeamTwo", 0)
-            putInt("ShirtTeamOne", viewModel.shirtTeamOne.value!!)
-            putInt("ShirtTeamTwo", viewModel.shirtTeamTwo.value!!)
+            putString("teamName1", viewModel.teamName1.value!!)
+            putString("teamName2", viewModel.teamName2.value!!)
+            putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
+            putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
             putInt("Rounds", viewModel.roundsOfPlay.value!!)
             putInt("CurrentRound", 1)
             putDouble("RoundTime", viewModel.timeForRound.value!!.toDouble() * 60)
@@ -177,11 +177,12 @@ class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
         return arguments
     }
 
+
     private fun cleanViewModelData(){
-        viewModel.nameTeamOne.value = ""
-        viewModel.nameTeamTwo.value = ""
-        viewModel.shirtTeamOne.value = R.drawable.shirt_select
-        viewModel.shirtTeamTwo.value = R.drawable.shirt_select
+        viewModel.teamName1.value = ""
+        viewModel.teamName2.value = ""
+        viewModel.shirtTeam1.value = R.drawable.shirt_select
+        viewModel.shirtTeam2.value = R.drawable.shirt_select
         viewModel.timeForRound.value = 0
         viewModel.roundsOfPlay.value = 1
     }

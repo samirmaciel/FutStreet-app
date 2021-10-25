@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_tournament_final.xml" value="0.37916666666666665" />
         <entry key="app/src/main/res/layout/fragment_tournament_quarters.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_tournament_semi.xml" value="0.37916666666666665" />
+        <entry key="app/src/main/res/layout/fragment_tournamentmatchsettings.xml" value="0.37916666666666665" />
         <entry key="app/src/main/res/layout/fragment_tournamentselect.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_tournamentteamsetting.xml" value="0.37916666666666665" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.22" />

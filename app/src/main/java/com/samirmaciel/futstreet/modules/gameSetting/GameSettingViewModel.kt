@@ -7,11 +7,11 @@ import com.samirmaciel.futstreet.shared.const.SELECT_SHIRT
 
 class GameSettingViewModel : ViewModel() {
 
-    var shirtTeamOne : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
-    var shirtTeamTwo : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
+    var shirtTeam1 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
+    var shirtTeam2 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
 
-    var nameTeamOne : MutableLiveData<String> = MutableLiveData("Time1")
-    var nameTeamTwo : MutableLiveData<String> = MutableLiveData("Time2")
+    var teamName1 : MutableLiveData<String> = MutableLiveData("Time1")
+    var teamName2 : MutableLiveData<String> = MutableLiveData("Time2")
 
     var roundsOfPlay : MutableLiveData<Int> = MutableLiveData(1)
     var timeForRound : MutableLiveData<Int> = MutableLiveData(0)

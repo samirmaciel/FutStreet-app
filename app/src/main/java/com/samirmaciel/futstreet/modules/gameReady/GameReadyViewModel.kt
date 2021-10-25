@@ -3,6 +3,7 @@ package com.samirmaciel.futstreet.modules.gameReady
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
+import com.samirmaciel.futstreet.shared.const.MATCH_FRIENDLY
 import com.samirmaciel.futstreet.shared.const.PREPLAY
 import com.samirmaciel.futstreet.shared.model.Match
 import kotlin.math.roundToInt
@@ -22,6 +23,8 @@ class GameReadyViewModel : ViewModel(){
     var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
 
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
+
+    var matchType : MutableLiveData<Int> = MutableLiveData(MATCH_FRIENDLY)
 
     fun getTimeStringFromDouble(time : Double) : String{
         val resultInt = time.roundToInt()

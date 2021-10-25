@@ -63,5 +63,36 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/enter_animation_inverted"
             app:exitAnim="@anim/exit_animation_inverted"/>
+        <action
+            android:id="@+id/action_tournamentSelectFragment_to_gameReadyFragment"
+            app:destination="@id/gameReadyFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_tournamentSelectFragment_to_gameSettingFragment"
+            app:destination="@id/gameSettingFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_tournamentSelectFragment_to_tournamentMatchSettingsFragment"
+            app:destination="@id/tournamentMatchSettingsFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
+    </fragment>
+    <fragment
+        android:id="@+id/tournamentMatchSettingsFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournamentMatchSettings.TournamentMatchSettingsFragment"
+        android:label="fragment_tournamentmatchsettings"
+        tools:layout="@layout/fragment_tournamentmatchsettings" >
+        <action
+            android:id="@+id/action_tournamentMatchSettingsFragment_to_gameReadyFragment"
+            app:destination="@id/gameReadyFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_tournamentMatchSettingsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_animation_inverted"
+            app:exitAnim="@anim/exit_animation_inverted"/>
     </fragment>
 </navigation>

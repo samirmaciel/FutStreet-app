@@ -14,6 +14,8 @@ import com.samirmaciel.futstreet.databinding.FragmentTournamentteamsettingBindin
 import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
 
 import com.samirmaciel.futstreet.shared.const.GO_TO_TOURNAMENET_PAGE
+import com.samirmaciel.futstreet.shared.const.MATCH_FRIENDLY
+import com.samirmaciel.futstreet.shared.const.MATCH_TOURNAMENT
 import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT
 
 
@@ -76,6 +78,17 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
             intent.putExtra("teamName8", viewModel.teamName8.value)
 
             requireActivity().sendBroadcast(intent)
+
+            val bundle = Bundle().apply {
+                putString("teamName1", viewModel.teamName1.value)
+                putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
+
+                putString("teamName2", viewModel.teamName2.value)
+                putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
+
+            }
+
+            findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment, bundle)
         }
 
         binding.selectShirtTeam1Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam1) }
@@ -126,7 +139,7 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
 
     private fun saveInputTeamNames(){
         if(binding.tournamentInputTeamName1.text.isNotEmpty()){
-            viewModel.teamName1.value = binding.tournamentInputTeamName2.text.toString()
+            viewModel.teamName1.value = binding.tournamentInputTeamName1.text.toString()
         }
 
         if(binding.tournamentInputTeamName2.text.isNotEmpty()){
