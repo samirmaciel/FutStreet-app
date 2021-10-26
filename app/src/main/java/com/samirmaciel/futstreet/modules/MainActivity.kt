@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        registerReceiver(receiverToTournamentPage, IntentFilter(GO_TO_TOURNAMENET_PAGE))
-        registerReceiver(receiverToLastMatchesPage, IntentFilter(GOT_TO_LASTMATCHES_PAGE))
 
         findNavController(R.id.topFragment).addOnDestinationChangedListener(object : NavController.OnDestinationChangedListener{
             @SuppressLint("ResourceType")
@@ -47,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+
                 binding.appBarTitle.setText(destination.label)
             }
         })
@@ -69,52 +68,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        Handler().postDelayed({
-            //binding.motionMainActivity.transitionToEnd()
-        }, 2000)
-    }
-
-    private val receiverToTournamentPage : BroadcastReceiver = object : BroadcastReceiver(){
-        override fun onReceive(context: Context, intent: Intent) {
-
-            val bundle = Bundle().apply {
-                putInt("shirtTeam1", intent.getIntExtra("shirtTeam1", R.drawable.shirt_select))
-                putString("teamName1", intent.getStringExtra("teamName1"))
-
-                putInt("shirtTeam2", intent.getIntExtra("shirtTeam2", R.drawable.shirt_select))
-                putString("teamName2", intent.getStringExtra("teamName2"))
-
-                putInt("shirtTeam3", intent.getIntExtra("shirtTeam3", R.drawable.shirt_select))
-                putString("teamName3", intent.getStringExtra("teamName3"))
-
-                putInt("shirtTeam4", intent.getIntExtra("shirtTeam4", R.drawable.shirt_select))
-                putString("teamName4", intent.getStringExtra("teamName4"))
-
-                putInt("shirtTeam5", intent.getIntExtra("shirtTeam5", R.drawable.shirt_select))
-                putString("teamName5", intent.getStringExtra("teamName5"))
-
-                putInt("shirtTeam6", intent.getIntExtra("shirtTeam6", R.drawable.shirt_select))
-                putString("teamName6", intent.getStringExtra("teamName6"))
-
-                putInt("shirtTeam7", intent.getIntExtra("shirtTeam7", R.drawable.shirt_select))
-                putString("teamName7", intent.getStringExtra("teamName7"))
-
-                putInt("shirtTeam8", intent.getIntExtra("shirtTeam8", R.drawable.shirt_select))
-                putString("teamName8", intent.getStringExtra("teamName8"))
-
-            }
-
-            findNavController(R.id.bottomFragment).navigate(R.id.action_lastGamesFragment_to_tournamentFragment, bundle)
-        }
-    }
-
-    private val receiverToLastMatchesPage : BroadcastReceiver = object : BroadcastReceiver(){
-        override fun onReceive(context: Context, intent: Intent) {
-            findNavController(R.id.bottomFragment).navigate(R.id.action_tournamentFragment_to_lastGamesFragment)
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()

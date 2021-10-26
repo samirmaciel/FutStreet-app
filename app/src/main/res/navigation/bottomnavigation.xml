@@ -10,21 +10,26 @@
         android:name="com.samirmaciel.futstreet.modules.lastGames.LastGamesFragment"
         android:label="fragment_lastgames"
         tools:layout="@layout/fragment_lastgames" >
-        <action
+
+    <action
             android:id="@+id/action_lastGamesFragment_to_tournamentFragment"
             app:destination="@id/tournamentFragment"
             app:enterAnim="@anim/enter_animation"
-            app:exitAnim="@anim/exit_animation"/>
+            app:exitAnim="@anim/exit_animation" />
     </fragment>
+
     <fragment
         android:id="@+id/tournamentFragment"
         android:name="com.samirmaciel.futstreet.modules.tournament.TournamentFragment"
         android:label="fragment_tournament"
         tools:layout="@layout/fragment_tournament" >
+
         <action
             android:id="@+id/action_tournamentFragment_to_lastGamesFragment"
             app:destination="@id/lastGamesFragment"
             app:enterAnim="@anim/enter_animation_inverted"
             app:exitAnim="@anim/exit_animation_inverted"/>
+
     </fragment>
+
 </navigation>

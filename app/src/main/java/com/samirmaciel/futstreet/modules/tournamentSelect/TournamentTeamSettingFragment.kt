@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentteamsettingBinding
@@ -28,6 +29,7 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         addValueStringResourcesDefaultTeamNames()
     }
 
@@ -52,43 +54,43 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
 
         binding.buttonReadyTournament.setOnClickListener{
             saveInputTeamNames()
-            val intent = Intent(GO_TO_TOURNAMENET_PAGE)
-            intent.putExtra("shirtTeam1", viewModel.shirtTeam1.value)
-            intent.putExtra("teamName1", viewModel.teamName1.value)
+            val allTeamsBundle = Bundle().apply {
+                putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
+                putString("teamName1", viewModel.teamName1.value)
 
-            intent.putExtra("shirtTeam2", viewModel.shirtTeam2.value)
-            intent.putExtra("teamName2", viewModel.teamName2.value)
+                putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
+                putString("teamName2", viewModel.teamName2.value)
 
-            intent.putExtra("shirtTeam3", viewModel.shirtTeam3.value)
-            intent.putExtra("teamName3", viewModel.teamName3.value)
+                putInt("shirtTeam3", viewModel.shirtTeam3.value!!)
+                putString("teamName3", viewModel.teamName3.value)
 
-            intent.putExtra("shirtTeam4", viewModel.shirtTeam4.value)
-            intent.putExtra("teamName4", viewModel.teamName4.value)
+                putInt("shirtTeam4", viewModel.shirtTeam4.value!!)
+                putString("teamName4", viewModel.teamName4.value)
 
-            intent.putExtra("shirtTeam5", viewModel.shirtTeam5.value)
-            intent.putExtra("teamName5", viewModel.teamName5.value)
+                putInt("shirtTeam5", viewModel.shirtTeam5.value!!)
+                putString("teamName5", viewModel.teamName5.value)
 
-            intent.putExtra("shirtTeam6", viewModel.shirtTeam6.value)
-            intent.putExtra("teamName6", viewModel.teamName6.value)
+                putInt("shirtTeam6", viewModel.shirtTeam6.value!!)
+                putString("teamName6", viewModel.teamName6.value)
 
-            intent.putExtra("shirtTeam7", viewModel.shirtTeam7.value)
-            intent.putExtra("teamName7", viewModel.teamName7.value)
+                putInt("shirtTeam7", viewModel.shirtTeam7.value!!)
+                putString("teamName7", viewModel.teamName7.value)
 
-            intent.putExtra("shirtTeam8", viewModel.shirtTeam8.value)
-            intent.putExtra("teamName8", viewModel.teamName8.value)
+                putInt("shirtTeam8", viewModel.shirtTeam8.value!!)
+                putString("teamName8", viewModel.teamName8.value)
+            }
 
-            requireActivity().sendBroadcast(intent)
+            requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_lastGamesFragment_to_tournamentFragment, allTeamsBundle)
 
-            val bundle = Bundle().apply {
+            val firstMatchBundle = Bundle().apply {
                 putString("teamName1", viewModel.teamName1.value)
                 putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
 
                 putString("teamName2", viewModel.teamName2.value)
                 putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
-
             }
 
-            findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment, bundle)
+            findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment, firstMatchBundle)
         }
 
         binding.selectShirtTeam1Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam1) }

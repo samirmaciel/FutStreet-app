@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentmatchsettingsBinding
@@ -37,7 +38,9 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
         }
 
         binding.buttonCancel.setOnClickListener{
-            findNavController().navigate(R.id.action_gameSettingFragment_to_homeFragment)
+            requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_tournamentFragment_to_lastGamesFragment)
+            findNavController().navigate(R.id.action_tournamentMatchSettingsFragment_to_homeFragment)
+
         }
     }
 

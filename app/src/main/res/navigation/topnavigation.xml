@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/tournamentMatchSettingsFragment"
         android:name="com.samirmaciel.futstreet.modules.tournamentMatchSettings.TournamentMatchSettingsFragment"
-        android:label="fragment_tournamentmatchsettings"
+        android:label="@string/title_tournament_match_settings"
         tools:layout="@layout/fragment_tournamentmatchsettings" >
         <action
             android:id="@+id/action_tournamentMatchSettingsFragment_to_gameReadyFragment"

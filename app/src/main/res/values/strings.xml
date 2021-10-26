@@ -54,6 +54,7 @@
     <string name="Cancel">Cancelar</string>
 
     //Navigation titles
+    <string name="title_tournament_match_settings">Configuração do torneio</string>
     <string name="title_tournament_select">Configuração de times</string>
     <string name="title_game_settings">Configuração de jogo</string>
     <string name="title_currentGame">Partida em Andamento</string>
