@@ -3,6 +3,7 @@ package com.samirmaciel.futstreet.modules.tournamentOptions
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentOptionsBinding
 
@@ -14,6 +15,14 @@ class TournamentOptionsFragment : Fragment(R.layout.fragment_tournament_options)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentOptionsBinding.bind(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.buttonNewTournament.setOnClickListener{
+            findNavController().navigate(R.id.action_tournamentOptionsFragment_to_tournamentSelectFragment)
+        }
     }
 
 

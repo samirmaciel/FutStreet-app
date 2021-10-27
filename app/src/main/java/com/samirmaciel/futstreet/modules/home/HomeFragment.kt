@@ -33,7 +33,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.buttonNewPlay.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_gameSettingFragment) }
         binding.buttonChampionship.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_tournamentSelectFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_tournamentOptionsFragment)
         }
     }
 

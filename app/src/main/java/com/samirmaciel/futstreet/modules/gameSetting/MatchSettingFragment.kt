@@ -18,11 +18,9 @@ class MatchSettingFragment : Fragment(R.layout.fragment_matchsettings){
     private val binding : FragmentMatchsettingsBinding get() = _binding!!
     private val viewModel : MatchSettingViewModel by activityViewModels()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
       _binding = FragmentMatchsettingsBinding.bind(view)
-
 
     }
 
@@ -39,7 +37,6 @@ class MatchSettingFragment : Fragment(R.layout.fragment_matchsettings){
                     }
                 }
             }
-
             shirtSelection.show(childFragmentManager, SHIRT_SELECTION_FRAGMENT)
         }
 
