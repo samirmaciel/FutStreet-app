@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.shared.const.SELECT_SHIRT
 
-class GameSettingViewModel : ViewModel() {
+class MatchSettingViewModel : ViewModel() {
 
     var shirtTeam1 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)
     var shirtTeam2 : MutableLiveData<Int> = MutableLiveData(R.drawable.shirt_select)

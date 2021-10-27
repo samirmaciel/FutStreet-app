@@ -20,12 +20,15 @@
             app:destination="@id/tournamentSelectFragment"
             app:enterAnim="@anim/enter_animation"
             app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_homeFragment_to_tournamentOptionsFragment"
+            app:destination="@id/tournamentOptionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
-        android:name="com.samirmaciel.futstreet.modules.gameSetting.GameSettingFragment"
+        android:name="com.samirmaciel.futstreet.modules.gameSetting.MatchSettingFragment"
         android:label="@string/title_game_settings"
-        tools:layout="@layout/fragment_gamesettings" >
+        tools:layout="@layout/fragment_matchsettings" >
         <action
             android:id="@+id/action_gameSettingFragment_to_gameReadyFragment"
             app:destination="@id/gameReadyFragment"
@@ -39,9 +42,9 @@
     </fragment>
     <fragment
         android:id="@+id/gameReadyFragment"
-        android:name="com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment"
+        android:name="com.samirmaciel.futstreet.modules.gameReady.MatchReadyFragment"
         android:label="@string/title_currentGame"
-        tools:layout="@layout/fragment_gameready" >
+        tools:layout="@layout/fragment_matchready" >
         <action
             android:id="@+id/action_gameReadyFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -94,5 +97,22 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/enter_animation_inverted"
             app:exitAnim="@anim/exit_animation_inverted"/>
+    </fragment>
+    <fragment
+        android:id="@+id/tournamentOptionsFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournamentOptions.TournamentOptionsFragment"
+        android:label="fragment_tournament_options"
+        tools:layout="@layout/fragment_tournament_options" >
+        <action
+            android:id="@+id/action_tournamentOptionsFragment_to_tournamentSelectFragment"
+            app:destination="@id/tournamentSelectFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
+        <action
+            android:id="@+id/action_tournamentOptionsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_animation_inverted"
+            app:exitAnim="@anim/exit_animation_inverted"/>
+
     </fragment>
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/lastGamesFragment"
-        android:name="com.samirmaciel.futstreet.modules.lastGames.LastGamesFragment"
+        android:name="com.samirmaciel.futstreet.modules.lastMatches.LastMatchesFragment"
         android:label="fragment_lastgames"
         tools:layout="@layout/fragment_lastgames" >
 
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/tournamentFragment"
-        android:name="com.samirmaciel.futstreet.modules.tournament.TournamentFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournamentMatcheStages.TournamentMatchesFragment"
         android:label="fragment_tournament"
         tools:layout="@layout/fragment_tournament" >
 

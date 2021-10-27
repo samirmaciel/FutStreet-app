@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.tournament.stages
+package com.samirmaciel.futstreet.modules.tournamentMatcheStages.stages
 
 import android.os.Bundle
 import android.view.View

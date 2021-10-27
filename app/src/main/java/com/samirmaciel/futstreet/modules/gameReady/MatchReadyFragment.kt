@@ -5,25 +5,22 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.databinding.FragmentGamereadyBinding
+import com.samirmaciel.futstreet.databinding.FragmentMatchreadyBinding
 import com.samirmaciel.futstreet.shared.const.*
 import com.samirmaciel.futstreet.shared.model.Match
 import com.samirmaciel.futstreet.shared.service.BackgroundService
 
-class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
+class MatchReadyFragment : Fragment(R.layout.fragment_matchready) {
 
-    private var _binding : FragmentGamereadyBinding? = null
-    private val binding : FragmentGamereadyBinding get() = _binding!!
+    private var _binding : FragmentMatchreadyBinding? = null
+    private val binding : FragmentMatchreadyBinding get() = _binding!!
     lateinit var serviceIntent : Intent
-    private val viewModel : GameReadyViewModel by activityViewModels()
+    private val viewModel : MatchReadyViewModel by activityViewModels()
 
 
 
@@ -60,7 +57,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentGamereadyBinding.bind(view)
+        _binding = FragmentMatchreadyBinding.bind(view)
 
         getSettings()
     }
@@ -72,7 +69,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         binding.buttonAddGoalTeamOne.setOnClickListener{
 
             val alertScore = AlertDialog.Builder(requireContext()).apply {
-                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeamOne.value.toString()}?")
+                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeam1.value.toString()}?")
                 setPositiveButton(resources.getText(R.string.yes)) { _, _ -> addGolTeamOne() }
                 setNegativeButton(resources.getText(R.string.no), null)
             }
@@ -82,7 +79,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         binding.buttonAddGoalTeamTwo.setOnClickListener{
             val alertScore = AlertDialog.Builder(requireContext()).apply {
-                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeamTwo.value.toString()}?")
+                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeam2.value.toString()}?")
                 setPositiveButton(resources.getText(R.string.yes)){ _, _  -> addGolTeamTwo() }
                 setNegativeButton(resources.getText(R.string.no), null)
             }
@@ -125,19 +122,19 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
 
         }
 
-        viewModel.nameTeamOne.observe(this){
+        viewModel.nameTeam1.observe(this){
             binding.textNameTeamOne.setText(it)
         }
 
-        viewModel.nameTeamTwo.observe(this){
+        viewModel.nameTeam2.observe(this){
             binding.textNameTeamTwo.setText(it)
         }
 
-        viewModel.shirtTeamOne.observe(this){
+        viewModel.shirtTeam1.observe(this){
             binding.imageShirtTeamOne.setImageResource(it)
         }
 
-        viewModel.shirtTeamTwo.observe(this){
+        viewModel.shirtTeam2.observe(this){
             binding.imageShirtTeamTwo.setImageResource(it)
         }
 
@@ -149,12 +146,18 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             binding.textCurrentRound.setText("${viewModel.currentRound.value}°")
         }
 
-        viewModel.scoreTeamOne.observe(this){
+        viewModel.scoreTeam1.observe(this){
             binding.textScoreTeamOne.setText(it.toString())
+            val scoreIntent = Intent(SCORE_OBSERVE)
+            scoreIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeam1.value!!)
+            requireActivity().sendBroadcast(scoreIntent)
         }
 
-        viewModel.scoreTeamTwo.observe(this){
+        viewModel.scoreTeam2.observe(this){
             binding.textScoreTeamTwo.setText(it.toString())
+            val scoreIntent = Intent(SCORE_OBSERVE)
+            scoreIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeam2.value!!)
+            requireActivity().sendBroadcast(scoreIntent)
         }
 
         viewModel.gameState.observe(this){
@@ -182,13 +185,13 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.Restart))
-                    viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeamOne.value!!, viewModel.scoreTeamTwo.value!!),
-                        nameTeamOne = viewModel.nameTeamOne.value!!,
-                        nameTeamTwo = viewModel.nameTeamTwo.value!!,
-                        scoreTeamOne = viewModel.scoreTeamOne.value!!,
-                        scoreTeamTwo = viewModel.scoreTeamTwo.value!!,
-                        shirtTeamOne = viewModel.shirtTeamOne.value!!,
-                        shirtTeamTwo = viewModel.scoreTeamTwo.value!!,
+                    viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeam1.value!!, viewModel.scoreTeam2.value!!),
+                        nameTeamOne = viewModel.nameTeam1.value!!,
+                        nameTeamTwo = viewModel.nameTeam2.value!!,
+                        scoreTeamOne = viewModel.scoreTeam1.value!!,
+                        scoreTeamTwo = viewModel.scoreTeam2.value!!,
+                        shirtTeamOne = viewModel.shirtTeam1.value!!,
+                        shirtTeamTwo = viewModel.scoreTeam2.value!!,
                         rounds = viewModel.roundsLimit.value!!,
                         time = viewModel.timeLimitParams.value!!
                     ))
@@ -218,19 +221,19 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
     }
 
     private fun restartBackgroundService(){
-        viewModel.scoreTeamOne.value = 0
-        viewModel.scoreTeamTwo.value = 0
+        viewModel.scoreTeam1.value = 0
+        viewModel.scoreTeam2.value = 0
         viewModel.currentRound.value = 1
         viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
     }
 
     private fun startBackgroundService() {
-        serviceIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeamOne.value)
-        serviceIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeamTwo.value)
-        serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeamOne.value)
-        serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeamTwo.value)
-        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeamOne.value)
-        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeamTwo.value)
+        serviceIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeam1.value)
+        serviceIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeam2.value)
+        serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeam1.value)
+        serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeam2.value)
+        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeam1.value)
+        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeam2.value)
         serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModel.timeLimit.value)
         serviceIntent.putExtra(BackgroundService.ROUND_LIMIT, viewModel.roundsLimit.value)
         serviceIntent.putExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value)
@@ -244,7 +247,7 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             scaleYBy(0.5f)
 
         }.withEndAction {
-            viewModel.scoreTeamOne.value = viewModel.scoreTeamOne.value!! + 1
+            viewModel.scoreTeam1.value = viewModel.scoreTeam1.value!! + 1
             binding.textScoreTeamOne.animate().apply {
                 duration = 150
                 scaleXBy(-0.5f)
@@ -252,9 +255,6 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             }
         }.start()
 
-        val scoreIntent = Intent(SCORE_OBSERVE)
-        scoreIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeamOne.value!!)
-        requireActivity().sendBroadcast(scoreIntent)
     }
 
     private fun addGolTeamTwo() {
@@ -263,26 +263,24 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
             scaleYBy(0.5f)
             scaleXBy(0.5f)
         }.withEndAction {
-            viewModel.scoreTeamTwo.value = viewModel.scoreTeamTwo.value!! + 1
+            viewModel.scoreTeam2.value = viewModel.scoreTeam2.value!! + 1
             binding.textScoreTeamTwo.animate().apply {
                 duration = 150
                 scaleXBy(-0.5f)
                 scaleYBy(-0.5f)
             }
         }.start()
-        val scoreIntent = Intent(SCORE_OBSERVE)
-        scoreIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeamTwo.value!!)
-        requireActivity().sendBroadcast(scoreIntent)
+
     }
 
     private fun getSettings() {
 
         arguments?.getString("teamName1")?.let {
-            viewModel.nameTeamOne.value = it
+            viewModel.nameTeam1.value = it
         }
 
         arguments?.getString("teamName2")?.let {
-            viewModel.nameTeamTwo.value = it
+            viewModel.nameTeam2.value = it
         }
 
         arguments?.getDouble("RoundTime")?.let {
@@ -304,18 +302,16 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         }
 
         arguments?.getInt("shirtTeam1", R.drawable.shirt_select)?.let {
-            viewModel.shirtTeamOne.value = it
+            viewModel.shirtTeam1.value = it
         }
 
         arguments?.getInt("shirtTeam2", R.drawable.shirt_select)?.let{
-            viewModel.shirtTeamTwo.value = it
+            viewModel.shirtTeam2.value = it
         }
 
         arguments?.getInt("Rounds", 1)?.let {
             viewModel.roundsLimit.value = it
         }
-
-
     }
 
     private fun onCancelGame() {
@@ -337,7 +333,6 @@ class GameReadyFragment : Fragment(R.layout.fragment_gameready) {
         super.onStop()
         requireActivity().unregisterReceiver(updateTime)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

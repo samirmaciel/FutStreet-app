@@ -1,9 +1,9 @@
-package com.samirmaciel.futstreet.modules.tournament
+package com.samirmaciel.futstreet.modules.tournamentMatcheStages
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TournamentViewModel : ViewModel() {
+class TournamentMatchesViewModel : ViewModel() {
 
     //Quarters Teams
     var nameQ11 : MutableLiveData<String> = MutableLiveData()

@@ -64,4 +64,6 @@
     <string name="title_state_tournament_match_in_progress">Em andamento</string>
     <string name="title_state_tournament_match_closed">Encerrado</string>
     <string name="title_final">Final</string>
+    <string name="title_button_saved_tournaments">Torneios salvos</string>
+    <string name="title_button_new_tournament">Novo torneio</string>
 </resources>

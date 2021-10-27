@@ -2,12 +2,11 @@ package com.samirmaciel.futstreet.shared.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.samirmaciel.futstreet.modules.tournament.stages.FinalTournamentFragment
-import com.samirmaciel.futstreet.modules.tournament.stages.QuartersTournamentFragment
-import com.samirmaciel.futstreet.modules.tournament.stages.SemiTournamentFragment
+import com.samirmaciel.futstreet.modules.tournamentMatcheStages.stages.FinalTournamentFragment
+import com.samirmaciel.futstreet.modules.tournamentMatcheStages.stages.QuartersTournamentFragment
+import com.samirmaciel.futstreet.modules.tournamentMatcheStages.stages.SemiTournamentFragment
 
 
 class TabPagerAdapter(private val fm : FragmentManager, private val lifecycle: Lifecycle) : FragmentStateAdapter(fm, lifecycle){

@@ -8,22 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.databinding.FragmentGamesettingsBinding
+import com.samirmaciel.futstreet.databinding.FragmentMatchsettingsBinding
 import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
-import com.samirmaciel.futstreet.shared.const.MATCH_FRIENDLY
-import com.samirmaciel.futstreet.shared.const.MATCH_TOURNAMENT
 import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT
 
-class GameSettingFragment : Fragment(R.layout.fragment_gamesettings){
+class MatchSettingFragment : Fragment(R.layout.fragment_matchsettings){
 
-    private var _binding : FragmentGamesettingsBinding? = null
-    private val binding : FragmentGamesettingsBinding get() = _binding!!
-    private val viewModel : GameSettingViewModel by activityViewModels()
+    private var _binding : FragmentMatchsettingsBinding? = null
+    private val binding : FragmentMatchsettingsBinding get() = _binding!!
+    private val viewModel : MatchSettingViewModel by activityViewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      _binding = FragmentGamesettingsBinding.bind(view)
+      _binding = FragmentMatchsettingsBinding.bind(view)
 
 
     }

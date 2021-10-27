@@ -13,7 +13,7 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.modules.MainActivity
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.modules.gameReady.GameReadyFragment
+import com.samirmaciel.futstreet.modules.gameReady.MatchReadyFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID
 import com.samirmaciel.futstreet.shared.const.NOTIFICATION_ID
 import java.util.*
@@ -33,8 +33,8 @@ class BackgroundService : Service(){
     var shirtTeamOne : Int = R.drawable.shirt_select
     var shirtTeamTwo : Int = R.drawable.shirt_select
 
-    var scoreTeamOne : Int = 0
-    var scoreTeamTwo : Int = 0
+    var scoreTeam1 : Int = 0
+    var scoreTeam2 : Int = 0
 
     var currentRound : Int = 1
     var roundLimit : Int = 1
@@ -63,39 +63,39 @@ class BackgroundService : Service(){
 
     override fun onCreate() {
         super.onCreate()
-        registerReceiver(scoreObserve, IntentFilter(GameReadyFragment.SCORE_OBSERVE))
+        registerReceiver(scoreObserve, IntentFilter(MatchReadyFragment.SCORE_OBSERVE))
 
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
-        scoreTeamOne = intent.getIntExtra(SCORE_T1, 0)
-        scoreTeamTwo = intent.getIntExtra(SCORE_T2, 0)
+        scoreTeam1 = intent.getIntExtra(SCORE_T1, 0)
+        scoreTeam2 = intent.getIntExtra(SCORE_T2, 0)
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
         roundLimit = intent.getIntExtra(ROUND_LIMIT, 1)
         currentRound = intent.getIntExtra(CURRENT_ROUND, 1)
         nameTeamOne = intent.getStringExtra(NAME_TEAMONE).toString()
         nameTeamTwo = intent.getStringExtra(NAME_TEAMTWO).toString()
-        shirtTeamOne = intent.getIntExtra(SHIRT_TEAMONE, R.drawable.shirt_pink)
-        shirtTeamTwo = intent.getIntExtra(SHIRT_TEAMTWO, R.drawable.shirt_pink)
+        shirtTeamOne = intent.getIntExtra(SHIRT_TEAMONE, R.drawable.shirt_select)
+        shirtTeamTwo = intent.getIntExtra(SHIRT_TEAMTWO, R.drawable.shirt_select)
         timer.scheduleAtFixedRate(TimerLine(), 0, 1000)
+
         return START_NOT_STICKY
     }
 
     private val scoreObserve : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
-            scoreTeamOne = intent.getIntExtra(SCORE_T1, scoreTeamOne)
-            scoreTeamTwo = intent.getIntExtra(SCORE_T2, scoreTeamTwo)
+            scoreTeam1 = intent.getIntExtra(SCORE_T1, scoreTeam1)
+            scoreTeam2 = intent.getIntExtra(SCORE_T2, scoreTeam2)
         }
-
     }
 
     private inner class TimerLine : TimerTask(){
         override fun run() {
             if(timeLimit == 0.0) {
                 if(currentRound == roundLimit){
-                    callNotification(resources.getText(R.string.text_match_finish) as String, nameTeamOne, nameTeamTwo, scoreTeamOne, scoreTeamTwo, shirtTeamOne, shirtTeamTwo)
+                    callNotification(resources.getText(R.string.text_match_finish) as String, nameTeamOne, nameTeamTwo, scoreTeam1, scoreTeam2, shirtTeamOne, shirtTeamTwo)
                 }
                 if(!isTimeEnded){
                     if(currentRound < roundLimit){
@@ -110,10 +110,10 @@ class BackgroundService : Service(){
             }else{
                 timeLimit--
                 intentUpdate.putExtra(UPDATE_TIME, timeLimit)
-                intentUpdate.putExtra(SCORE_T1, scoreTeamOne)
-                intentUpdate.putExtra(SCORE_T2, scoreTeamTwo)
+                intentUpdate.putExtra(SCORE_T1, scoreTeam1)
+                intentUpdate.putExtra(SCORE_T2, scoreTeam2)
                 intentUpdate.putExtra(CURRENT_ROUND, currentRound)
-                callNotification(getTimeStringFromDouble(timeLimit), nameTeamOne, nameTeamTwo, scoreTeamOne, scoreTeamTwo, shirtTeamOne, shirtTeamTwo)
+                callNotification(getTimeStringFromDouble(timeLimit), nameTeamOne, nameTeamTwo, scoreTeam1, scoreTeam2, shirtTeamOne, shirtTeamTwo)
                 sendBroadcast(intentUpdate)
             }
         }
@@ -132,7 +132,7 @@ class BackgroundService : Service(){
         notificationLayout.setTextViewText(R.id.textTeamTwoName, nameTeamTwo)
         notificationLayout.setImageViewResource(R.id.shirtTeamOne, shirtTeamOne)
         notificationLayout.setImageViewResource(R.id.shirtTeamTwo, shirtTeamTwo)
-        notificationLayout.setTextViewText(R.id.textScore, "$scoreTeamOne X $scoreTeamTwo")
+        notificationLayout.setTextViewText(R.id.textScore, "${scoreTeamOne} X ${scoreTeamTwo}")
 
         var notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_sports_soccer_24)

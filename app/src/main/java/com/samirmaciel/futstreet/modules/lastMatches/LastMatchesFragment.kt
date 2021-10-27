@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.lastGames
+package com.samirmaciel.futstreet.modules.lastMatches
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentLastgamesBinding
 
-class LastGamesFragment : Fragment(R.layout.fragment_lastgames) {
+class LastMatchesFragment : Fragment(R.layout.fragment_lastgames) {
 
     private var _binding : FragmentLastgamesBinding? = null
     private val binding : FragmentLastgamesBinding get() = _binding!!

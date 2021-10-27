@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.tournament
+package com.samirmaciel.futstreet.modules.tournamentMatcheStages
 
 import android.os.Bundle
 import android.view.View
@@ -9,12 +9,12 @@ import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentBinding
 import com.samirmaciel.futstreet.shared.adapter.TabPagerAdapter
 
-class TournamentFragment : Fragment(R.layout.fragment_tournament) {
+class TournamentMatchesFragment : Fragment(R.layout.fragment_tournament) {
 
     private var _binding : FragmentTournamentBinding? = null
     private val binding : FragmentTournamentBinding get() = _binding!!
 
-    private val viewModel : TournamentViewModel by activityViewModels()
+    private val matchesViewModel : TournamentMatchesViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,22 +53,22 @@ class TournamentFragment : Fragment(R.layout.fragment_tournament) {
     }
 
     private fun getTournamentParams(){
-        viewModel.nameQ11.value = arguments?.getString("teamName1")
-        viewModel.shirtQ11.value = arguments?.getInt("shirtTeam1", R.drawable.shirt_select)
-        viewModel.nameQ21.value = arguments?.getString("teamName2")
-        viewModel.shirtQ21.value = arguments?.getInt("shirtTeam2", R.drawable.shirt_select)
-        viewModel.nameQ32.value = arguments?.getString("teamName3")
-        viewModel.shirtQ32.value = arguments?.getInt("shirtTeam3", R.drawable.shirt_select)
-        viewModel.nameQ42.value = arguments?.getString("teamName4")
-        viewModel.shirtQ42.value = arguments?.getInt("shirtTeam4", R.drawable.shirt_select)
-        viewModel.nameQ53.value = arguments?.getString("teamName5")
-        viewModel.shirtQ53.value = arguments?.getInt("shirtTeam5", R.drawable.shirt_select)
-        viewModel.nameQ63.value = arguments?.getString("teamName6")
-        viewModel.shirtQ63.value = arguments?.getInt("shirtTeam6", R.drawable.shirt_select)
-        viewModel.nameQ74.value = arguments?.getString("teamName7")
-        viewModel.shirtQ74.value = arguments?.getInt("shirtTeam7", R.drawable.shirt_select)
-        viewModel.nameQ84.value = arguments?.getString("teamName8")
-        viewModel.shirtQ84.value = arguments?.getInt("shirtTeam8", R.drawable.shirt_select)
+        matchesViewModel.nameQ11.value = arguments?.getString("teamName1")
+        matchesViewModel.shirtQ11.value = arguments?.getInt("shirtTeam1", R.drawable.shirt_select)
+        matchesViewModel.nameQ21.value = arguments?.getString("teamName2")
+        matchesViewModel.shirtQ21.value = arguments?.getInt("shirtTeam2", R.drawable.shirt_select)
+        matchesViewModel.nameQ32.value = arguments?.getString("teamName3")
+        matchesViewModel.shirtQ32.value = arguments?.getInt("shirtTeam3", R.drawable.shirt_select)
+        matchesViewModel.nameQ42.value = arguments?.getString("teamName4")
+        matchesViewModel.shirtQ42.value = arguments?.getInt("shirtTeam4", R.drawable.shirt_select)
+        matchesViewModel.nameQ53.value = arguments?.getString("teamName5")
+        matchesViewModel.shirtQ53.value = arguments?.getInt("shirtTeam5", R.drawable.shirt_select)
+        matchesViewModel.nameQ63.value = arguments?.getString("teamName6")
+        matchesViewModel.shirtQ63.value = arguments?.getInt("shirtTeam6", R.drawable.shirt_select)
+        matchesViewModel.nameQ74.value = arguments?.getString("teamName7")
+        matchesViewModel.shirtQ74.value = arguments?.getInt("shirtTeam7", R.drawable.shirt_select)
+        matchesViewModel.nameQ84.value = arguments?.getString("teamName8")
+        matchesViewModel.shirtQ84.value = arguments?.getInt("shirtTeam8", R.drawable.shirt_select)
     }
 
     override fun onDestroy() {
