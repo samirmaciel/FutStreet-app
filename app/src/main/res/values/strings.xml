@@ -66,4 +66,9 @@
     <string name="title_final">Final</string>
     <string name="title_button_saved_tournaments">Torneios salvos</string>
     <string name="title_button_new_tournament">Novo torneio</string>
+
+    //Tournament Stages
+    <string name="title_tab_quarters">Quartas</string>
+    <string name="title_tab_semi">Semi</string>
+    <string name="title_tab_final">Final</string>
 </resources>

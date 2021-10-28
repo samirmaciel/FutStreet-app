@@ -13,7 +13,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
     private var _binding : FragmentTournamentQuartersBinding? = null
     private val binding : FragmentTournamentQuartersBinding get() = _binding!!
 
-    private val matchesViewModel : TournamentMatchesViewModel by activityViewModels()
+    private val tounamentViewModel : TournamentMatchesViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,64 +23,64 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
     override fun onResume() {
         super.onResume()
 
-        matchesViewModel.nameQ11.observe(this){
+        tounamentViewModel.nameQ11.observe(this){
             binding.stageTeamName11.setText(it)
         }
-        matchesViewModel.shirtQ11.observe(this){
+        tounamentViewModel.shirtQ11.observe(this){
             binding.stageTeamShirt11.setImageResource(it)
         }
 
-        matchesViewModel.nameQ21.observe(this){
+        tounamentViewModel.nameQ21.observe(this){
             binding.stageTeamName21.setText(it)
         }
-        matchesViewModel.shirtQ21.observe(this){
+        tounamentViewModel.shirtQ21.observe(this){
             binding.stageTeamShirt21.setImageResource(it)
         }
 
-        matchesViewModel.nameQ32.observe(this){
+        tounamentViewModel.nameQ32.observe(this){
             binding.stageTeamName32.setText(it)
         }
-        matchesViewModel.shirtQ32.observe(this){
+        tounamentViewModel.shirtQ32.observe(this){
             binding.stageTeamShirt32.setImageResource(it)
         }
 
-        matchesViewModel.nameQ42.observe(this){
+        tounamentViewModel.nameQ42.observe(this){
             binding.stageTeamName42.setText(it)
         }
 
-        matchesViewModel.shirtQ42.observe(this){
+        tounamentViewModel.shirtQ42.observe(this){
             binding.stageTeamShirt42.setImageResource(it)
         }
 
-        matchesViewModel.nameQ53.observe(this){
+        tounamentViewModel.nameQ53.observe(this){
             binding.stageTeamName53.setText(it)
         }
 
-        matchesViewModel.shirtQ53.observe(this){
+        tounamentViewModel.shirtQ53.observe(this){
             binding.stageTeamShirt53.setImageResource(it)
         }
 
-        matchesViewModel.nameQ63.observe(this){
+        tounamentViewModel.nameQ63.observe(this){
             binding.stageTeamName63.setText(it)
         }
 
-        matchesViewModel.shirtQ63.observe(this){
+        tounamentViewModel.shirtQ63.observe(this){
             binding.stageTeamShirt63.setImageResource(it)
         }
 
-        matchesViewModel.nameQ74.observe(this){
+        tounamentViewModel.nameQ74.observe(this){
             binding.stageTeamName74.setText(it)
         }
 
-        matchesViewModel.shirtQ74.observe(this){
+        tounamentViewModel.shirtQ74.observe(this){
             binding.stageTeamShirt74.setImageResource(it)
         }
 
-        matchesViewModel.nameQ84.observe(this){
+        tounamentViewModel.nameQ84.observe(this){
             binding.stageTeamName84.setText(it)
         }
 
-        matchesViewModel.shirtQ84.observe(this){
+        tounamentViewModel.shirtQ84.observe(this){
             binding.stageTeamShirt84.setImageResource(it)
         }
     }

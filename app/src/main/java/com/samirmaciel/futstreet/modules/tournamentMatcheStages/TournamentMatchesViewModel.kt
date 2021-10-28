@@ -26,8 +26,6 @@ class TournamentMatchesViewModel : ViewModel() {
     var nameQ84 : MutableLiveData<String> = MutableLiveData()
     var shirtQ84 : MutableLiveData<Int> = MutableLiveData()
 
-
-
     //Semi Teams
     var nameS11 : MutableLiveData<String> = MutableLiveData()
     var shirtS11 : MutableLiveData<Int> = MutableLiveData()
@@ -44,5 +42,32 @@ class TournamentMatchesViewModel : ViewModel() {
     var shirtF11 : MutableLiveData<Int> = MutableLiveData()
     var nameF21 : MutableLiveData<String> = MutableLiveData()
     var shirtF21 : MutableLiveData<Int> = MutableLiveData()
+
+
+    fun getMapWithQuartersNamesLiveData() : Map<Int, MutableLiveData<String>>{
+        return mapOf<Int, MutableLiveData<String>>(
+            0 to nameQ11,
+            1 to nameQ21,
+            2 to nameQ32,
+            3 to nameQ42,
+            4 to nameQ53,
+            5 to nameQ63,
+            6 to nameQ74,
+            7 to nameQ84
+        )
+    }
+
+    fun getMapWithQuartersShirtLiveData() : Map<Int, MutableLiveData<Int>>{
+        return mapOf(
+            0 to shirtQ11,
+            1 to shirtQ21,
+            2 to shirtQ32,
+            3 to shirtQ42,
+            4 to shirtQ53,
+            5 to shirtQ63,
+            6 to shirtQ74,
+            7 to shirtQ84
+        )
+    }
 
 }
