@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.gameSetting
+package com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentMatchsettingsBinding
-import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
+import com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting.shirtSelectionFragment.ShirtSelectionDialog
 import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT
 
 class MatchSettingFragment : Fragment(R.layout.fragment_matchsettings){

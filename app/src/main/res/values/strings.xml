@@ -16,7 +16,7 @@
     <string name="input_hint_team6">Time6</string>
     <string name="input_hint_team7">Time7</string>
     <string name="input_hint_team8">Time8</string>
-    <string name="title_team_name_waiting">Aguardando</string>
+
 
     //Game Settings misc
     <string name="input_text_number_of_times">Números de tempos:</string>
@@ -33,10 +33,17 @@
     <string name="text_match_finish">Partida terminada</string>
     <string name="text_end_game">Fim de jogo</string>
 
-    //Hint menu buttons
-    <string name="hint_menu_button_newmatch">Amistoso</string>
-    <string name="hint_menu_button_tournament">Torneio</string>
-    <string name="hint_menu_button_about">Sobre</string>
+    //Title buttons
+    <string name="title_menu_button_newmatch">Amistoso</string>
+    <string name="title_menu_button_tournament">Torneio</string>
+    <string name="title_menu_button_about">Sobre</string>
+    <string name="title_button_back">Voltar</string>
+    <string name="title_button_ready">Pronto</string>
+    <string name="title_button_start">Começar</string>
+    <string name="title_button_pause">Pausar</string>
+    <string name="title_button_continue">Continuar</string>
+    <string name="title_button_restart">Reiniciar</string>
+    <string name="title_button_cancel">Cancelar</string>
 
     //Questions
     <string name="yes">Sim</string>
@@ -44,14 +51,6 @@
     <string name="text_ask_cancel_game">Deseja cancelar o jogo?</string>
     <string name="text_ask_cancel_tournament">Deseja cancelar o torneio?</string>
     <string name="text_add_gol">Marcar gol para </string>
-
-    //UI buttons text
-    <string name="Ready">Pronto</string>
-    <string name="Start">Começar</string>
-    <string name="Pause">Pausar</string>
-    <string name="Continue">Continuar</string>
-    <string name="Restart">Reiniciar</string>
-    <string name="Cancel">Cancelar</string>
 
     //Navigation titles
     <string name="title_tournament_match_settings">Configuração do torneio</string>
@@ -63,6 +62,7 @@
     <string name="title_state_tournament_match_start">Começar partida</string>
     <string name="title_state_tournament_match_in_progress">Em andamento</string>
     <string name="title_state_tournament_match_closed">Encerrado</string>
+    <string name="title_state_tournament_match_waiting">Aguardando</string>
     <string name="title_final">Final</string>
     <string name="title_button_saved_tournaments">Torneios salvos</string>
     <string name="title_button_new_tournament">Novo torneio</string>

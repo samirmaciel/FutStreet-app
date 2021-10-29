@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.tournamentMatcheStages
+package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages
 
 import android.os.Bundle
 import android.view.View
@@ -7,29 +7,34 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentBinding
+import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 import com.samirmaciel.futstreet.shared.adapter.TabPagerAdapter
-import com.samirmaciel.futstreet.shared.model.Team
 
 class TournamentMatchesFragment : Fragment(R.layout.fragment_tournament) {
 
     private var _binding : FragmentTournamentBinding? = null
     private val binding : FragmentTournamentBinding get() = _binding!!
 
-    private val matchesViewModel : TournamentMatchesViewModel by activityViewModels()
+    private val viewModel : TournamentViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getTournamentParams()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentBinding.bind(view)
-        initComponets()
+        initComponents()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setTeamsOnQuarters()
     }
 
 
-    private fun initComponets(){
+    private fun initComponents(){
         val adapter = TabPagerAdapter(childFragmentManager, lifecycle)
         binding.tournamenteViewPager.adapter = adapter
         binding.tournamentTab.tabSelectedIndicator.alpha = 0
@@ -53,24 +58,12 @@ class TournamentMatchesFragment : Fragment(R.layout.fragment_tournament) {
         }.attach()
     }
 
-    private fun getTournamentParams(){
-
-        val argumentKeyToName = "teamName"
-        val argumentKeyToShirt = "shirtTeam"
-
-        val listOfTeams = mutableListOf<Team>()
-
-        for (i in 1..8){
-            listOfTeams.add(Team(name = arguments?.getString("${argumentKeyToName}$i")!!, shirt = arguments?.getInt("${argumentKeyToShirt}$i")!!))
-        }
-
-        listOfTeams.shuffle()
+    private fun setTeamsOnQuarters(){
 
         for (i in 0..7){
-            matchesViewModel.getMapWithQuartersNamesLiveData()[i]!!.value = listOfTeams[i].name
-            matchesViewModel.getMapWithQuartersShirtLiveData()[i]!!.value = listOfTeams[i].shirt
+            viewModel.getMapWithQuartersNamesLiveData()[i]!!.value = viewModel.getTeamNameMap()[i]!!.value
+            viewModel.getMapWithQuartersShirtLiveData()[i]!!.value = viewModel.getTeamShirtMap()[i]!!.value
         }
-
     }
 
     override fun onDestroy() {

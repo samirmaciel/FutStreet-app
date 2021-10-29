@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
-        android:name="com.samirmaciel.futstreet.modules.gameSetting.MatchSettingFragment"
+        android:name="com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting.MatchSettingFragment"
         android:label="@string/title_game_settings"
         tools:layout="@layout/fragment_matchsettings" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameReadyFragment"
-        android:name="com.samirmaciel.futstreet.modules.gameReady.MatchReadyFragment"
+        android:name="com.samirmaciel.futstreet.modules.friendlyMatch.matchReady.MatchReadyFragment"
         android:label="@string/title_currentGame"
         tools:layout="@layout/fragment_matchready" >
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/tournamentSelectFragment"
-        android:name="com.samirmaciel.futstreet.modules.tournamentSelect.TournamentTeamSettingFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournament.tournamentSetTeams.TournamentTeamSettingFragment"
         android:label="@string/title_tournament_select"
         tools:layout="@layout/fragment_tournamentteamsetting" >
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/tournamentMatchSettingsFragment"
-        android:name="com.samirmaciel.futstreet.modules.tournamentMatchSettings.TournamentMatchSettingsFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournament.tournamentMatchsSettings.TournamentMatchSettingsFragment"
         android:label="@string/title_tournament_match_settings"
         tools:layout="@layout/fragment_tournamentmatchsettings" >
         <action
@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/tournamentOptionsFragment"
-        android:name="com.samirmaciel.futstreet.modules.tournamentOptions.TournamentOptionsFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournament.tournamentOptions.TournamentOptionsFragment"
         android:label="@string/title_tournament_match_settings"
         tools:layout="@layout/fragment_tournament_options" >
         <action

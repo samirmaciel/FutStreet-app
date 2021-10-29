@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment
+package com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting.shirtSelectionFragment
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

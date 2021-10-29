@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.gameReady
+package com.samirmaciel.futstreet.modules.friendlyMatch.matchReady
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

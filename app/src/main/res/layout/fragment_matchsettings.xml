@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/blue"
-    tools:context=".modules.gameSetting.MatchSettingFragment">
+    tools:context=".modules.friendlyMatch.matchSetting.MatchSettingFragment">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/matchCard1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -79,7 +79,7 @@
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@id/matchCard1">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -165,7 +165,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonReady"
             style="@style/button_menu"
-            android:text="@string/Ready"
+            android:text="@string/title_button_ready"
             android:textColor="@color/white"
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="@color/green"
@@ -176,7 +176,7 @@
             style="@style/button_menu"
             app:cornerRadius="10dp"
             android:layout_marginHorizontal="10dp"
-            android:text="@string/Cancel"
+            android:text="@string/title_button_cancel"
             app:layout_constraintStart_toEndOf="@id/buttonReady"
             app:layout_constraintTop_toTopOf="@id/buttonReady"/>
     </LinearLayout>

@@ -1,9 +1,8 @@
-package com.samirmaciel.futstreet.modules.gameSetting
+package com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.shared.const.SELECT_SHIRT
 
 class MatchSettingViewModel : ViewModel() {
 

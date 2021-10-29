@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.tournamentMatcheStages.stages
+package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
 import android.os.Bundle
 import android.view.View
@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
-import com.samirmaciel.futstreet.modules.tournamentMatcheStages.TournamentMatchesViewModel
+import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 
 class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarters) {
 
     private var _binding : FragmentTournamentQuartersBinding? = null
     private val binding : FragmentTournamentQuartersBinding get() = _binding!!
 
-    private val tounamentViewModel : TournamentMatchesViewModel by activityViewModels()
+    private val tounamentViewModel : TournamentViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,6 +22,10 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
 
     override fun onResume() {
         super.onResume()
+
+        binding.matchCard1.setOnClickListener{
+
+        }
 
         tounamentViewModel.nameQ11.observe(this){
             binding.stageTeamName11.setText(it)

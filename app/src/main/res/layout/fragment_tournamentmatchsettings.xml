@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".modules.tournamentMatchSettings.TournamentMatchSettingsFragment"
+    tools:context=".modules.tournament.tournamentMatchsSettings.TournamentMatchSettingsFragment"
     android:background="@color/blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -104,7 +104,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonReady"
             style="@style/button_menu"
-            android:text="@string/Ready"
+            android:text="@string/title_button_continue"
             android:textColor="@color/white"
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="@color/green"
@@ -115,7 +115,7 @@
             style="@style/button_menu"
             app:cornerRadius="10dp"
             android:layout_marginHorizontal="10dp"
-            android:text="@string/Cancel"
+            android:text="@string/title_button_cancel"
             app:layout_constraintStart_toEndOf="@id/buttonReady"
             app:layout_constraintTop_toTopOf="@id/buttonReady"/>
     </LinearLayout>

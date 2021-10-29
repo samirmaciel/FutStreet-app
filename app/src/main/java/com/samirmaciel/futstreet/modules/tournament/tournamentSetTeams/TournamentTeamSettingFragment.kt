@@ -1,7 +1,5 @@
-package com.samirmaciel.futstreet.modules.tournamentSelect
+package com.samirmaciel.futstreet.modules.tournament.tournamentSetTeams
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -12,12 +10,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentteamsettingBinding
-import com.samirmaciel.futstreet.modules.gameSetting.shirtSelectionFragment.ShirtSelectionDialog
+import com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting.shirtSelectionFragment.ShirtSelectionDialog
+import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 
-import com.samirmaciel.futstreet.shared.const.GO_TO_TOURNAMENET_PAGE
-import com.samirmaciel.futstreet.shared.const.MATCH_FRIENDLY
-import com.samirmaciel.futstreet.shared.const.MATCH_TOURNAMENT
 import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT
+import com.samirmaciel.futstreet.shared.model.Team
 
 
 class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteamsetting) {
@@ -25,7 +22,7 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
     private var _binding : FragmentTournamentteamsettingBinding? = null
     private val binding : FragmentTournamentteamsettingBinding get() = _binding!!
 
-    private val viewModel : TournamentTeamSettingViewModel by activityViewModels()
+    private val viewModel : TournamentViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,55 +40,39 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
     override fun onResume() {
         super.onResume()
 
+
         binding.buttonCancelTournament.setOnClickListener{
-            val alert = AlertDialog.Builder(requireContext()).apply {
-                setTitle(resources.getText(R.string.text_ask_cancel_tournament))
-                setPositiveButton(resources.getText(R.string.yes)){
-                        _, _, -> findNavController().navigate(R.id.action_tournamentSelectFragment_to_homeFragment)
-                }
-                setNegativeButton(resources.getText(R.string.no), null)
-            }.create().show()
+            findNavController().navigate(R.id.action_tournamentSelectFragment_to_homeFragment)
         }
 
         binding.buttonReadyTournament.setOnClickListener{
-            saveInputTeamNames()
-            val allTeamsBundle = Bundle().apply {
-                putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
-                putString("teamName1", viewModel.teamName1.value)
 
-                putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
-                putString("teamName2", viewModel.teamName2.value)
+            saveInputTeamsNamesInViewModel()
 
-                putInt("shirtTeam3", viewModel.shirtTeam3.value!!)
-                putString("teamName3", viewModel.teamName3.value)
+            val listSortedTeams = geSortedTeams()
+            val allTeamsBundle = Bundle()
 
-                putInt("shirtTeam4", viewModel.shirtTeam4.value!!)
-                putString("teamName4", viewModel.teamName4.value)
-
-                putInt("shirtTeam5", viewModel.shirtTeam5.value!!)
-                putString("teamName5", viewModel.teamName5.value)
-
-                putInt("shirtTeam6", viewModel.shirtTeam6.value!!)
-                putString("teamName6", viewModel.teamName6.value)
-
-                putInt("shirtTeam7", viewModel.shirtTeam7.value!!)
-                putString("teamName7", viewModel.teamName7.value)
-
-                putInt("shirtTeam8", viewModel.shirtTeam8.value!!)
-                putString("teamName8", viewModel.teamName8.value)
+            for (i in 0..7){
+                allTeamsBundle.putInt("shirtTeam${i}", listSortedTeams[i].shirt)
+                allTeamsBundle.putString("teamName${i}", listSortedTeams[i].name)
             }
 
-            requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_lastGamesFragment_to_tournamentFragment, allTeamsBundle)
-
-            val firstMatchBundle = Bundle().apply {
-                putString("teamName1", viewModel.teamName1.value)
-                putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
-
-                putString("teamName2", viewModel.teamName2.value)
-                putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
+            for (i in 0..7){
+                viewModel.getTeamNameMap()[i]!!.value = listSortedTeams[i].name
+                viewModel.getTeamShirtMap()[i]!!.value = listSortedTeams[i].shirt
             }
 
-            findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment, firstMatchBundle)
+            requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_lastGamesFragment_to_tournamentFragment)
+
+//            val firstMatchBundle = Bundle().apply {
+//                putString("teamName1", viewModel.teamName1.value)
+//                putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
+//
+//                putString("teamName2", viewModel.teamName2.value)
+//                putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
+//            }
+
+            findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment)
         }
 
         binding.selectShirtTeam1Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam1) }
@@ -112,6 +93,17 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
         viewModel.shirtTeam7.observe(this){ animateShirt(binding.selectShirtTeam7Tournament, it) }
         viewModel.shirtTeam8.observe(this){ animateShirt(binding.selectShirtTeam8Tournament, it) }
 
+    }
+
+    private fun geSortedTeams() : MutableList<Team> {
+        val listTeams = mutableListOf<Team>()
+
+        for (i in 0..7){
+            listTeams.add(Team(name = viewModel.getTeamNameMap()[i]!!.value!!, shirt = viewModel.getTeamShirtMap()[i]!!.value!!))
+        }
+        listTeams.shuffle()
+
+        return listTeams
     }
 
     private fun animateShirt(imageView : ImageView, shirt : Int){
@@ -140,7 +132,7 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
         shirtSelection.show(childFragmentManager, SHIRT_SELECTION_FRAGMENT)
     }
 
-    private fun saveInputTeamNames(){
+    private fun saveInputTeamsNamesInViewModel(){
         if(binding.tournamentInputTeamName1.text.isNotEmpty()){
             viewModel.teamName1.value = binding.tournamentInputTeamName1.text.toString()
         }

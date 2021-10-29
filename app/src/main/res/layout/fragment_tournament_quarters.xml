@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".modules.tournamentMatcheStages.stages.QuartersTournamentFragment"
+    tools:context=".modules.tournament.tournamentMatchsStages.stages.QuartersTournamentFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,9 +11,11 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
+            android:id="@+id/matchCard1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +59,7 @@
                                 android:id="@+id/stageTeamName11"
                                 style="@style/stages_tournament_team_name"
                                 android:layout_height="wrap_content"
-                                android:text="@string/title_team_name_waiting"
+                                android:text="@string/title_state_tournament_match_waiting"
                                 android:textColor="@color/white" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -107,7 +109,7 @@
                                 android:id="@+id/stageTeamName21"
                                 style="@style/stages_tournament_team_name"
                                 android:layout_height="wrap_content"
-                                android:text="@string/title_team_name_waiting"
+                                android:text="@string/title_state_tournament_match_waiting"
                                 android:textColor="@color/white"
                                 tools:layout_editor_absoluteX="16dp"
                                 tools:layout_editor_absoluteY="16dp" />
@@ -156,7 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
-                            android:text="@string/title_state_tournament_match_start"/>
+                            android:text="@string/title_state_tournament_match_waiting"/>
 
                     </LinearLayout>
 
@@ -171,7 +173,7 @@
                             android:id="@+id/stageTeamName32"
                             style="@style/stages_tournament_team_name"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_team_name_waiting"
+                            android:text="@string/title_state_tournament_match_waiting"
                             android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -221,7 +223,7 @@
                             android:id="@+id/stageTeamName42"
                             style="@style/stages_tournament_team_name"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_team_name_waiting"
+                            android:text="@string/title_state_tournament_match_waiting"
                             android:textColor="@color/white"
                             tools:layout_editor_absoluteX="16dp"
                             tools:layout_editor_absoluteY="16dp" />
@@ -252,9 +254,9 @@
             android:layout_height="115dp"
             android:scaleType="centerCrop"
             android:layout_marginTop="28dp"
-            app:layout_constraintStart_toEndOf="@id/linearLayout1"
-            app:layout_constraintTop_toTopOf="@id/linearLayout1"
-            app:layout_constraintBottom_toBottomOf="@id/linearLayout1"
+            app:layout_constraintStart_toEndOf="@id/matchCard1"
+            app:layout_constraintTop_toTopOf="@id/matchCard1"
+            app:layout_constraintBottom_toBottomOf="@id/matchCard1"
             android:src="@drawable/track_stage"
             tools:layout_editor_absoluteX="144dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -273,7 +275,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout1"
+            app:layout_constraintTop_toBottomOf="@id/matchCard1"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
@@ -306,7 +308,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
-                            android:text="@string/title_state_tournament_match_start"/>
+                            android:text="@string/title_state_tournament_match_waiting"/>
 
                     </LinearLayout>
 
@@ -321,7 +323,7 @@
                             android:id="@+id/stageTeamName53"
                             style="@style/stages_tournament_team_name"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_team_name_waiting"
+                            android:text="@string/title_state_tournament_match_waiting"
                             android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -371,7 +373,7 @@
                             android:id="@+id/stageTeamName63"
                             style="@style/stages_tournament_team_name"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_team_name_waiting"
+                            android:text="@string/title_state_tournament_match_waiting"
                             android:textColor="@color/white"
                             tools:layout_editor_absoluteX="16dp"
                             tools:layout_editor_absoluteY="16dp" />
@@ -419,7 +421,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
-                            android:text="@string/title_state_tournament_match_start"/>
+                            android:text="@string/title_state_tournament_match_waiting"/>
 
                     </LinearLayout>
 
@@ -434,7 +436,7 @@
                             android:id="@+id/stageTeamName74"
                             style="@style/stages_tournament_team_name"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_team_name_waiting"
+                            android:text="@string/title_state_tournament_match_waiting"
                             android:textColor="@color/white" />
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -484,7 +486,7 @@
                             android:id="@+id/stageTeamName84"
                             style="@style/stages_tournament_team_name"
                             android:layout_height="wrap_content"
-                            android:text="@string/title_team_name_waiting"
+                            android:text="@string/title_state_tournament_match_waiting"
                             android:textColor="@color/white"
                             tools:layout_editor_absoluteX="16dp"
                             tools:layout_editor_absoluteY="16dp" />

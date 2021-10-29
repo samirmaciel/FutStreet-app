@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.gameReady
+package com.samirmaciel.futstreet.modules.friendlyMatch.matchReady
 
 import android.content.*
 import android.os.Bundle
@@ -166,25 +166,25 @@ class MatchReadyFragment : Fragment(R.layout.fragment_matchready) {
                     binding.buttonAddGoalTeamOne.isEnabled = false
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
-                    binding.buttonStart.setText(resources.getText(R.string.Start))
+                    binding.buttonStart.setText(resources.getText(R.string.title_button_start))
                 }
 
                 PLAYING ->{
                     binding.buttonAddGoalTeamOne.isEnabled = true
                     binding.buttonAddGoalTeamTwo.isEnabled = true
                     binding.motionLayoutButtonsGoals.transitionToEnd()
-                    binding.buttonStart.setText(resources.getText(R.string.Pause))
+                    binding.buttonStart.setText(resources.getText(R.string.title_button_pause))
                 }
 
                 PAUSED ->{
-                    binding.buttonStart.setText(resources.getText(R.string.Continue))
+                    binding.buttonStart.setText(resources.getText(R.string.title_button_continue))
                 }
 
                 FINISH -> {
                     binding.buttonAddGoalTeamOne.isEnabled = false
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
-                    binding.buttonStart.setText(resources.getText(R.string.Restart))
+                    binding.buttonStart.setText(resources.getText(R.string.title_button_restart))
                     viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeam1.value!!, viewModel.scoreTeam2.value!!),
                         nameTeamOne = viewModel.nameTeam1.value!!,
                         nameTeamTwo = viewModel.nameTeam2.value!!,

@@ -27,7 +27,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            motion:layout_constraintTop_toBottomOf="@+id/matchCard1"
             motion:layout_constraintHorizontal_bias="0.496"
             motion:layout_constraintStart_toStartOf="parent"
             android:id="@+id/linearLayout4"
@@ -36,17 +36,17 @@
             android:id="@+id/buttonAddGoalTeamOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            motion:layout_constraintTop_toBottomOf="@+id/matchCard1"
             android:alpha="1"
             android:layout_marginStart="14dp"
-            motion:layout_constraintStart_toStartOf="@+id/linearLayout1" />
+            motion:layout_constraintStart_toStartOf="@+id/matchCard1" />
         <Constraint
             android:id="@+id/buttonAddGoalTeamTwo"
-            motion:layout_constraintEnd_toEndOf="@+id/linearLayout1"
+            motion:layout_constraintEnd_toEndOf="@+id/matchCard1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
-            motion:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            motion:layout_constraintTop_toBottomOf="@+id/matchCard1"
             android:alpha="1" />
     </ConstraintSet>
 </MotionScene>

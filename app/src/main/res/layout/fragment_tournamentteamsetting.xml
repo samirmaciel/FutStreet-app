@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".modules.tournamentSelect.TournamentTeamSettingFragment"
+    tools:context=".modules.tournament.tournamentSetTeams.TournamentTeamSettingFragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/blue">
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/matchCard1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -52,7 +52,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@id/matchCard1">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/selectShirtTeam2Tournament"
@@ -161,7 +161,7 @@
         style="@style/button_menu"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/green"
-        android:text="@string/Ready"
+        android:text="@string/title_button_continue"
         android:textColor="@color/white"
         app:cornerRadius="10dp"
         android:layout_marginStart="16dp"
@@ -173,7 +173,7 @@
         style="@style/button_menu"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/yellow"
-        android:text="@string/Cancel"
+        android:text="@string/title_button_back"
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         android:layout_marginEnd="16dp"

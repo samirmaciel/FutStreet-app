@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/tournamentFragment"
-        android:name="com.samirmaciel.futstreet.modules.tournamentMatcheStages.TournamentMatchesFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.TournamentMatchesFragment"
         android:label="fragment_tournament"
         tools:layout="@layout/fragment_tournament" >
 

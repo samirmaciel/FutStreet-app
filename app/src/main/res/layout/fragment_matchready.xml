@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     android:background="@color/blue"
     app:layoutDescription="@xml/fragment_gameready_scene"
-    tools:context=".modules.gameReady.MatchReadyFragment">
+    tools:context=".modules.friendlyMatch.matchReady.MatchReadyFragment">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/matchCard1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -135,8 +135,8 @@
         android:alpha="0"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_add_gol"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout1"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+        app:layout_constraintStart_toStartOf="@+id/matchCard1"
+        app:layout_constraintTop_toBottomOf="@+id/matchCard1" />
 
     <ImageButton
         android:id="@+id/buttonAddGoalTeamTwo"
@@ -146,8 +146,8 @@
         android:alpha="0"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_add_gol"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout1"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+        app:layout_constraintEnd_toEndOf="@+id/matchCard1"
+        app:layout_constraintTop_toBottomOf="@+id/matchCard1" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -157,14 +157,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/matchCard1">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonStart"
             style="@style/button_menu"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/green"
-            android:text="@string/Start"
+            android:text="@string/title_button_start"
             android:textColor="@color/white"
             app:cornerRadius="10dp" />
 
@@ -173,7 +173,7 @@
             style="@style/button_menu"
             android:layout_marginStart="10dp"
             android:backgroundTint="@color/yellow"
-            android:text="@string/Cancel"
+            android:text="@string/title_button_cancel"
             app:cornerRadius="10dp" />
     </LinearLayout>
 
@@ -186,7 +186,7 @@
         android:text="1º"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintBottom_toTopOf="@+id/matchCard1"
         app:layout_constraintStart_toEndOf="@+id/textCurrentTime"
         app:layout_constraintTop_toTopOf="@+id/textCurrentTime" />
 

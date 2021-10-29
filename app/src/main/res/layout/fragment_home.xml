@@ -35,7 +35,7 @@
         style="@style/button_menu"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hint_menu_button_newmatch"
+        android:text="@string/title_menu_button_newmatch"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonChampionship"
         style="@style/button_menu"
-        android:text="@string/hint_menu_button_tournament"
+        android:text="@string/title_menu_button_tournament"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/buttonNewPlay"
         app:layout_constraintStart_toStartOf="@+id/buttonNewPlay"
@@ -52,7 +52,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAbout"
         style="@style/button_menu"
-        android:text="@string/hint_menu_button_about"
+        android:text="@string/title_menu_button_about"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toStartOf="@+id/buttonChampionship"
         app:layout_constraintTop_toBottomOf="@+id/buttonChampionship" />
