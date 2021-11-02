@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/hint_text_state_torunament_match"
-                        android:text="@string/title_state_tournament_match_start"/>
+                        android:text="@string/title_state_tournament_match_ready"/>
 
                 </LinearLayout>
 
@@ -155,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/hint_text_state_torunament_match"
-                        android:text="@string/title_state_tournament_match_start"/>
+                        android:text="@string/title_state_tournament_match_ready"/>
 
                 </LinearLayout>
 

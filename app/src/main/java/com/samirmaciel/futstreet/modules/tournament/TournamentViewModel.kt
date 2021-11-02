@@ -3,8 +3,24 @@ package com.samirmaciel.futstreet.modules.tournament
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
+import com.samirmaciel.futstreet.shared.const.MATCH_ENDED
+import com.samirmaciel.futstreet.shared.const.MATCH_READY
+import com.samirmaciel.futstreet.shared.const.MATCH_WAITING
 
 class TournamentViewModel : ViewModel() {
+
+    //Match QUARTERS state
+    var matchStateQ1 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+    var matchStateQ2 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+    var matchStateQ3 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+    var matchStateQ4 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+
+    //Match SEMI state
+    var matchStateS1 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+    var matchStateS2 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+
+    //Match FINAL state
+    var matchStateF1 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
 
     var roundsOfPlay : MutableLiveData<Int> = MutableLiveData(1)
     var timeForRound : MutableLiveData<Int> = MutableLiveData(0)

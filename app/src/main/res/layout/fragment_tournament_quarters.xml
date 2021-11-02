@@ -23,6 +23,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/stageCardView1"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue">
@@ -33,18 +34,19 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/backgroundMatchState1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:paddingVertical="5dp"
-                            android:background="@color/green">
+                            android:background="@color/red">
 
                             <TextView
                                 android:id="@+id/textStageMatch1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/hint_text_state_torunament_match"
-                                android:text="@string/title_state_tournament_match_start"/>
+                                android:text="@string/title_state_tournament_match_waiting"/>
 
                         </LinearLayout>
 
@@ -137,6 +139,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/stageCardView2"
                 android:layout_marginTop="5dp"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue">
@@ -147,11 +150,12 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/backgroundMatchState2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingVertical="5dp"
-                        android:background="@color/green">
+                        android:background="@color/red">
 
                         <TextView
                             android:id="@+id/textStageMatch2"
@@ -285,6 +289,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/stageCardView3"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue"
@@ -297,11 +302,12 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/backgroundMatchState3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingVertical="5dp"
-                        android:background="@color/green">
+                        android:background="@color/red">
 
                         <TextView
                             android:id="@+id/textStageMatch3"
@@ -399,6 +405,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/stageCardView4"
+                android:clickable="true"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -410,11 +417,12 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/backgroundMatchState4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingVertical="5dp"
-                        android:background="@color/green">
+                        android:background="@color/red">
 
                         <TextView
                             android:id="@+id/textStageMatch4"

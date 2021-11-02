@@ -17,7 +17,6 @@
     <string name="input_hint_team7">Time7</string>
     <string name="input_hint_team8">Time8</string>
 
-
     //Game Settings misc
     <string name="input_text_number_of_times">Números de tempos:</string>
     <string name="input_text_time_of_round">Tempo de partida:</string>
@@ -59,9 +58,9 @@
     <string name="title_currentGame">Partida em Andamento</string>
     
     //Tournament stage of matchs
-    <string name="title_state_tournament_match_start">Começar partida</string>
-    <string name="title_state_tournament_match_in_progress">Em andamento</string>
-    <string name="title_state_tournament_match_closed">Encerrado</string>
+    <string name="title_state_tournament_match_ready">Começar partida</string>
+    <string name="title_state_tournament_match_running">Em andamento</string>
+    <string name="title_state_tournament_match_ended">Encerrado</string>
     <string name="title_state_tournament_match_waiting">Aguardando</string>
     <string name="title_final">Final</string>
     <string name="title_button_saved_tournaments">Torneios salvos</string>
