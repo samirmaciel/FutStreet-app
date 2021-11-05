@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentteamsettingBinding
-import com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting.shirtSelectionFragment.ShirtSelectionDialog
+import com.samirmaciel.futstreet.modules.matchFriendlySetting.shirtSelectionFragment.ShirtSelectionDialog
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 
 import com.samirmaciel.futstreet.shared.const.SHIRT_SELECTION_FRAGMENT

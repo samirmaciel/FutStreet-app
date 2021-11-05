@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/blue"
     app:layoutDescription="@xml/fragment_gameready_scene"
-    tools:context=".modules.friendlyMatch.matchReady.MatchReadyFragment">
+    tools:context=".modules.matchReady.MatchReadyFragment">
 
 
     <LinearLayout

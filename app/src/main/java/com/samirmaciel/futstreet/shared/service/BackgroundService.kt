@@ -13,7 +13,7 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.modules.MainActivity
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.modules.friendlyMatch.matchReady.MatchReadyFragment
+import com.samirmaciel.futstreet.modules.matchReady.MatchReadyFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID
 import com.samirmaciel.futstreet.shared.const.NOTIFICATION_ID
 import java.util.*

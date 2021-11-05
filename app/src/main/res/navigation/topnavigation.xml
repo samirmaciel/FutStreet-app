@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
-        android:name="com.samirmaciel.futstreet.modules.friendlyMatch.matchSetting.MatchSettingFragment"
+        android:name="com.samirmaciel.futstreet.modules.matchFriendlySetting.MatchSettingFragment"
         android:label="@string/title_game_settings"
         tools:layout="@layout/fragment_matchsettings" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameReadyFragment"
-        android:name="com.samirmaciel.futstreet.modules.friendlyMatch.matchReady.MatchReadyFragment"
+        android:name="com.samirmaciel.futstreet.modules.matchReady.MatchReadyFragment"
         android:label="@string/title_currentGame"
         tools:layout="@layout/fragment_matchready" >
         <action

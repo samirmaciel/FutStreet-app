@@ -35,6 +35,27 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
             viewModel.matchStateQ4.value = MATCH_WAITING
         }
 
+        binding.stageCardView2.setOnClickListener{
+            viewModel.matchStateQ1.value = MATCH_WAITING
+            viewModel.matchStateQ2.value = MATCH_RUNNING
+            viewModel.matchStateQ3.value = MATCH_WAITING
+            viewModel.matchStateQ4.value = MATCH_WAITING
+        }
+
+        binding.stageCardView3.setOnClickListener{
+            viewModel.matchStateQ1.value = MATCH_WAITING
+            viewModel.matchStateQ2.value = MATCH_WAITING
+            viewModel.matchStateQ3.value = MATCH_RUNNING
+            viewModel.matchStateQ4.value = MATCH_WAITING
+        }
+
+        binding.stageCardView4.setOnClickListener{
+            viewModel.matchStateQ1.value = MATCH_WAITING
+            viewModel.matchStateQ2.value = MATCH_WAITING
+            viewModel.matchStateQ3.value = MATCH_WAITING
+            viewModel.matchStateQ4.value = MATCH_RUNNING
+        }
+
         viewModel.matchStateQ1.observe(this){
             when(it){
                 MATCH_WAITING -> {

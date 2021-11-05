@@ -1,4 +1,4 @@
-package com.samirmaciel.futstreet.modules.friendlyMatch.matchReady
+package com.samirmaciel.futstreet.modules.matchReady
 
 import android.content.*
 import android.os.Bundle

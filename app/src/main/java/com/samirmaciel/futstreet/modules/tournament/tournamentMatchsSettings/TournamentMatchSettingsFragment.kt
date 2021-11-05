@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentmatchsettingsBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
+import com.samirmaciel.futstreet.shared.const.MATCH_READY
 import com.samirmaciel.futstreet.shared.const.MATCH_TOURNAMENT
 
 class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmatchsettings) {
@@ -63,6 +64,7 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
     }
 
     private fun cancelTournament(){
+        cleanViewModel()
         requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_tournamentFragment_to_lastGamesFragment)
         findNavController().navigate(R.id.action_tournamentMatchSettingsFragment_to_homeFragment)
     }
@@ -85,6 +87,18 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
             Toast.makeText(requireContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show()
             return false
         }
+    }
+
+    private fun cleanViewModel(){
+        viewModel.matchStateQ1.value = MATCH_READY
+        viewModel.matchStateQ2.value = MATCH_READY
+        viewModel.matchStateQ3.value = MATCH_READY
+        viewModel.matchStateQ4.value = MATCH_READY
+
+        viewModel.matchStateS1.value = MATCH_READY
+        viewModel.matchStateS2.value = MATCH_READY
+
+        viewModel.matchStateF1.value = MATCH_READY
     }
 
 
