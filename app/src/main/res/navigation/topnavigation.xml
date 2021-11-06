@@ -99,6 +99,11 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/enter_animation_inverted"
             app:exitAnim="@anim/exit_animation_inverted"/>
+        <action
+            android:id="@+id/action_tournamentMatchSettingsFragment_to_waitingForMatchFragment"
+            app:destination="@id/waitingForMatchFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
     </fragment>
     <fragment
         android:id="@+id/tournamentOptionsFragment"
@@ -116,5 +121,16 @@
             app:enterAnim="@anim/enter_animation_inverted"
             app:exitAnim="@anim/exit_animation_inverted"/>
 
+    </fragment>
+    <fragment
+        android:id="@+id/waitingForMatchFragment"
+        android:name="com.samirmaciel.futstreet.modules.tournament.WaitingForMatchFragment"
+        android:label="@string/title_waiting"
+        tools:layout="@layout/fragment_waiting_match" >
+        <action
+            android:id="@+id/action_waitingForMatchFragment_to_gameReadyFragment"
+            app:destination="@id/gameReadyFragment"
+            app:enterAnim="@anim/enter_animation"
+            app:exitAnim="@anim/exit_animation"/>
     </fragment>
 </navigation>

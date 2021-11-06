@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
-import com.samirmaciel.futstreet.shared.const.MATCH_ENDED
-import com.samirmaciel.futstreet.shared.const.MATCH_READY
-import com.samirmaciel.futstreet.shared.const.MATCH_RUNNING
-import com.samirmaciel.futstreet.shared.const.MATCH_WAITING
+import com.samirmaciel.futstreet.shared.const.*
 
 class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarters) {
 
@@ -71,6 +69,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 }
 
                 MATCH_RUNNING -> {
+                    sendToMatchReady(viewModel.nameQ11.value!!, viewModel.shirtQ11.value!!, viewModel.nameQ21.value!!,viewModel.shirtQ21.value!!)
                     binding.backgroundMatchState1.setBackgroundResource(R.color.green)
                     binding.textStageMatch1.setText(resources.getText(R.string.title_state_tournament_match_running))
                     binding.stageCardView1.isClickable = false
@@ -100,6 +99,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 }
 
                 MATCH_RUNNING -> {
+                    sendToMatchReady(viewModel.nameQ32.value!!, viewModel.shirtQ32.value!!, viewModel.nameQ42.value!!,viewModel.shirtQ42.value!!)
                     binding.backgroundMatchState2.setBackgroundResource(R.color.green)
                     binding.textStageMatch2.setText(resources.getText(R.string.title_state_tournament_match_running))
                     binding.stageCardView2.isClickable = false
@@ -129,6 +129,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 }
 
                 MATCH_RUNNING -> {
+                    sendToMatchReady(viewModel.nameQ53.value!!, viewModel.shirtQ53.value!!, viewModel.nameQ63.value!!,viewModel.shirtQ63.value!!)
                     binding.backgroundMatchState3.setBackgroundResource(R.color.green)
                     binding.textStageMatch3.setText(resources.getText(R.string.title_state_tournament_match_running))
                     binding.stageCardView3.isClickable = false
@@ -158,6 +159,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 }
 
                 MATCH_RUNNING -> {
+                    sendToMatchReady(viewModel.nameQ74.value!!, viewModel.shirtQ74.value!!, viewModel.nameQ84.value!!,viewModel.shirtQ84.value!!)
                     binding.backgroundMatchState4.setBackgroundResource(R.color.green)
                     binding.textStageMatch4.setText(resources.getText(R.string.title_state_tournament_match_running))
                     binding.stageCardView4.isClickable = false
@@ -231,6 +233,21 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
         viewModel.shirtQ84.observe(this){
             binding.stageTeamShirt84.setImageResource(it)
         }
+    }
+
+    private fun sendToMatchReady(team1 : String, shirt1 : Int, team2 : String, shirt2 : Int){
+        val arguments = Bundle().apply {
+            putInt("matchType", MATCH_TOURNAMENT)
+            putString("teamName1", team1)
+            putString("teamName2", team2)
+            putInt("shirtTeam1", shirt1)
+            putInt("shirtTeam2", shirt2)
+            putInt("Rounds", viewModel.roundsOfPlay.value!!)
+            putInt("CurrentRound", 1)
+            putDouble("RoundTime", viewModel.timeForRound.value!!.toDouble() * 60)
+        }
+
+        requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_gameReadyFragment, arguments)
     }
 
     override fun onDestroy() {

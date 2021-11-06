@@ -56,6 +56,7 @@
     <string name="title_tournament_select">Configuração de times</string>
     <string name="title_game_settings">Configuração de jogo</string>
     <string name="title_currentGame">Partida em Andamento</string>
+    <string name="title_waiting">Aguardando</string>
     
     //Tournament stage of matchs
     <string name="title_state_tournament_match_ready">Começar partida</string>
@@ -70,4 +71,5 @@
     <string name="title_tab_quarters">Quartas</string>
     <string name="title_tab_semi">Semi</string>
     <string name="title_tab_final">Final</string>
+    <string name="title_waiting_for_match">Selecione uma partida para começar!</string>
 </resources>

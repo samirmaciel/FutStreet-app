@@ -50,27 +50,18 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
             saveInputTeamsNamesInViewModel()
 
             val listSortedTeams = geSortedTeams()
-            val allTeamsBundle = Bundle()
-
-            for (i in 0..7){
-                allTeamsBundle.putInt("shirtTeam${i}", listSortedTeams[i].shirt)
-                allTeamsBundle.putString("teamName${i}", listSortedTeams[i].name)
-            }
+//            val allTeamsBundle = Bundle()
+//
+//            for (i in 0..7){
+//                allTeamsBundle.putInt("shirtTeam${i}", listSortedTeams[i].shirt)
+//                allTeamsBundle.putString("teamName${i}", listSortedTeams[i].name)
+//            }
 
             for (i in 0..7){
                 viewModel.getTeamNameMap()[i]!!.value = listSortedTeams[i].name
                 viewModel.getTeamShirtMap()[i]!!.value = listSortedTeams[i].shirt
             }
 
-            requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_lastGamesFragment_to_tournamentFragment)
-
-//            val firstMatchBundle = Bundle().apply {
-//                putString("teamName1", viewModel.teamName1.value)
-//                putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
-//
-//                putString("teamName2", viewModel.teamName2.value)
-//                putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
-//            }
 
             findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment)
         }

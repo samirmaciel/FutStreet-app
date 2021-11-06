@@ -32,7 +32,8 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
 
         binding.buttonReady.setOnClickListener{
             if(saveTempData()){
-                findNavController().navigate(R.id.action_tournamentMatchSettingsFragment_to_gameReadyFragment, setBundleWithArguments())
+                requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_lastGamesFragment_to_tournamentFragment)
+                findNavController().navigate(R.id.action_tournamentMatchSettingsFragment_to_waitingForMatchFragment)
             }
         }
 
