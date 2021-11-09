@@ -1,8 +1,10 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -26,28 +28,28 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
     override fun onResume() {
         super.onResume()
 
-        binding.stageCardView1.setOnClickListener{
+        binding.matchCardView1.setOnClickListener{
             viewModel.matchStateQ1.value = MATCH_RUNNING
             viewModel.matchStateQ2.value = MATCH_WAITING
             viewModel.matchStateQ3.value = MATCH_WAITING
             viewModel.matchStateQ4.value = MATCH_WAITING
         }
 
-        binding.stageCardView2.setOnClickListener{
+        binding.matchCardView2.setOnClickListener{
             viewModel.matchStateQ1.value = MATCH_WAITING
             viewModel.matchStateQ2.value = MATCH_RUNNING
             viewModel.matchStateQ3.value = MATCH_WAITING
             viewModel.matchStateQ4.value = MATCH_WAITING
         }
 
-        binding.stageCardView3.setOnClickListener{
+        binding.matchCardView3.setOnClickListener{
             viewModel.matchStateQ1.value = MATCH_WAITING
             viewModel.matchStateQ2.value = MATCH_WAITING
             viewModel.matchStateQ3.value = MATCH_RUNNING
             viewModel.matchStateQ4.value = MATCH_WAITING
         }
 
-        binding.stageCardView4.setOnClickListener{
+        binding.matchCardView4.setOnClickListener{
             viewModel.matchStateQ1.value = MATCH_WAITING
             viewModel.matchStateQ2.value = MATCH_WAITING
             viewModel.matchStateQ3.value = MATCH_WAITING
@@ -55,122 +57,23 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
         }
 
         viewModel.matchStateQ1.observe(this){
-            when(it){
-                MATCH_WAITING -> {
-                    binding.backgroundMatchState1.setBackgroundResource(R.color.yellow)
-                    binding.textStageMatch1.setText(resources.getText(R.string.title_state_tournament_match_waiting))
-                    binding.textStageMatch1.setTextColor(resources.getColor(R.color.black))
-                    binding.stageCardView1.isClickable = false
-                }
-
-                MATCH_READY -> {
-                    binding.backgroundMatchState1.setBackgroundResource(R.color.green)
-                    binding.textStageMatch1.setText(resources.getText(R.string.title_state_tournament_match_ready))
-                }
-
-                MATCH_RUNNING -> {
-                    sendToMatchReady(viewModel.nameQ11.value!!, viewModel.shirtQ11.value!!, viewModel.nameQ21.value!!,viewModel.shirtQ21.value!!)
-                    binding.backgroundMatchState1.setBackgroundResource(R.color.green)
-                    binding.textStageMatch1.setText(resources.getText(R.string.title_state_tournament_match_running))
-                    binding.stageCardView1.isClickable = false
-                }
-
-                MATCH_ENDED ->{
-                    binding.backgroundMatchState1.setBackgroundResource(R.color.red)
-                    binding.textStageMatch1.setText(R.string.title_state_tournament_match_ended)
-                    binding.stageCardView1.isClickable = false
-                }
-            }
+            configStateMatchElements(it, binding.backgroundStatusMatch1, binding.titleStatusMatch1, binding.matchCardView1, viewModel.nameQ11.value!!,
+            viewModel.shirtQ11.value!!, viewModel.nameQ21.value!!, viewModel.shirtQ21.value!!)
         }
 
         viewModel.matchStateQ2.observe(this){
-            when(it){
-                MATCH_WAITING -> {
-                    binding.backgroundMatchState2.setBackgroundResource(R.color.yellow)
-                    binding.textStageMatch2.setText(resources.getText(R.string.title_state_tournament_match_waiting))
-                    binding.textStageMatch2.setTextColor(resources.getColor(R.color.black))
-                    binding.stageCardView2.isClickable = false
-                }
-
-                MATCH_READY -> {
-                    binding.backgroundMatchState2.setBackgroundResource(R.color.green)
-                    binding.textStageMatch2.setText(resources.getText(R.string.title_state_tournament_match_ready))
-                    binding.stageCardView2.isClickable = true
-                }
-
-                MATCH_RUNNING -> {
-                    sendToMatchReady(viewModel.nameQ32.value!!, viewModel.shirtQ32.value!!, viewModel.nameQ42.value!!,viewModel.shirtQ42.value!!)
-                    binding.backgroundMatchState2.setBackgroundResource(R.color.green)
-                    binding.textStageMatch2.setText(resources.getText(R.string.title_state_tournament_match_running))
-                    binding.stageCardView2.isClickable = false
-                }
-
-                MATCH_ENDED ->{
-                    binding.backgroundMatchState2.setBackgroundResource(R.color.red)
-                    binding.textStageMatch2.setText(R.string.title_state_tournament_match_ended)
-                    binding.stageCardView2.isClickable = false
-                }
-            }
+            configStateMatchElements(it, binding.backgroundStatusMatch2, binding.titleStatusMatch2, binding.matchCardView2,viewModel.nameQ32.value!!,
+                viewModel.shirtQ32.value!!, viewModel.nameQ42.value!!, viewModel.shirtQ42.value!!)
         }
 
         viewModel.matchStateQ3.observe(this){
-            when(it){
-                MATCH_WAITING -> {
-                    binding.backgroundMatchState3.setBackgroundResource(R.color.yellow)
-                    binding.textStageMatch3.setText(resources.getText(R.string.title_state_tournament_match_waiting))
-                    binding.textStageMatch3.setTextColor(resources.getColor(R.color.black))
-                    binding.stageCardView3.isClickable = false
-                }
-
-                MATCH_READY -> {
-                    binding.backgroundMatchState3.setBackgroundResource(R.color.green)
-                    binding.textStageMatch3.setText(resources.getText(R.string.title_state_tournament_match_ready))
-                    binding.stageCardView3.isClickable = true
-                }
-
-                MATCH_RUNNING -> {
-                    sendToMatchReady(viewModel.nameQ53.value!!, viewModel.shirtQ53.value!!, viewModel.nameQ63.value!!,viewModel.shirtQ63.value!!)
-                    binding.backgroundMatchState3.setBackgroundResource(R.color.green)
-                    binding.textStageMatch3.setText(resources.getText(R.string.title_state_tournament_match_running))
-                    binding.stageCardView3.isClickable = false
-                }
-
-                MATCH_ENDED ->{
-                    binding.backgroundMatchState3.setBackgroundResource(R.color.red)
-                    binding.textStageMatch3.setText(R.string.title_state_tournament_match_ended)
-                    binding.stageCardView3.isClickable = false
-                }
-            }
+            configStateMatchElements(it, binding.backgroundStatusMatch3, binding.titleStatusMatch3, binding.matchCardView3, viewModel.nameQ53.value!!,
+                viewModel.shirtQ53.value!!, viewModel.nameQ63.value!!, viewModel.shirtQ63.value!!)
         }
 
         viewModel.matchStateQ4.observe(this){
-            when(it){
-                MATCH_WAITING -> {
-                    binding.backgroundMatchState4.setBackgroundResource(R.color.yellow)
-                    binding.textStageMatch4.setText(resources.getText(R.string.title_state_tournament_match_waiting))
-                    binding.textStageMatch4.setTextColor(resources.getColor(R.color.black))
-                    binding.stageCardView4.isClickable = false
-                }
-
-                MATCH_READY -> {
-                    binding.backgroundMatchState4.setBackgroundResource(R.color.green)
-                    binding.textStageMatch4.setText(resources.getText(R.string.title_state_tournament_match_ready))
-                    binding.stageCardView4.isClickable = true
-                }
-
-                MATCH_RUNNING -> {
-                    sendToMatchReady(viewModel.nameQ74.value!!, viewModel.shirtQ74.value!!, viewModel.nameQ84.value!!,viewModel.shirtQ84.value!!)
-                    binding.backgroundMatchState4.setBackgroundResource(R.color.green)
-                    binding.textStageMatch4.setText(resources.getText(R.string.title_state_tournament_match_running))
-                    binding.stageCardView4.isClickable = false
-                }
-
-                MATCH_ENDED ->{
-                    binding.backgroundMatchState4.setBackgroundResource(R.color.red)
-                    binding.textStageMatch4.setText(R.string.title_state_tournament_match_ended)
-                    binding.stageCardView4.isClickable = false
-                }
-            }
+            configStateMatchElements(it, binding.backgroundStatusMatch4, binding.titleStatusMatch4, binding.matchCardView4, viewModel.nameQ74.value!!,
+                viewModel.shirtQ74.value!!, viewModel.nameQ84.value!!, viewModel.shirtQ84.value!!)
         }
 
         viewModel.nameQ11.observe(this){
@@ -247,7 +150,57 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
             putDouble("RoundTime", viewModel.timeForRound.value!!.toDouble() * 60)
         }
 
-        requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_gameReadyFragment, arguments)
+        requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment, arguments)
+    }
+
+    private fun configStateMatchElements(state : Int, backGroundMatch : LinearLayout, matchTitle : TextView,
+                                         matchCard : CardView, teamName1 : String, teamShirt1 : Int, teamName2 : String, teamShirt2 : Int ){
+        when(state){
+            MATCH_WAITING -> {
+                backGroundMatch.setBackgroundResource(R.color.yellow)
+                matchTitle.setText(resources.getText(R.string.title_state_tournament_match_waiting))
+                matchTitle.setTextColor(resources.getColor(R.color.black))
+                matchCard.isClickable = false
+            }
+
+            MATCH_READY -> {
+                backGroundMatch.setBackgroundResource(R.color.green)
+                matchTitle.setText(resources.getText(R.string.title_state_tournament_match_ready))
+                matchCard.isClickable = true
+            }
+
+            MATCH_RUNNING -> {
+                sendToMatchReady(teamName1, teamShirt1, teamName2, teamShirt2)
+                backGroundMatch.setBackgroundResource(R.color.green)
+                matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
+                matchCard.isClickable = false
+            }
+
+            MATCH_ENDED ->{
+                backGroundMatch.setBackgroundResource(R.color.red)
+                matchTitle.setText(R.string.title_state_tournament_match_ended)
+                matchCard.isClickable = false
+            }
+        }
+    }
+
+    private fun setStateOfMatch(matchSelect : Int){
+        when(matchSelect){
+            1 -> {
+                viewModel.matchStateQ1.value = MATCH_RUNNING
+                viewModel.matchStateQ2.value = MATCH_WAITING
+                viewModel.matchStateQ3.value = MATCH_WAITING
+                viewModel.matchStateQ4.value = MATCH_WAITING
+            }
+
+            2 -> {
+                viewModel.matchStateQ1.value = MATCH_WAITING
+                viewModel.matchStateQ2.value = MATCH_RUNNING
+                viewModel.matchStateQ3.value = MATCH_WAITING
+                viewModel.matchStateQ4.value = MATCH_WAITING
+            }
+        }
+
     }
 
     override fun onDestroy() {

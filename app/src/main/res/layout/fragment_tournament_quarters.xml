@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/stageCardView1"
+                android:id="@+id/matchCardView1"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:id="@+id/backgroundMatchState1"
+                            android:id="@+id/backgroundStatusMatch1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -43,7 +43,7 @@
                             android:background="@color/red">
 
                             <TextView
-                                android:id="@+id/textStageMatch1"
+                                android:id="@+id/titleStatusMatch1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 style="@style/hint_text_state_torunament_match"
@@ -138,7 +138,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/stageCardView2"
+                android:id="@+id/matchCardView2"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
                 android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/backgroundMatchState2"
+                        android:id="@+id/backgroundStatusMatch2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -159,7 +159,7 @@
                         android:background="@color/red">
 
                         <TextView
-                            android:id="@+id/textStageMatch2"
+                            android:id="@+id/titleStatusMatch2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
@@ -289,13 +289,13 @@
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/stageCardView3"
+                android:id="@+id/matchCardView3"
                 android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/stageCardView2">
+                app:layout_constraintTop_toBottomOf="@id/matchCardView2">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -303,7 +303,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/backgroundMatchState3"
+                        android:id="@+id/backgroundStatusMatch3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -311,7 +311,7 @@
                         android:background="@color/red">
 
                         <TextView
-                            android:id="@+id/textStageMatch3"
+                            android:id="@+id/titleStatusMatch3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"
@@ -405,7 +405,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/stageCardView4"
+                android:id="@+id/matchCardView4"
                 android:clickable="true"
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
@@ -418,7 +418,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/backgroundMatchState4"
+                        android:id="@+id/backgroundStatusMatch4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -426,7 +426,7 @@
                         android:background="@color/red">
 
                         <TextView
-                            android:id="@+id/textStageMatch4"
+                            android:id="@+id/titleStatusMatch4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="@style/hint_text_state_torunament_match"

@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/stageCardView1"
+        android:id="@+id/matchCardView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

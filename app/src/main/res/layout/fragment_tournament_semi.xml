@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/stageCardView1"
+            android:id="@+id/matchCardView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue">
@@ -132,7 +132,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/stageCardView2"
+            android:id="@+id/matchCardView2"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                     android:background="@color/green">
 
                     <TextView
-                        android:id="@+id/textStageMatch2"
+                        android:id="@+id/titleStatusMatch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/hint_text_state_torunament_match"
