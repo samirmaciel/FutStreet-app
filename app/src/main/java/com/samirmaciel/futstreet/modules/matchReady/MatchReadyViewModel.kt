@@ -21,9 +21,7 @@ class MatchReadyViewModel : ViewModel(){
     var timeLimit : MutableLiveData<Double> = MutableLiveData(0.0)
     var timeLimitParams : MutableLiveData<Double> = MutableLiveData(0.0)
     var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
-
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
-
     var matchType : MutableLiveData<Int> = MutableLiveData(MATCH_FRIENDLY)
 
     fun getTimeStringFromDouble(time : Double) : String{

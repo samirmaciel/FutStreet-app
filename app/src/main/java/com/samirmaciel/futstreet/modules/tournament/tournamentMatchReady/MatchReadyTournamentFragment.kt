@@ -22,8 +22,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     private var _binding : FragmentTournamentMatchreadyBinding? = null
     private val binding : FragmentTournamentMatchreadyBinding get() = _binding!!
     lateinit var serviceIntent : Intent
-    private val viewModelDefault : MatchReadyViewModel by activityViewModels()
-    private val viewModelTournament : TournamentViewModel by activityViewModels()
+    private val viewModel : TournamentViewModel by activityViewModels()
 
 
 
@@ -34,18 +33,18 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
     private val updateTime : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
-            viewModelDefault.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
-            viewModelDefault.textTimeView.value = viewModelDefault.getTimeStringFromDouble(viewModelDefault.timeLimit.value!!)
+            viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
+            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!)
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
-                if(viewModelDefault.roundsLimit.value == viewModelDefault.currentRound.value){
-                    viewModelDefault.textTimeView.value = resources.getText(R.string.text_end_game).toString()
-                    viewModelDefault.gameState.value = FINISH
+                if(viewModel.roundsLimit.value == viewModel.currentRound.value){
+                    viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
+                    viewModel.gameState.value = FINISH
                 }else{
-                    viewModelDefault.textTimeView.value = viewModelDefault.getTimeStringFromDouble(viewModelDefault.timeLimitParams.value!!)
-                    viewModelDefault.gameState.value = PREPLAY
+                    viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
+                    viewModel.gameState.value = PREPLAY
                 }
-                viewModelDefault.timeLimit.value = viewModelDefault.timeLimitParams.value
-                viewModelDefault.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModelDefault.currentRound.value!!)
+                viewModel.timeLimit.value = viewModel.timeLimitParams.value
+                viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
                 requireActivity().stopService(serviceIntent)
             }
         }
@@ -72,7 +71,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         binding.buttonAddGoalTeamOne.setOnClickListener{
 
             val alertScore = AlertDialog.Builder(requireContext()).apply {
-                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModelDefault.nameTeam1.value.toString()}?")
+                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeam1MR.value.toString()}?")
                 setPositiveButton(resources.getText(R.string.yes)) { _, _ -> addGolTeamOne() }
                 setNegativeButton(resources.getText(R.string.no), null)
             }
@@ -82,7 +81,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
         binding.buttonAddGoalTeamTwo.setOnClickListener{
             val alertScore = AlertDialog.Builder(requireContext()).apply {
-                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModelDefault.nameTeam2.value.toString()}?")
+                setTitle("${resources.getText(R.string.text_add_gol)} ${viewModel.nameTeam2MR.value.toString()}?")
                 setPositiveButton(resources.getText(R.string.yes)){ _, _  -> addGolTeamTwo() }
                 setNegativeButton(resources.getText(R.string.no), null)
             }
@@ -90,25 +89,25 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         }
 
         binding.buttonStart.setOnClickListener{
-            when(viewModelDefault.gameState.value!!){
+            when(viewModel.gameState.value!!){
                 PREPLAY -> {
                     startBackgroundService()
-                    viewModelDefault.gameState.value = PLAYING
+                    viewModel.gameState.value = PLAYING
                 }
 
                 PLAYING ->{
                     requireActivity().stopService(serviceIntent)
-                    viewModelDefault.gameState.value = PAUSED
+                    viewModel.gameState.value = PAUSED
                 }
 
                 PAUSED ->{
                     startBackgroundService()
-                    viewModelDefault.gameState.value = PLAYING
+                    viewModel.gameState.value = PLAYING
                 }
 
                 FINISH -> {
                     restartBackgroundService()
-                    viewModelDefault.gameState.value = PREPLAY
+                    viewModel.gameState.value = PREPLAY
                 }
             }
 
@@ -125,46 +124,46 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
         }
 
-        viewModelDefault.nameTeam1.observe(this){
+        viewModel.nameTeam1MR.observe(this){
             binding.textNameTeamOne.setText(it)
         }
 
-        viewModelDefault.nameTeam2.observe(this){
+        viewModel.nameTeam2MR.observe(this){
             binding.textNameTeamTwo.setText(it)
         }
 
-        viewModelDefault.shirtTeam1.observe(this){
+        viewModel.shirtTeam1MR.observe(this){
             binding.imageShirtTeamOne.setImageResource(it)
         }
 
-        viewModelDefault.shirtTeam2.observe(this){
+        viewModel.shirtTeam2MR.observe(this){
             binding.imageShirtTeamTwo.setImageResource(it)
         }
 
-        viewModelDefault.textTimeView.observe(this){
+        viewModel.textTimeView.observe(this){
             binding.textCurrentTime.setText(it)
         }
 
-        viewModelDefault.currentRound.observe(this){
-            binding.textCurrentRound.setText("${viewModelDefault.currentRound.value}°")
+        viewModel.currentRound.observe(this){
+            binding.textCurrentRound.setText("${viewModel.currentRound.value}°")
         }
 
-        viewModelDefault.scoreTeam1.observe(this){
+        viewModel.scoreTeam1.observe(this){
             binding.textScoreTeamOne.setText(it.toString())
             val scoreIntent = Intent(SCORE_OBSERVE)
-            scoreIntent.putExtra(BackgroundService.SCORE_T1, viewModelDefault.scoreTeam1.value!!)
+            scoreIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeam1.value!!)
             requireActivity().sendBroadcast(scoreIntent)
         }
 
-        viewModelDefault.scoreTeam2.observe(this){
+        viewModel.scoreTeam2.observe(this){
             binding.textScoreTeamTwo.setText(it.toString())
             val scoreIntent = Intent(SCORE_OBSERVE)
-            scoreIntent.putExtra(BackgroundService.SCORE_T2, viewModelDefault.scoreTeam2.value!!)
+            scoreIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeam2.value!!)
             requireActivity().sendBroadcast(scoreIntent)
         }
 
-        viewModelDefault.gameState.observe(this){
-            when(viewModelDefault.gameState.value!!){
+        viewModel.gameState.observe(this){
+            when(viewModel.gameState.value!!){
                 PREPLAY -> {
                     binding.buttonAddGoalTeamOne.isEnabled = false
                     binding.buttonAddGoalTeamTwo.isEnabled = false
@@ -188,15 +187,15 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.title_button_restart))
-                    viewModelDefault.saveMatch(Match(winner = getWinnerMath(viewModelDefault.scoreTeam1.value!!, viewModelDefault.scoreTeam2.value!!),
-                        nameTeamOne = viewModelDefault.nameTeam1.value!!,
-                        nameTeamTwo = viewModelDefault.nameTeam2.value!!,
-                        scoreTeamOne = viewModelDefault.scoreTeam1.value!!,
-                        scoreTeamTwo = viewModelDefault.scoreTeam2.value!!,
-                        shirtTeamOne = viewModelDefault.shirtTeam1.value!!,
-                        shirtTeamTwo = viewModelDefault.scoreTeam2.value!!,
-                        rounds = viewModelDefault.roundsLimit.value!!,
-                        time = viewModelDefault.timeLimitParams.value!!
+                    viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeam1.value!!, viewModel.scoreTeam2.value!!),
+                        nameTeamOne = viewModel.nameTeam1MR.value!!,
+                        nameTeamTwo = viewModel.nameTeam2MR.value!!,
+                        scoreTeamOne = viewModel.scoreTeam1.value!!,
+                        scoreTeamTwo = viewModel.scoreTeam2.value!!,
+                        shirtTeamOne = viewModel.shirtTeam1MR.value!!,
+                        shirtTeamTwo = viewModel.shirtTeam1MR.value!!,
+                        rounds = viewModel.roundsLimit.value!!,
+                        time = viewModel.timeLimitParams.value!!
                     ))
                 }
             }
@@ -224,22 +223,22 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     }
 
     private fun restartBackgroundService(){
-        viewModelDefault.scoreTeam1.value = 0
-        viewModelDefault.scoreTeam2.value = 0
-        viewModelDefault.currentRound.value = 1
-        viewModelDefault.textTimeView.value = viewModelDefault.getTimeStringFromDouble(viewModelDefault.timeLimitParams.value!!)
+        viewModel.scoreTeam1.value = 0
+        viewModel.scoreTeam2.value = 0
+        viewModel.currentRound.value = 1
+        viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
     }
 
     private fun startBackgroundService() {
-        serviceIntent.putExtra(BackgroundService.SCORE_T1, viewModelDefault.scoreTeam1.value)
-        serviceIntent.putExtra(BackgroundService.SCORE_T2, viewModelDefault.scoreTeam2.value)
-        serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModelDefault.nameTeam1.value)
-        serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModelDefault.nameTeam2.value)
-        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModelDefault.shirtTeam1.value)
-        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModelDefault.shirtTeam2.value)
-        serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModelDefault.timeLimit.value)
-        serviceIntent.putExtra(BackgroundService.ROUND_LIMIT, viewModelDefault.roundsLimit.value)
-        serviceIntent.putExtra(BackgroundService.CURRENT_ROUND, viewModelDefault.currentRound.value)
+        serviceIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeam1.value)
+        serviceIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeam2.value)
+        serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeam1MR.value)
+        serviceIntent.putExtra(BackgroundService.NAME_TEAMTWO, viewModel.nameTeam2MR.value)
+        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMONE, viewModel.shirtTeam1MR.value)
+        serviceIntent.putExtra(BackgroundService.SHIRT_TEAMTWO, viewModel.shirtTeam2MR.value)
+        serviceIntent.putExtra(BackgroundService.TIME_LIMIT, viewModel.timeLimit.value)
+        serviceIntent.putExtra(BackgroundService.ROUND_LIMIT, viewModel.roundsLimit.value)
+        serviceIntent.putExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value)
         requireActivity().startService(serviceIntent)
     }
 
@@ -250,7 +249,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             scaleYBy(0.5f)
 
         }.withEndAction {
-            viewModelDefault.scoreTeam1.value = viewModelDefault.scoreTeam1.value!! + 1
+            viewModel.scoreTeam1.value = viewModel.scoreTeam1.value!! + 1
             binding.textScoreTeamOne.animate().apply {
                 duration = 150
                 scaleXBy(-0.5f)
@@ -266,7 +265,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             scaleYBy(0.5f)
             scaleXBy(0.5f)
         }.withEndAction {
-            viewModelDefault.scoreTeam2.value = viewModelDefault.scoreTeam2.value!! + 1
+            viewModel.scoreTeam2.value = viewModel.scoreTeam2.value!! + 1
             binding.textScoreTeamTwo.animate().apply {
                 duration = 150
                 scaleXBy(-0.5f)
@@ -279,41 +278,41 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     private fun getSettings() {
 
         arguments?.getString("teamName1")?.let {
-            viewModelDefault.nameTeam1.value = it
+            viewModel.nameTeam1MR.value = it
         }
 
         arguments?.getString("teamName2")?.let {
-            viewModelDefault.nameTeam2.value = it
+            viewModel.nameTeam2MR.value = it
         }
 
         arguments?.getDouble("RoundTime")?.let {
-            viewModelDefault.timeLimit.value = it
-            viewModelDefault.timeLimitParams.value = it
-            viewModelDefault.textTimeView.value = viewModelDefault.getTimeStringFromDouble(it)
+            viewModel.timeLimit.value = it
+            viewModel.timeLimitParams.value = it
+            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(it)
         }
 
         arguments?.getInt("matchType")?.let {
-            viewModelDefault.matchType.value = it
+            viewModel.matchType.value = it
         }
 
         arguments?.getInt("CurrentRound")?.let {
-            viewModelDefault.currentRound.value = it
+            viewModel.currentRound.value = it
         }
 
         arguments?.getInt("Rounds")?.let {
-            viewModelDefault.roundsLimit.value = it
+            viewModel.roundsLimit.value = it
         }
 
         arguments?.getInt("shirtTeam1", R.drawable.shirt_select)?.let {
-            viewModelDefault.shirtTeam1.value = it
+            viewModel.shirtTeam1MR.value = it
         }
 
         arguments?.getInt("shirtTeam2", R.drawable.shirt_select)?.let{
-            viewModelDefault.shirtTeam2.value = it
+            viewModel.shirtTeam2MR.value = it
         }
 
         arguments?.getInt("Rounds", 1)?.let {
-            viewModelDefault.roundsLimit.value = it
+            viewModel.roundsLimit.value = it
         }
     }
 
@@ -325,12 +324,12 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     }
 
     private fun cleanViewModelData(){
-        viewModelDefault.gameState.value = PREPLAY
-        viewModelDefault.currentRound.value = 1
-        viewModelTournament.matchStateQ4.value = MATCH_READY
-        viewModelTournament.matchStateQ3.value = MATCH_READY
-        viewModelTournament.matchStateQ2.value = MATCH_READY
-        viewModelTournament.matchStateQ1.value = MATCH_READY
+        viewModel.gameState.value = PREPLAY
+        viewModel.currentRound.value = 1
+        viewModel.matchStateQ4.value = MATCH_READY
+        viewModel.matchStateQ3.value = MATCH_READY
+        viewModel.matchStateQ2.value = MATCH_READY
+        viewModel.matchStateQ1.value = MATCH_READY
     }
 
     override fun onStop() {
