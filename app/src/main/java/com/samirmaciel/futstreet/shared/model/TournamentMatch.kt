@@ -1,16 +1,16 @@
 package com.samirmaciel.futstreet.shared.model
 
-data class Match(
+import androidx.lifecycle.MutableLiveData
+
+data class TournamentMatch(
 
     val id : Long = 0,
-    val winner : Int,
+    var winner : Int,
     val nameTeamOne : String,
     val nameTeamTwo : String,
     val scoreTeamOne : Int,
     val scoreTeamTwo : Int,
     val shirtTeamOne : Int,
     val shirtTeamTwo : Int,
-    val rounds : Int,
-    val time : Double
-
+    val status : MutableLiveData<Int>
 )

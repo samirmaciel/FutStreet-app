@@ -12,6 +12,7 @@ import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 import com.samirmaciel.futstreet.shared.const.*
+import com.samirmaciel.futstreet.shared.model.TournamentMatch
 
 class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarters) {
 
@@ -170,10 +171,22 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
             }
 
             MATCH_RUNNING -> {
-                sendToMatchReady(teamName1, teamShirt1, teamName2, teamShirt2)
+                //sendToMatchReady(teamName1, teamShirt1, teamName2, teamShirt2)
+                viewModel.currentMatchRunning.value = TournamentMatch(
+                    id = 1,
+                    winner = 1,
+                    nameTeamOne = viewModel.nameQ11.value!!,
+                    nameTeamTwo = viewModel.nameQ21.value!!,
+                    scoreTeamOne = 0,
+                    scoreTeamTwo = 0,
+                    shirtTeamOne = viewModel.shirtQ11.value!!,
+                    shirtTeamTwo = viewModel.shirtQ21.value!!,
+                    status = viewModel.matchStateQ1
+                )
                 backGroundMatch.setBackgroundResource(R.color.green)
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
                 matchCard.isClickable = false
+                requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
             }
 
             MATCH_ENDED ->{

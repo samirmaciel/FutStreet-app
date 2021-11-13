@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentMatchreadyBinding
 import com.samirmaciel.futstreet.shared.const.*
-import com.samirmaciel.futstreet.shared.model.Match
+import com.samirmaciel.futstreet.shared.model.TournamentMatch
 import com.samirmaciel.futstreet.shared.service.BackgroundService
 
 class MatchReadyFragment : Fragment(R.layout.fragment_matchready) {
@@ -185,16 +185,6 @@ class MatchReadyFragment : Fragment(R.layout.fragment_matchready) {
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.title_button_restart))
-                    viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeam1.value!!, viewModel.scoreTeam2.value!!),
-                        nameTeamOne = viewModel.nameTeam1.value!!,
-                        nameTeamTwo = viewModel.nameTeam2.value!!,
-                        scoreTeamOne = viewModel.scoreTeam1.value!!,
-                        scoreTeamTwo = viewModel.scoreTeam2.value!!,
-                        shirtTeamOne = viewModel.shirtTeam1.value!!,
-                        shirtTeamTwo = viewModel.scoreTeam2.value!!,
-                        rounds = viewModel.roundsLimit.value!!,
-                        time = viewModel.timeLimitParams.value!!
-                    ))
                 }
             }
         }

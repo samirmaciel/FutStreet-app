@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.shared.const.MATCH_FRIENDLY
 import com.samirmaciel.futstreet.shared.const.PREPLAY
-import com.samirmaciel.futstreet.shared.model.Match
+import com.samirmaciel.futstreet.shared.model.TournamentMatch
 import kotlin.math.roundToInt
 
 class MatchReadyViewModel : ViewModel(){
@@ -31,13 +31,13 @@ class MatchReadyViewModel : ViewModel(){
         return makeTimeString( minutes, seconds)
     }
 
-    fun saveMatch(match : Match){
-        when(match.winner){
+    fun saveMatch(tournamentMatch : TournamentMatch){
+        when(tournamentMatch.winner){
             0 -> println("EMPATE -----------")
 
-            1 -> println(match.nameTeamOne)
+            1 -> println(tournamentMatch.nameTeamOne)
 
-            2 -> println(match.nameTeamTwo)
+            2 -> println(tournamentMatch.nameTeamTwo)
         }
     }
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.shared.const.*
-import com.samirmaciel.futstreet.shared.model.Match
+import com.samirmaciel.futstreet.shared.model.TournamentMatch
 import kotlin.math.roundToInt
 
 class TournamentViewModel : ViewModel() {
@@ -96,7 +96,10 @@ class TournamentViewModel : ViewModel() {
     var timeLimitParams : MutableLiveData<Double> = MutableLiveData(0.0)
     var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
-    var matchType : MutableLiveData<Int> = MutableLiveData(MATCH_FRIENDLY)
+
+    // Match current on MATCHREADY
+    var currentMatchRunning : MutableLiveData<TournamentMatch> = MutableLiveData()
+
 
     fun getTimeStringFromDouble(time : Double) : String{
         val resultInt = time.roundToInt()
@@ -105,13 +108,13 @@ class TournamentViewModel : ViewModel() {
         return makeTimeString( minutes, seconds)
     }
 
-    fun saveMatch(match : Match){
-        when(match.winner){
+    fun saveMatch(tournamentMatch : TournamentMatch){
+        when(tournamentMatch.winner){
             0 -> println("EMPATE -----------")
 
-            1 -> println(match.nameTeamOne)
+            1 -> println(tournamentMatch.nameTeamOne)
 
-            2 -> println(match.nameTeamTwo)
+            2 -> println(tournamentMatch.nameTeamTwo)
         }
     }
 

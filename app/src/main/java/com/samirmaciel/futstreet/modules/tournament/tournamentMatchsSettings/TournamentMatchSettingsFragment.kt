@@ -73,15 +73,11 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
     private fun saveTempData() : Boolean{
         if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
             if(binding.inputNumberOfTimes.text.isNotEmpty()){
-                viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
-            }
-
-            if(binding.inputNumberOfTimes.text.toString().isNotEmpty()){
-                viewModel.roundsOfPlay.value = binding.inputNumberOfTimes.text.toString().toInt()
+                viewModel.roundsLimit.value = binding.inputNumberOfTimes.text.toString().toInt()
             }
 
             if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
-                viewModel.timeForRound.value = binding.inputMinutesOfRound.text.toString().toInt()
+                viewModel.timeLimit.value = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
             }
             return true
         }else{

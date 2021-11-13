@@ -10,11 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
-import com.samirmaciel.futstreet.databinding.FragmentMatchreadyBinding
 import com.samirmaciel.futstreet.databinding.FragmentTournamentMatchreadyBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 import com.samirmaciel.futstreet.shared.const.*
-import com.samirmaciel.futstreet.shared.model.Match
+import com.samirmaciel.futstreet.shared.model.TournamentMatch
 import com.samirmaciel.futstreet.shared.service.BackgroundService
 
 class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_matchready) {
@@ -39,6 +38,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
                     viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
                     viewModel.gameState.value = FINISH
+                    viewModel.currentMatchRunning.value!!.status.value = MATCH_ENDED
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
                     viewModel.gameState.value = PREPLAY
@@ -61,7 +61,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentMatchreadyBinding.bind(view)
 
-        getSettings()
+        getSettings(viewModel.currentMatchRunning.value!!)
     }
 
     override fun onResume() {
@@ -187,16 +187,6 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                     binding.buttonAddGoalTeamTwo.isEnabled = false
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.title_button_restart))
-                    viewModel.saveMatch(Match(winner = getWinnerMath(viewModel.scoreTeam1.value!!, viewModel.scoreTeam2.value!!),
-                        nameTeamOne = viewModel.nameTeam1MR.value!!,
-                        nameTeamTwo = viewModel.nameTeam2MR.value!!,
-                        scoreTeamOne = viewModel.scoreTeam1.value!!,
-                        scoreTeamTwo = viewModel.scoreTeam2.value!!,
-                        shirtTeamOne = viewModel.shirtTeam1MR.value!!,
-                        shirtTeamTwo = viewModel.shirtTeam1MR.value!!,
-                        rounds = viewModel.roundsLimit.value!!,
-                        time = viewModel.timeLimitParams.value!!
-                    ))
                 }
             }
         }
@@ -275,45 +265,52 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
     }
 
-    private fun getSettings() {
+    private fun getSettings(match : TournamentMatch) {
 
-        arguments?.getString("teamName1")?.let {
-            viewModel.nameTeam1MR.value = it
-        }
+        viewModel.nameTeam1MR.value = match.nameTeamOne
+        viewModel.nameTeam2MR.value = match.nameTeamTwo
+        viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
+        viewModel.shirtTeam1MR.value = match.shirtTeamOne
+        viewModel.shirtTeam2MR.value = match.shirtTeamTwo
 
-        arguments?.getString("teamName2")?.let {
-            viewModel.nameTeam2MR.value = it
-        }
 
-        arguments?.getDouble("RoundTime")?.let {
-            viewModel.timeLimit.value = it
-            viewModel.timeLimitParams.value = it
-            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(it)
-        }
-
-        arguments?.getInt("matchType")?.let {
-            viewModel.matchType.value = it
-        }
-
-        arguments?.getInt("CurrentRound")?.let {
-            viewModel.currentRound.value = it
-        }
-
-        arguments?.getInt("Rounds")?.let {
-            viewModel.roundsLimit.value = it
-        }
-
-        arguments?.getInt("shirtTeam1", R.drawable.shirt_select)?.let {
-            viewModel.shirtTeam1MR.value = it
-        }
-
-        arguments?.getInt("shirtTeam2", R.drawable.shirt_select)?.let{
-            viewModel.shirtTeam2MR.value = it
-        }
-
-        arguments?.getInt("Rounds", 1)?.let {
-            viewModel.roundsLimit.value = it
-        }
+//        arguments?.getString("teamName1")?.let {
+//            viewModel.nameTeam1MR.value = it
+//        }
+//
+//        arguments?.getString("teamName2")?.let {
+//            viewModel.nameTeam2MR.value = it
+//        }
+//
+//        arguments?.getDouble("RoundTime")?.let {
+//            viewModel.timeLimit.value = it
+//            viewModel.timeLimitParams.value = it
+//            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(it)
+//        }
+//
+//        arguments?.getInt("matchType")?.let {
+//            viewModel.matchType.value = it
+//        }
+//
+//        arguments?.getInt("CurrentRound")?.let {
+//            viewModel.currentRound.value = it
+//        }
+//
+//        arguments?.getInt("Rounds")?.let {
+//            viewModel.roundsLimit.value = it
+//        }
+//
+//        arguments?.getInt("shirtTeam1", R.drawable.shirt_select)?.let {
+//            viewModel.shirtTeam1MR.value = it
+//        }
+//
+//        arguments?.getInt("shirtTeam2", R.drawable.shirt_select)?.let{
+//            viewModel.shirtTeam2MR.value = it
+//        }
+//
+//        arguments?.getInt("Rounds", 1)?.let {
+//            viewModel.roundsLimit.value = it
+//        }
     }
 
     private fun onCancelGame() {
