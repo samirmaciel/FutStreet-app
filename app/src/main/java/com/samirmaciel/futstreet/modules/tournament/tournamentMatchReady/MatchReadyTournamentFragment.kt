@@ -38,7 +38,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
                     viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
                     viewModel.gameState.value = FINISH
-                    viewModel.currentMatchRunning.value!!.status.value = MATCH_ENDED
+                    //viewModel.currentMatchRunning.value!!.status.value = MATCH_ENDED
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
                     viewModel.gameState.value = PREPLAY

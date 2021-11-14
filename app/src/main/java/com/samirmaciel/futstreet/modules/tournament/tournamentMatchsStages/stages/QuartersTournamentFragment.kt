@@ -1,6 +1,7 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -24,10 +25,17 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentQuartersBinding.bind(view)
+        viewModel.addQuartersTeams()
+
     }
 
     override fun onResume() {
         super.onResume()
+
+
+        viewModel.matchQ1.observe(this){
+            Log.d("TOURNAMENTTEST", "${it.nameTeamOne} - ${it.nameTeamTwo} ")
+        }
 
         binding.matchCardView1.setOnClickListener{
             viewModel.matchStateQ1.value = MATCH_RUNNING
@@ -139,20 +147,6 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
         }
     }
 
-    private fun sendToMatchReady(team1 : String, shirt1 : Int, team2 : String, shirt2 : Int){
-        val arguments = Bundle().apply {
-            putInt("matchType", MATCH_TOURNAMENT)
-            putString("teamName1", team1)
-            putString("teamName2", team2)
-            putInt("shirtTeam1", shirt1)
-            putInt("shirtTeam2", shirt2)
-            putInt("Rounds", viewModel.roundsOfPlay.value!!)
-            putInt("CurrentRound", 1)
-            putDouble("RoundTime", viewModel.timeForRound.value!!.toDouble() * 60)
-        }
-
-        requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment, arguments)
-    }
 
     private fun configStateMatchElements(state : Int, backGroundMatch : LinearLayout, matchTitle : TextView,
                                          matchCard : CardView, teamName1 : String, teamShirt1 : Int, teamName2 : String, teamShirt2 : Int ){
@@ -181,7 +175,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                     scoreTeamTwo = 0,
                     shirtTeamOne = viewModel.shirtQ11.value!!,
                     shirtTeamTwo = viewModel.shirtQ21.value!!,
-                    status = viewModel.matchStateQ1
+                    status = MATCH_READY
                 )
                 backGroundMatch.setBackgroundResource(R.color.green)
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))

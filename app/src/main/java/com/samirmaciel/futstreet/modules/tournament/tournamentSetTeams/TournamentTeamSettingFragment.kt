@@ -6,7 +6,6 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentteamsettingBinding
@@ -27,7 +26,7 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        addValueStringResourcesDefaultTeamNames()
+        addDefaultTeams()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -171,7 +170,17 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
         }
     }
 
-    private fun addValueStringResourcesDefaultTeamNames(){
+    private fun addDefaultTeams(){
+        viewModel.team1.value = Team(name = resources.getText(R.string.input_hint_team1).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team2.value = Team(name = resources.getText(R.string.input_hint_team2).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team3.value = Team(name = resources.getText(R.string.input_hint_team3).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team4.value = Team(name = resources.getText(R.string.input_hint_team4).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team5.value = Team(name = resources.getText(R.string.input_hint_team5).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team6.value = Team(name = resources.getText(R.string.input_hint_team6).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team7.value = Team(name = resources.getText(R.string.input_hint_team7).toString(), shirt = R.drawable.shirt_select)
+        viewModel.team8.value = Team(name = resources.getText(R.string.input_hint_team8).toString(), shirt = R.drawable.shirt_select)
+
+
         viewModel.teamName1.value = resources.getText(R.string.input_hint_team1).toString()
         viewModel.teamName2.value = resources.getText(R.string.input_hint_team2).toString()
         viewModel.teamName3.value = resources.getText(R.string.input_hint_team3).toString()

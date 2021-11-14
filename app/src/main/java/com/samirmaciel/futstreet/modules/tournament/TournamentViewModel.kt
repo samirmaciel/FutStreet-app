@@ -1,14 +1,39 @@
 package com.samirmaciel.futstreet.modules.tournament
 
+import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.shared.const.*
+import com.samirmaciel.futstreet.shared.model.Team
 import com.samirmaciel.futstreet.shared.model.TournamentMatch
 import kotlin.math.roundToInt
 
 class TournamentViewModel : ViewModel() {
+
+    //Teams
+    var team1 : MutableLiveData<Team> = MutableLiveData()
+    var team2 : MutableLiveData<Team> = MutableLiveData()
+    var team3 : MutableLiveData<Team> = MutableLiveData()
+    var team4 : MutableLiveData<Team> = MutableLiveData()
+    var team5 : MutableLiveData<Team> = MutableLiveData()
+    var team6 : MutableLiveData<Team> = MutableLiveData()
+    var team7 : MutableLiveData<Team> = MutableLiveData()
+    var team8 : MutableLiveData<Team> = MutableLiveData()
+
+    //Quarters Matchs
+    var matchQ1 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchQ2 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchQ3 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchQ4 : MutableLiveData<TournamentMatch> = MutableLiveData()
+
+    //Semi matchs
+    var matchS1 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchS2 : MutableLiveData<TournamentMatch> = MutableLiveData()
+
+    //Final match
+    var matchF : MutableLiveData<TournamentMatch> = MutableLiveData()
 
     //Match QUARTERS state
     var matchStateQ1 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
@@ -46,18 +71,7 @@ class TournamentViewModel : ViewModel() {
     var teamName7 : MutableLiveData<String> = MutableLiveData()
     var teamName8 : MutableLiveData<String> = MutableLiveData()
 
-    //Quarters Matchs
-    var matchQ1 : MutableLiveData<TournamentMatch> = MutableLiveData()
-    var matchQ2 : MutableLiveData<TournamentMatch> = MutableLiveData()
-    var matchQ3 : MutableLiveData<TournamentMatch> = MutableLiveData()
-    var matchQ4 : MutableLiveData<TournamentMatch> = MutableLiveData()
 
-    //Semi matchs
-    var matchS1 : MutableLiveData<TournamentMatch> = MutableLiveData()
-    var matchS2 : MutableLiveData<TournamentMatch> = MutableLiveData()
-
-    //Final match
-    var matchF : MutableLiveData<TournamentMatch> = MutableLiveData()
 
     //List with imageview and imageresourceID
     var mapShirtImageView : MutableMap<String, Int> = mutableMapOf()
@@ -101,6 +115,51 @@ class TournamentViewModel : ViewModel() {
 
     // Match current on MATCHREADY
     var currentMatchRunning : MutableLiveData<TournamentMatch> = MutableLiveData()
+
+    fun addQuartersTeams(){
+
+        val teams = getTeams()
+        teams.shuffle()
+        val matchs = getQuartersMatchs()
+        var t1pointer = 0
+        var t2pointer = 1
+
+        for(i in matchs.indices){
+
+            matchs[i].value = TournamentMatch(
+                winner = 0,
+                nameTeamOne = teams[t1pointer].name,
+                nameTeamTwo = teams[t2pointer].name,
+                shirtTeamOne = teams[t1pointer].shirt,
+                shirtTeamTwo = teams[t2pointer].shirt,
+                status = MATCH_READY
+            )
+            t1pointer = t1pointer + 2
+            t2pointer = t2pointer + 2
+        }
+    }
+
+    fun getTeams() : MutableList<Team>{
+        return mutableListOf(
+            team1.value!!,
+            team2.value!!,
+            team3.value!!,
+            team4.value!!,
+            team5.value!!,
+            team6.value!!,
+            team7.value!!,
+            team8.value!!,
+        )
+    }
+
+    fun getQuartersMatchs() : List<MutableLiveData<TournamentMatch>>{
+        return listOf(
+            matchQ1,
+            matchQ2,
+            matchQ3,
+            matchQ4
+        )
+    }
 
 
     fun getTimeStringFromDouble(time : Double) : String{

@@ -8,9 +8,9 @@ data class TournamentMatch(
     var winner : Int,
     val nameTeamOne : String,
     val nameTeamTwo : String,
-    var scoreTeamOne : Int,
-    var scoreTeamTwo : Int,
+    var scoreTeamOne : Int = 0,
+    var scoreTeamTwo : Int = 0,
     val shirtTeamOne : Int,
     val shirtTeamTwo : Int,
-    val status : MutableLiveData<Int>
+    val status : Int
 )
