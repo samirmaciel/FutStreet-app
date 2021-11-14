@@ -1,5 +1,6 @@
 package com.samirmaciel.futstreet.modules.tournament
 
+import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samirmaciel.futstreet.R
@@ -45,6 +46,22 @@ class TournamentViewModel : ViewModel() {
     var teamName7 : MutableLiveData<String> = MutableLiveData()
     var teamName8 : MutableLiveData<String> = MutableLiveData()
 
+    //Quarters Matchs
+    var matchQ1 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchQ2 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchQ3 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchQ4 : MutableLiveData<TournamentMatch> = MutableLiveData()
+
+    //Semi matchs
+    var matchS1 : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var matchS2 : MutableLiveData<TournamentMatch> = MutableLiveData()
+
+    //Final match
+    var matchF : MutableLiveData<TournamentMatch> = MutableLiveData()
+
+    //List with imageview and imageresourceID
+    var mapShirtImageView : MutableMap<String, Int> = mutableMapOf()
+
     //Quarters Teams
     var nameQ11 : MutableLiveData<String> = MutableLiveData()
     var shirtQ11 : MutableLiveData<Int> = MutableLiveData()
@@ -66,22 +83,7 @@ class TournamentViewModel : ViewModel() {
     var nameQ84 : MutableLiveData<String> = MutableLiveData()
     var shirtQ84 : MutableLiveData<Int> = MutableLiveData()
 
-    //Semi Teams
-    var nameS11 : MutableLiveData<String> = MutableLiveData()
-    var shirtS11 : MutableLiveData<Int> = MutableLiveData()
-    var nameS21 : MutableLiveData<String> = MutableLiveData()
-    var shirtS21 : MutableLiveData<Int> = MutableLiveData()
 
-    var nameS32 : MutableLiveData<String> = MutableLiveData()
-    var shirtS32 : MutableLiveData<Int> = MutableLiveData()
-    var nameS42 : MutableLiveData<String> = MutableLiveData()
-    var shirtS42 : MutableLiveData<Int> = MutableLiveData()
-
-    //Final Team
-    var nameF11 : MutableLiveData<String> = MutableLiveData()
-    var shirtF11 : MutableLiveData<Int> = MutableLiveData()
-    var nameF21 : MutableLiveData<String> = MutableLiveData()
-    var shirtF21 : MutableLiveData<Int> = MutableLiveData()
 
     // Match Ready
     var nameTeam1MR : MutableLiveData<String> = MutableLiveData("TeamOne")

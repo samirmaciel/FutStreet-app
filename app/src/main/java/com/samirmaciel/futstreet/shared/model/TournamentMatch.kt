@@ -8,8 +8,8 @@ data class TournamentMatch(
     var winner : Int,
     val nameTeamOne : String,
     val nameTeamTwo : String,
-    val scoreTeamOne : Int,
-    val scoreTeamTwo : Int,
+    var scoreTeamOne : Int,
+    var scoreTeamTwo : Int,
     val shirtTeamOne : Int,
     val shirtTeamTwo : Int,
     val status : MutableLiveData<Int>

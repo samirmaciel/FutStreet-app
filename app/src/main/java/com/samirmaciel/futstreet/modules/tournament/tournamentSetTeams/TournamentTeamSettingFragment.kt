@@ -50,12 +50,6 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
             saveInputTeamsNamesInViewModel()
 
             val listSortedTeams = geSortedTeams()
-//            val allTeamsBundle = Bundle()
-//
-//            for (i in 0..7){
-//                allTeamsBundle.putInt("shirtTeam${i}", listSortedTeams[i].shirt)
-//                allTeamsBundle.putString("teamName${i}", listSortedTeams[i].name)
-//            }
 
             for (i in 0..7){
                 viewModel.getTeamNameMap()[i]!!.value = listSortedTeams[i].name
@@ -66,7 +60,15 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
             findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment)
         }
 
-        binding.selectShirtTeam1Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam1) }
+        binding.selectShirtTeam1Tournament.setOnClickListener{ view ->
+            //callAlertShirtSelect(viewModel.shirtTeam1)
+
+            getInputShirtImage(binding.selectShirtTeam1Tournament, "shirt1")
+
+        }
+
+
+
         binding.selectShirtTeam2Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam2) }
         binding.selectShirtTeam3Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam3) }
         binding.selectShirtTeam4Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam4) }
@@ -110,6 +112,18 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
                 scaleXBy(-0.5f)
             }
         }.start()
+    }
+
+    private fun getInputShirtImage(imageView: ImageView, shirt : String){
+        val shirtSelection = ShirtSelectionDialog {
+            for ((k, v) in viewModel.getListOfShirts()) {
+                if (it == k) {
+                    viewModel.mapShirtImageView[shirt] = v
+                    animateShirt(imageView, v)
+                }
+            }
+        }
+        shirtSelection.show(childFragmentManager, SHIRT_SELECTION_FRAGMENT)
     }
 
     private fun callAlertShirtSelect(liveData : MutableLiveData<Int>){
