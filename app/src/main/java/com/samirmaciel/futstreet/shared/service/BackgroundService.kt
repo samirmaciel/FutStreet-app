@@ -72,7 +72,6 @@ class BackgroundService : Service(){
         scoreTeam1 = intent.getIntExtra(SCORE_T1, 0)
         scoreTeam2 = intent.getIntExtra(SCORE_T2, 0)
         timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
-        timeLimit = intent.getDoubleExtra(TIME_LIMIT, 0.0)
         roundLimit = intent.getIntExtra(ROUND_LIMIT, 1)
         currentRound = intent.getIntExtra(CURRENT_ROUND, 1)
         nameTeamOne = intent.getStringExtra(NAME_TEAMONE).toString()

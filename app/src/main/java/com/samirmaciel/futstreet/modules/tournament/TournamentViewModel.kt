@@ -12,6 +12,8 @@ import kotlin.math.roundToInt
 
 class TournamentViewModel : ViewModel() {
 
+    var isRunningMatch = false
+
     //Teams
     var team1 : MutableLiveData<Team> = MutableLiveData()
     var team2 : MutableLiveData<Team> = MutableLiveData()
@@ -98,6 +100,8 @@ class TournamentViewModel : ViewModel() {
     var shirtQ84 : MutableLiveData<Int> = MutableLiveData()
 
 
+    var tournamentTimeLimit : Double = 0.0
+
 
     // Match Ready
     var nameTeam1MR : MutableLiveData<String> = MutableLiveData("TeamOne")
@@ -108,7 +112,7 @@ class TournamentViewModel : ViewModel() {
     var scoreTeam2 : MutableLiveData<Int> = MutableLiveData(0)
     var currentRound : MutableLiveData<Int> = MutableLiveData(1)
     var roundsLimit  : MutableLiveData<Int> = MutableLiveData(1)
-    var timeLimit : MutableLiveData<Double> = MutableLiveData(0.0)
+    var timeLimit : MutableLiveData<Double> = MutableLiveData(tournamentTimeLimit)
     var timeLimitParams : MutableLiveData<Double> = MutableLiveData(0.0)
     var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
@@ -116,11 +120,12 @@ class TournamentViewModel : ViewModel() {
     // Match current on MATCHREADY
     var currentMatchRunning : MutableLiveData<TournamentMatch> = MutableLiveData()
 
-    fun addQuartersTeams(){
+    fun addTeamsToMatchsQuarters(){
 
         val teams = getTeams()
         teams.shuffle()
         val matchs = getQuartersMatchs()
+        val matchStatus = getQuartersMatchsStatus()
         var t1pointer = 0
         var t2pointer = 1
 
@@ -132,7 +137,7 @@ class TournamentViewModel : ViewModel() {
                 nameTeamTwo = teams[t2pointer].name,
                 shirtTeamOne = teams[t1pointer].shirt,
                 shirtTeamTwo = teams[t2pointer].shirt,
-                status = MATCH_READY
+                status = matchStatus[i]
             )
             t1pointer = t1pointer + 2
             t2pointer = t2pointer + 2
@@ -149,6 +154,15 @@ class TournamentViewModel : ViewModel() {
             team6.value!!,
             team7.value!!,
             team8.value!!,
+        )
+    }
+
+    fun getQuartersMatchsStatus() : List<MutableLiveData<Int>>{
+        return listOf(
+            matchStateQ1,
+            matchStateQ2,
+            matchStateQ3,
+            matchStateQ4
         )
     }
 

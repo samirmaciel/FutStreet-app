@@ -49,20 +49,6 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
         }
     }
 
-    private fun setBundleWithArguments() : Bundle {
-        val arguments = Bundle().apply {
-            putInt("matchType", MATCH_TOURNAMENT)
-            putString("teamName1", viewModel.teamName1.value!!)
-            putString("teamName2", viewModel.teamName2.value!!)
-            putInt("shirtTeam1", viewModel.shirtTeam1.value!!)
-            putInt("shirtTeam2", viewModel.shirtTeam2.value!!)
-            putInt("Rounds", viewModel.roundsOfPlay.value!!)
-            putInt("CurrentRound", 1)
-            putDouble("RoundTime", viewModel.timeForRound.value!!.toDouble() * 60)
-        }
-
-        return arguments
-    }
 
     private fun cancelTournament(){
         cleanViewModel()
@@ -77,6 +63,7 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
             }
 
             if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
+                viewModel.tournamentTimeLimit = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
                 viewModel.timeLimit.value = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
             }
             return true

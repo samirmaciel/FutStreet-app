@@ -1,13 +1,14 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
@@ -25,7 +26,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentQuartersBinding.bind(view)
-        viewModel.addQuartersTeams()
+        viewModel.addTeamsToMatchsQuarters()
 
     }
 
@@ -34,122 +35,81 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
 
 
         viewModel.matchQ1.observe(this){
-            Log.d("TOURNAMENTTEST", "${it.nameTeamOne} - ${it.nameTeamTwo} ")
-        }
-
-        binding.matchCardView1.setOnClickListener{
-            viewModel.matchStateQ1.value = MATCH_RUNNING
-            viewModel.matchStateQ2.value = MATCH_WAITING
-            viewModel.matchStateQ3.value = MATCH_WAITING
-            viewModel.matchStateQ4.value = MATCH_WAITING
-        }
-
-        binding.matchCardView2.setOnClickListener{
-            viewModel.matchStateQ1.value = MATCH_WAITING
-            viewModel.matchStateQ2.value = MATCH_RUNNING
-            viewModel.matchStateQ3.value = MATCH_WAITING
-            viewModel.matchStateQ4.value = MATCH_WAITING
-        }
-
-        binding.matchCardView3.setOnClickListener{
-            viewModel.matchStateQ1.value = MATCH_WAITING
-            viewModel.matchStateQ2.value = MATCH_WAITING
-            viewModel.matchStateQ3.value = MATCH_RUNNING
-            viewModel.matchStateQ4.value = MATCH_WAITING
-        }
-
-        binding.matchCardView4.setOnClickListener{
-            viewModel.matchStateQ1.value = MATCH_WAITING
-            viewModel.matchStateQ2.value = MATCH_WAITING
-            viewModel.matchStateQ3.value = MATCH_WAITING
-            viewModel.matchStateQ4.value = MATCH_RUNNING
+            updateMatch(binding.stageTeamName11, binding.stageTeamName21, binding.score11, binding.score21, binding.stageTeamShirt11, binding.stageTeamShirt21, it)
         }
 
         viewModel.matchStateQ1.observe(this){
-            configStateMatchElements(it, binding.backgroundStatusMatch1, binding.titleStatusMatch1, binding.matchCardView1, viewModel.nameQ11.value!!,
-            viewModel.shirtQ11.value!!, viewModel.nameQ21.value!!, viewModel.shirtQ21.value!!)
+            updateStatusMatch(0, it, binding.backgroundStatusMatch1, binding.titleStatusMatch1, binding.matchCardView1, viewModel.matchQ1)
+        }
+
+        viewModel.matchQ2.observe(this){
+            updateMatch(binding.stageTeamName32, binding.stageTeamName42, binding.score32, binding.score42, binding.stageTeamShirt32, binding.stageTeamShirt42, it)
         }
 
         viewModel.matchStateQ2.observe(this){
-            configStateMatchElements(it, binding.backgroundStatusMatch2, binding.titleStatusMatch2, binding.matchCardView2,viewModel.nameQ32.value!!,
-                viewModel.shirtQ32.value!!, viewModel.nameQ42.value!!, viewModel.shirtQ42.value!!)
+            updateStatusMatch(1, it, binding.backgroundStatusMatch2, binding.titleStatusMatch2, binding.matchCardView2, viewModel.matchQ2)
+        }
+
+        viewModel.matchQ3.observe(this){
+            updateMatch(binding.stageTeamName53, binding.stageTeamName63, binding.score53, binding.score63, binding.stageTeamShirt53, binding.stageTeamShirt63, it)
         }
 
         viewModel.matchStateQ3.observe(this){
-            configStateMatchElements(it, binding.backgroundStatusMatch3, binding.titleStatusMatch3, binding.matchCardView3, viewModel.nameQ53.value!!,
-                viewModel.shirtQ53.value!!, viewModel.nameQ63.value!!, viewModel.shirtQ63.value!!)
+            updateStatusMatch(2, it, binding.backgroundStatusMatch3, binding.titleStatusMatch3, binding.matchCardView3, viewModel.matchQ3)
+        }
+
+        viewModel.matchQ4.observe(this){
+            updateMatch(binding.stageTeamName74, binding.stageTeamName84, binding.score74, binding.score84, binding.stageTeamShirt74, binding.stageTeamShirt84, it)
         }
 
         viewModel.matchStateQ4.observe(this){
-            configStateMatchElements(it, binding.backgroundStatusMatch4, binding.titleStatusMatch4, binding.matchCardView4, viewModel.nameQ74.value!!,
-                viewModel.shirtQ74.value!!, viewModel.nameQ84.value!!, viewModel.shirtQ84.value!!)
+            updateStatusMatch(3 ,it , binding.backgroundStatusMatch4, binding.titleStatusMatch4, binding.matchCardView4, viewModel.matchQ4)
         }
 
-        viewModel.nameQ11.observe(this){
-            binding.stageTeamName11.setText(it)
-        }
-        viewModel.shirtQ11.observe(this){
-            binding.stageTeamShirt11.setImageResource(it)
+
+
+        binding.matchCardView1.setOnClickListener{
+            viewModel.matchStateQ1.value = MATCH_RUNNING
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ2)
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ3)
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ4)
         }
 
-        viewModel.nameQ21.observe(this){
-            binding.stageTeamName21.setText(it)
-        }
-        viewModel.shirtQ21.observe(this){
-            binding.stageTeamShirt21.setImageResource(it)
-        }
-
-        viewModel.nameQ32.observe(this){
-            binding.stageTeamName32.setText(it)
-        }
-        viewModel.shirtQ32.observe(this){
-            binding.stageTeamShirt32.setImageResource(it)
+        binding.matchCardView2.setOnClickListener{
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ1)
+            viewModel.matchStateQ2.value = MATCH_RUNNING
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ3)
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ4)
         }
 
-        viewModel.nameQ42.observe(this){
-            binding.stageTeamName42.setText(it)
+        binding.matchCardView3.setOnClickListener{
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ1)
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ2)
+            viewModel.matchStateQ3.value = MATCH_RUNNING
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ4)
         }
 
-        viewModel.shirtQ42.observe(this){
-            binding.stageTeamShirt42.setImageResource(it)
+        binding.matchCardView4.setOnClickListener{
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ1)
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ2)
+            checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ3)
+            viewModel.matchStateQ4.value = MATCH_RUNNING
         }
 
-        viewModel.nameQ53.observe(this){
-            binding.stageTeamName53.setText(it)
-        }
 
-        viewModel.shirtQ53.observe(this){
-            binding.stageTeamShirt53.setImageResource(it)
-        }
-
-        viewModel.nameQ63.observe(this){
-            binding.stageTeamName63.setText(it)
-        }
-
-        viewModel.shirtQ63.observe(this){
-            binding.stageTeamShirt63.setImageResource(it)
-        }
-
-        viewModel.nameQ74.observe(this){
-            binding.stageTeamName74.setText(it)
-        }
-
-        viewModel.shirtQ74.observe(this){
-            binding.stageTeamShirt74.setImageResource(it)
-        }
-
-        viewModel.nameQ84.observe(this){
-            binding.stageTeamName84.setText(it)
-        }
-
-        viewModel.shirtQ84.observe(this){
-            binding.stageTeamShirt84.setImageResource(it)
-        }
     }
 
+    private fun updateMatch(nameT1 : TextView, nameT2 : TextView, scoreT1 : TextView, scoreT2 : TextView, shirtT1 : ImageView, shirtT2 : ImageView, match : TournamentMatch){
+        nameT1.setText(match.nameTeamOne)
+        nameT2.setText(match.nameTeamTwo)
+        shirtT1.setImageResource(match.shirtTeamOne)
+        shirtT2.setImageResource(match.shirtTeamTwo)
+        scoreT1.setText(match.scoreTeamOne.toString())
+        scoreT2.setText(match.scoreTeamTwo.toString())
+    }
 
-    private fun configStateMatchElements(state : Int, backGroundMatch : LinearLayout, matchTitle : TextView,
-                                         matchCard : CardView, teamName1 : String, teamShirt1 : Int, teamName2 : String, teamShirt2 : Int ){
+    private fun updateStatusMatch(matchID : Int, state : Int, backGroundMatch : LinearLayout, matchTitle : TextView,
+                                  matchCard : CardView, match : MutableLiveData<TournamentMatch>){
         when(state){
             MATCH_WAITING -> {
                 backGroundMatch.setBackgroundResource(R.color.yellow)
@@ -160,54 +120,73 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
 
             MATCH_READY -> {
                 backGroundMatch.setBackgroundResource(R.color.green)
+                matchTitle.setTextColor(resources.getColor(R.color.white))
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_ready))
                 matchCard.isClickable = true
             }
 
             MATCH_RUNNING -> {
-                //sendToMatchReady(teamName1, teamShirt1, teamName2, teamShirt2)
-                viewModel.currentMatchRunning.value = TournamentMatch(
-                    id = 1,
-                    winner = 1,
-                    nameTeamOne = viewModel.nameQ11.value!!,
-                    nameTeamTwo = viewModel.nameQ21.value!!,
-                    scoreTeamOne = 0,
-                    scoreTeamTwo = 0,
-                    shirtTeamOne = viewModel.shirtQ11.value!!,
-                    shirtTeamTwo = viewModel.shirtQ21.value!!,
-                    status = MATCH_READY
-                )
+                viewModel.currentMatchRunning = match
                 backGroundMatch.setBackgroundResource(R.color.green)
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
                 matchCard.isClickable = false
-                requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
+                if(!viewModel.isRunningMatch){
+                    requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
+                    viewModel.isRunningMatch = true
+                    viewModel.timeLimit.value = viewModel.tournamentTimeLimit
+                }
+
             }
 
             MATCH_ENDED ->{
                 backGroundMatch.setBackgroundResource(R.color.red)
                 matchTitle.setText(R.string.title_state_tournament_match_ended)
                 matchCard.isClickable = false
+                updateStatusMatchs(matchID)
             }
         }
     }
 
-    private fun setStateOfMatch(matchSelect : Int){
-        when(matchSelect){
+    private fun updateStatusMatchs(match : Int){
+
+        when(match){
+
+            0 -> {
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ2)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ3)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ4)
+            }
+
             1 -> {
-                viewModel.matchStateQ1.value = MATCH_RUNNING
-                viewModel.matchStateQ2.value = MATCH_WAITING
-                viewModel.matchStateQ3.value = MATCH_WAITING
-                viewModel.matchStateQ4.value = MATCH_WAITING
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ1)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ3)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ4)
             }
 
             2 -> {
-                viewModel.matchStateQ1.value = MATCH_WAITING
-                viewModel.matchStateQ2.value = MATCH_RUNNING
-                viewModel.matchStateQ3.value = MATCH_WAITING
-                viewModel.matchStateQ4.value = MATCH_WAITING
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ1)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ2)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ4)
+            }
+
+            3 -> {
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ1)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ2)
+                checkStatusMatchAndChangeToReady(viewModel.matchStateQ3)
             }
         }
+    }
 
+    private fun checkStatusMatchAndChangeToReady(match : MutableLiveData<Int>){
+        if(match.value!! == MATCH_WAITING){
+            match.value = MATCH_READY
+        }
+    }
+
+    private fun checkStatusMatchAndChangeToWaiting(match : MutableLiveData<Int>){
+        if(match.value!! == MATCH_READY){
+            match.value = MATCH_WAITING
+        }
     }
 
     override fun onDestroy() {

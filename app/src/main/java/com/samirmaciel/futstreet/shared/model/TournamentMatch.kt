@@ -12,5 +12,5 @@ data class TournamentMatch(
     var scoreTeamTwo : Int = 0,
     val shirtTeamOne : Int,
     val shirtTeamTwo : Int,
-    val status : Int
+    var status : MutableLiveData<Int>
 )
