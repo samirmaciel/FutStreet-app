@@ -44,11 +44,11 @@ class TournamentViewModel : ViewModel() {
     var matchStateQ4 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
 
     //Match SEMI state
-    var matchStateS1 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
-    var matchStateS2 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+    var matchStateS1 : MutableLiveData<Int> = MutableLiveData(MATCH_WAITING)
+    var matchStateS2 : MutableLiveData<Int> = MutableLiveData(MATCH_WAITING)
 
     //Match FINAL state
-    var matchStateF1 : MutableLiveData<Int> = MutableLiveData(MATCH_READY)
+    var matchStateF1 : MutableLiveData<Int> = MutableLiveData(MATCH_WAITING)
 
     var roundsOfPlay : MutableLiveData<Int> = MutableLiveData(1)
     var timeForRound : MutableLiveData<Int> = MutableLiveData(0)
@@ -118,7 +118,7 @@ class TournamentViewModel : ViewModel() {
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
 
     // Match current on MATCHREADY
-    var currentMatchRunning : MutableLiveData<TournamentMatch> = MutableLiveData()
+    var currentMatchRunning : MutableLiveData<MutableLiveData<TournamentMatch>> = MutableLiveData()
 
     fun addTeamsToMatchsQuarters(){
 

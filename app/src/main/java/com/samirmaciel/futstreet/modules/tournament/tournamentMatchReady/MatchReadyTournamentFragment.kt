@@ -24,25 +24,21 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     lateinit var serviceIntent : Intent
     private val viewModel : TournamentViewModel by activityViewModels()
 
-
-
     companion object {
         const val SCORE_OBSERVE = "SCORE_OBSERVE"
     }
 
-
     private val updateTime : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
-            val match = viewModel.currentMatchRunning.value!!
+            val match = viewModel.currentMatchRunning.value!!.value!!
             viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
-            viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimit.value!!)
             match.scoreTeamOne = intent.getIntExtra(BackgroundService.SCORE_T1, match.scoreTeamOne)
             match.scoreTeamTwo = intent.getIntExtra(BackgroundService.SCORE_T2, match.scoreTeamTwo)
-            viewModel.currentMatchRunning.value = match
+            viewModel.currentMatchRunning.value!!.value = match
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
-                    match.status.value = MATCH_ENDED
                     matchEndClean()
+                    match.status.value = MATCH_ENDED
                     findNavController().navigate(R.id.action_matchReadyTournamentFragment_to_waitingForMatchFragment)
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
@@ -65,8 +61,8 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentMatchreadyBinding.bind(view)
-
-        getSettings(viewModel.currentMatchRunning.value!!)
+        getSettings(viewModel.currentMatchRunning.value!!.value!!)
+        viewModel.isRunningMatch = true
     }
 
     override fun onResume() {
@@ -145,8 +141,9 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             binding.imageShirtTeamTwo.setImageResource(it)
         }
 
-        viewModel.textTimeView.observe(this){
-            binding.textCurrentTime.setText(it)
+        //TESTE
+        viewModel.timeLimit.observe(this){
+            binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(it))
         }
 
         viewModel.currentRound.observe(this){
@@ -195,6 +192,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                 }
             }
         }
+
     }
 
     private fun getWinnerMath(teamOne : Int, teamTwo : Int) : Int {
@@ -225,7 +223,6 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     }
 
     private fun startBackgroundService() {
-        Log.d("CHECKTIME", "matchEndClean: ${viewModel.timeLimit.value}")
         serviceIntent.putExtra(BackgroundService.SCORE_T1, viewModel.scoreTeam1.value)
         serviceIntent.putExtra(BackgroundService.SCORE_T2, viewModel.scoreTeam2.value)
         serviceIntent.putExtra(BackgroundService.NAME_TEAMONE, viewModel.nameTeam1MR.value)
@@ -275,7 +272,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
         viewModel.nameTeam1MR.value = match.nameTeamOne
         viewModel.nameTeam2MR.value = match.nameTeamTwo
-        viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
+        viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.tournamentTimeLimit)
         viewModel.shirtTeam1MR.value = match.shirtTeamOne
         viewModel.shirtTeam2MR.value = match.shirtTeamTwo
     }
@@ -292,7 +289,9 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         viewModel.gameState.value = PREPLAY
         viewModel.scoreTeam1.value = 0
         viewModel.scoreTeam2.value = 0
+        viewModel.timeLimit.value = viewModel.tournamentTimeLimit
         viewModel.isRunningMatch = false
+
     }
 
     private fun cleanViewModelData(){

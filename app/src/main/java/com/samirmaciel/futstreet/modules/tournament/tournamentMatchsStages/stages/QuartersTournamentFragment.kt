@@ -1,6 +1,7 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -23,19 +24,25 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
 
     private val viewModel : TournamentViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.addTeamsToMatchsQuarters()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentQuartersBinding.bind(view)
-        viewModel.addTeamsToMatchsQuarters()
 
     }
 
     override fun onResume() {
         super.onResume()
 
+        Log.d("RUNNINGMATCH", "onResumeFIRST: " + viewModel.isRunningMatch)
 
         viewModel.matchQ1.observe(this){
             updateMatch(binding.stageTeamName11, binding.stageTeamName21, binding.score11, binding.score21, binding.stageTeamShirt11, binding.stageTeamShirt21, it)
+            Log.d("QUARTERSFRAGMENT", "QUARTERS " + viewModel.matchStateQ1.value!!)
         }
 
         viewModel.matchStateQ1.observe(this){
@@ -66,8 +73,6 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
             updateStatusMatch(3 ,it , binding.backgroundStatusMatch4, binding.titleStatusMatch4, binding.matchCardView4, viewModel.matchQ4)
         }
 
-
-
         binding.matchCardView1.setOnClickListener{
             viewModel.matchStateQ1.value = MATCH_RUNNING
             checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ2)
@@ -95,8 +100,6 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
             checkStatusMatchAndChangeToWaiting(viewModel.matchStateQ3)
             viewModel.matchStateQ4.value = MATCH_RUNNING
         }
-
-
     }
 
     private fun updateMatch(nameT1 : TextView, nameT2 : TextView, scoreT1 : TextView, scoreT2 : TextView, shirtT1 : ImageView, shirtT2 : ImageView, match : TournamentMatch){
@@ -126,13 +129,12 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
             }
 
             MATCH_RUNNING -> {
-                viewModel.currentMatchRunning = match
+                viewModel.currentMatchRunning.value = match
                 backGroundMatch.setBackgroundResource(R.color.green)
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
                 matchCard.isClickable = false
                 if(!viewModel.isRunningMatch){
                     requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
-                    viewModel.isRunningMatch = true
                     viewModel.timeLimit.value = viewModel.tournamentTimeLimit
                 }
 
@@ -142,12 +144,15 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 backGroundMatch.setBackgroundResource(R.color.red)
                 matchTitle.setText(R.string.title_state_tournament_match_ended)
                 matchCard.isClickable = false
-                updateStatusMatchs(matchID)
+                Log.d("RUNNINGMATCH", "updateStatusMatch: " + viewModel.isRunningMatch)
+                if(!viewModel.isRunningMatch){
+                    updateStatusOthersToReady(matchID)
+                }
             }
         }
     }
 
-    private fun updateStatusMatchs(match : Int){
+    private fun updateStatusOthersToReady(match : Int){
 
         when(match){
 
