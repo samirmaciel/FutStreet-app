@@ -41,12 +41,13 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                     match.status.value = MATCH_ENDED
                     findNavController().navigate(R.id.action_matchReadyTournamentFragment_to_waitingForMatchFragment)
                 }else{
-                    viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.timeLimitParams.value!!)
+                    viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.tournamentTimeLimit)
+                    viewModel.timeLimit.value = viewModel.tournamentTimeLimit
                     viewModel.gameState.value = PREPLAY
+                    viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
+                    requireActivity().stopService(serviceIntent)
                 }
-                viewModel.timeLimit.value = viewModel.timeLimitParams.value
-                viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
-                requireActivity().stopService(serviceIntent)
+
             }
         }
     }
