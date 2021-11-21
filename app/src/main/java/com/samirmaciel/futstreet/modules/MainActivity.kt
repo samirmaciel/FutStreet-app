@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
+                Log.d("CHANGELISTENER", "onDestinationChanged: " + destination.label)
                 binding.appBarTitle.setText(destination.label)
             }
         })

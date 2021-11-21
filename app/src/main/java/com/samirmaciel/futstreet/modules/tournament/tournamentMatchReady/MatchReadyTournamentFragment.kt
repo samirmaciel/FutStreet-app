@@ -37,9 +37,9 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             viewModel.currentMatchRunning.value!!.value = match
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
+                    Log.d("ENDMATCH", "onReceive: ")
                     matchEndClean()
                     match.status.value = MATCH_ENDED
-                    findNavController().navigate(R.id.action_matchReadyTournamentFragment_to_waitingForMatchFragment)
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.tournamentTimeLimit)
                     viewModel.timeLimit.value = viewModel.tournamentTimeLimit
@@ -142,7 +142,6 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             binding.imageShirtTeamTwo.setImageResource(it)
         }
 
-        //TESTE
         viewModel.timeLimit.observe(this){
             binding.textCurrentTime.setText(viewModel.getTimeStringFromDouble(it))
         }
@@ -292,7 +291,8 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         viewModel.scoreTeam2.value = 0
         viewModel.timeLimit.value = viewModel.tournamentTimeLimit
         viewModel.isRunningMatch = false
-
+        requireActivity().stopService(serviceIntent)
+        findNavController().navigate(R.id.action_matchReadyTournamentFragment_to_waitingForMatchFragment)
     }
 
     private fun cleanViewModelData(){

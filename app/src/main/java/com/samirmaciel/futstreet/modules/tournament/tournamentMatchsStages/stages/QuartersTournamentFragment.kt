@@ -1,5 +1,6 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
@@ -38,7 +41,6 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
     override fun onResume() {
         super.onResume()
 
-        Log.d("RUNNINGMATCH", "onResumeFIRST: " + viewModel.isRunningMatch)
 
         viewModel.matchQ1.observe(this){
             updateMatch(binding.stageTeamName11, binding.stageTeamName21, binding.score11, binding.score21, binding.stageTeamShirt11, binding.stageTeamShirt21, it)
@@ -144,7 +146,6 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 backGroundMatch.setBackgroundResource(R.color.red)
                 matchTitle.setText(R.string.title_state_tournament_match_ended)
                 matchCard.isClickable = false
-                Log.d("RUNNINGMATCH", "updateStatusMatch: " + viewModel.isRunningMatch)
                 if(!viewModel.isRunningMatch){
                     updateStatusOthersToReady(matchID)
                 }
