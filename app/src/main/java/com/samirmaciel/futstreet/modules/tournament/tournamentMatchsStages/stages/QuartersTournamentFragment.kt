@@ -136,7 +136,9 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
                 matchCard.isClickable = false
                 if(!viewModel.isRunningMatch){
-                    requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
+                    if(requireActivity().findNavController(R.id.topFragment).currentDestination?.id == R.id.waitingForMatchFragment){
+                        requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
+                    }
                     viewModel.timeLimit.value = viewModel.tournamentTimeLimit
                 }
 
