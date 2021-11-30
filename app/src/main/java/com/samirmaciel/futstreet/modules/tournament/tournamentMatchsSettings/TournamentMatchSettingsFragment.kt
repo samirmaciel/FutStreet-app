@@ -12,7 +12,6 @@ import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentmatchsettingsBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 import com.samirmaciel.futstreet.shared.const.MATCH_READY
-import com.samirmaciel.futstreet.shared.const.MATCH_TOURNAMENT
 
 class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmatchsettings) {
 
@@ -21,7 +20,6 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
 
     private val viewModel : TournamentViewModel by activityViewModels()
 
-    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentmatchsettingsBinding.bind(view)
@@ -45,14 +43,12 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
                 }
                 setNegativeButton(resources.getText(R.string.no), null)
             }.create().show()
-
         }
     }
 
-
     private fun cancelTournament(){
-        cleanViewModel()
-        requireActivity().findNavController(R.id.bottomFragment).navigate(R.id.action_tournamentFragment_to_lastGamesFragment)
+        setDefaultValuesToMatchStates()
+        requireActivity().findNavController(R.id.bottomFragment).navigateUp()
         findNavController().navigate(R.id.action_tournamentMatchSettingsFragment_to_homeFragment)
     }
 
@@ -61,7 +57,6 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
             if(binding.inputNumberOfTimes.text.isNotEmpty()){
                 viewModel.roundsLimit.value = binding.inputNumberOfTimes.text.toString().toInt()
             }
-
             if (binding.inputMinutesOfRound.text.toString().isNotEmpty()){
                 viewModel.tournamentTimeLimit = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
                 viewModel.timeLimit.value = binding.inputMinutesOfRound.text.toString().toInt().toDouble() * 60
@@ -73,18 +68,15 @@ class TournamentMatchSettingsFragment : Fragment(R.layout.fragment_tournamentmat
         }
     }
 
-    private fun cleanViewModel(){
+    private fun setDefaultValuesToMatchStates(){
         viewModel.matchStateQ1.value = MATCH_READY
         viewModel.matchStateQ2.value = MATCH_READY
         viewModel.matchStateQ3.value = MATCH_READY
         viewModel.matchStateQ4.value = MATCH_READY
-
         viewModel.matchStateS1.value = MATCH_READY
         viewModel.matchStateS2.value = MATCH_READY
-
         viewModel.matchStateF1.value = MATCH_READY
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

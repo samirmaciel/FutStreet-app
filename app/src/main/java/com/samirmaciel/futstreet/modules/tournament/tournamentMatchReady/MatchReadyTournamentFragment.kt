@@ -37,7 +37,6 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             viewModel.currentMatchRunning.value!!.value = match
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
-                    Log.d("ENDMATCH", "onReceive: ")
                     matchEndClean()
                     match.status.value = MATCH_ENDED
                 }else{
@@ -96,26 +95,20 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                     startBackgroundService()
                     viewModel.gameState.value = PLAYING
                 }
-
                 PLAYING ->{
                     requireActivity().stopService(serviceIntent)
                     viewModel.gameState.value = PAUSED
                 }
-
                 PAUSED ->{
                     startBackgroundService()
                     viewModel.gameState.value = PLAYING
                 }
-
                 FINISH -> {
                     restartBackgroundService()
                     viewModel.gameState.value = PREPLAY
                 }
             }
-
-
         }
-
         binding.buttonGameCancel.setOnClickListener{
             val alertCancel = AlertDialog.Builder(requireContext()).apply {
                 setTitle(resources.getText(R.string.text_ask_cancel_game))
@@ -292,7 +285,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         viewModel.timeLimit.value = viewModel.tournamentTimeLimit
         viewModel.isRunningMatch = false
         requireActivity().stopService(serviceIntent)
-        findNavController().navigate(R.id.action_matchReadyTournamentFragment_to_waitingForMatchFragment)
+        findNavController().navigateUp()
     }
 
     private fun cleanViewModelData(){
@@ -308,7 +301,6 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
     override fun onDestroy() {
         super.onDestroy()
         requireActivity().stopService(serviceIntent)
-        requireActivity().unregisterReceiver(updateTime)
         _binding = null
     }
 

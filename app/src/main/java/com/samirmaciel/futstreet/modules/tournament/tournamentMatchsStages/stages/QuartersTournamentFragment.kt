@@ -1,6 +1,5 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,8 +10,6 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
@@ -136,12 +133,9 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
                 matchCard.isClickable = false
                 if(!viewModel.isRunningMatch){
-                    if(requireActivity().findNavController(R.id.topFragment).currentDestination?.id == R.id.waitingForMatchFragment){
                         requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
-                    }
                     viewModel.timeLimit.value = viewModel.tournamentTimeLimit
                 }
-
             }
 
             MATCH_ENDED ->{
@@ -149,34 +143,30 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 matchTitle.setText(R.string.title_state_tournament_match_ended)
                 matchCard.isClickable = false
                 if(!viewModel.isRunningMatch){
-                    updateStatusOthersToReady(matchID)
+                    updateStatusForOthersToReady(matchID)
                 }
             }
         }
     }
 
-    private fun updateStatusOthersToReady(match : Int){
+    private fun updateStatusForOthersToReady(match : Int){
 
         when(match){
-
             0 -> {
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ2)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ3)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ4)
             }
-
             1 -> {
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ1)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ3)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ4)
             }
-
             2 -> {
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ1)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ2)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ4)
             }
-
             3 -> {
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ1)
                 checkStatusMatchAndChangeToReady(viewModel.matchStateQ2)
