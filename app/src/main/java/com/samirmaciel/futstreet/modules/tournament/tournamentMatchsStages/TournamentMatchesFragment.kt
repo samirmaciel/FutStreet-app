@@ -27,13 +27,6 @@ class TournamentMatchesFragment : Fragment(R.layout.fragment_tournament) {
         initComponents()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        setTeamsOnQuarters()
-    }
-
-
     private fun initComponents(){
         val adapter = TabPagerAdapter(childFragmentManager, lifecycle)
         binding.tournamenteViewPager.adapter = adapter
@@ -56,14 +49,6 @@ class TournamentMatchesFragment : Fragment(R.layout.fragment_tournament) {
                 }
             }
         }.attach()
-    }
-
-    private fun setTeamsOnQuarters(){
-
-        for (i in 0..7){
-            viewModel.getMapWithQuartersNamesLiveData()[i]!!.value = viewModel.getTeamNameMap()[i]!!.value
-            viewModel.getMapWithQuartersShirtLiveData()[i]!!.value = viewModel.getTeamShirtMap()[i]!!.value
-        }
     }
 
     override fun onDestroy() {

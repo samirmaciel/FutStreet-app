@@ -23,12 +23,6 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
 
     private val viewModel : TournamentViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        addDefaultTeams()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -39,7 +33,6 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
     override fun onResume() {
         super.onResume()
 
-
         binding.buttonCancelTournament.setOnClickListener{
             findNavController().navigate(R.id.action_tournamentSelectFragment_to_homeFragment)
         }
@@ -48,54 +41,27 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
 
             saveInputTeamsNamesInViewModel()
 
-            val listSortedTeams = geSortedTeams()
-
-            for (i in 0..7){
-                viewModel.getTeamNameMap()[i]!!.value = listSortedTeams[i].name
-                viewModel.getTeamShirtMap()[i]!!.value = listSortedTeams[i].shirt
-            }
-
-
             findNavController().navigate(R.id.action_tournamentSelectFragment_to_tournamentMatchSettingsFragment)
         }
+        
+        binding.selectShirtTeam1Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team1) }
+        binding.selectShirtTeam2Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team2) }
+        binding.selectShirtTeam3Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team3) }
+        binding.selectShirtTeam4Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team4) }
+        binding.selectShirtTeam5Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team5) }
+        binding.selectShirtTeam6Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team6) }
+        binding.selectShirtTeam7Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team7) }
+        binding.selectShirtTeam8Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.team8) }
 
-        binding.selectShirtTeam1Tournament.setOnClickListener{ view ->
-            //callAlertShirtSelect(viewModel.shirtTeam1)
+        viewModel.team1.observe(this){ animateShirt(binding.selectShirtTeam1Tournament, it.shirt) }
+        viewModel.team2.observe(this){ animateShirt(binding.selectShirtTeam2Tournament, it.shirt) }
+        viewModel.team3.observe(this){ animateShirt(binding.selectShirtTeam3Tournament, it.shirt) }
+        viewModel.team4.observe(this){ animateShirt(binding.selectShirtTeam4Tournament, it.shirt) }
+        viewModel.team5.observe(this){ animateShirt(binding.selectShirtTeam5Tournament, it.shirt) }
+        viewModel.team6.observe(this){ animateShirt(binding.selectShirtTeam6Tournament, it.shirt) }
+        viewModel.team7.observe(this){ animateShirt(binding.selectShirtTeam7Tournament, it.shirt) }
+        viewModel.team8.observe(this){ animateShirt(binding.selectShirtTeam8Tournament, it.shirt) }
 
-            getInputShirtImage(binding.selectShirtTeam1Tournament, "shirt1")
-
-        }
-
-
-
-        binding.selectShirtTeam2Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam2) }
-        binding.selectShirtTeam3Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam3) }
-        binding.selectShirtTeam4Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam4) }
-        binding.selectShirtTeam5Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam5) }
-        binding.selectShirtTeam6Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam6) }
-        binding.selectShirtTeam7Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam7) }
-        binding.selectShirtTeam8Tournament.setOnClickListener{ callAlertShirtSelect(viewModel.shirtTeam8) }
-
-        viewModel.shirtTeam1.observe(this){ animateShirt(binding.selectShirtTeam1Tournament, it) }
-        viewModel.shirtTeam2.observe(this){ animateShirt(binding.selectShirtTeam2Tournament, it) }
-        viewModel.shirtTeam3.observe(this){ animateShirt(binding.selectShirtTeam3Tournament, it) }
-        viewModel.shirtTeam4.observe(this){ animateShirt(binding.selectShirtTeam4Tournament, it) }
-        viewModel.shirtTeam5.observe(this){ animateShirt(binding.selectShirtTeam5Tournament, it) }
-        viewModel.shirtTeam6.observe(this){ animateShirt(binding.selectShirtTeam6Tournament, it) }
-        viewModel.shirtTeam7.observe(this){ animateShirt(binding.selectShirtTeam7Tournament, it) }
-        viewModel.shirtTeam8.observe(this){ animateShirt(binding.selectShirtTeam8Tournament, it) }
-
-    }
-
-    private fun geSortedTeams() : MutableList<Team> {
-        val listTeams = mutableListOf<Team>()
-
-        for (i in 0..7){
-            listTeams.add(Team(name = viewModel.getTeamNameMap()[i]!!.value!!, shirt = viewModel.getTeamShirtMap()[i]!!.value!!))
-        }
-        listTeams.shuffle()
-
-        return listTeams
     }
 
     private fun animateShirt(imageView : ImageView, shirt : Int){
@@ -113,23 +79,14 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
         }.start()
     }
 
-    private fun getInputShirtImage(imageView: ImageView, shirt : String){
-        val shirtSelection = ShirtSelectionDialog {
-            for ((k, v) in viewModel.getListOfShirts()) {
-                if (it == k) {
-                    viewModel.mapShirtImageView[shirt] = v
-                    animateShirt(imageView, v)
-                }
-            }
-        }
-        shirtSelection.show(childFragmentManager, SHIRT_SELECTION_FRAGMENT)
-    }
 
-    private fun callAlertShirtSelect(liveData : MutableLiveData<Int>){
+    private fun callAlertShirtSelect(teamLiveData: MutableLiveData<Team>){
         val shirtSelection = ShirtSelectionDialog {
-            for ((k, v) in viewModel.getListOfShirts()) {
+            for ((k, v) in viewModel.getListOfShirtsResourceIDs()) {
                 if (it == k) {
-                   liveData.value = v
+                    val team = teamLiveData.value!!
+                    team.shirt = v
+                    teamLiveData.value = team
                 }
             }
         }
@@ -138,60 +95,30 @@ class TournamentTeamSettingFragment : Fragment(R.layout.fragment_tournamentteams
 
     private fun saveInputTeamsNamesInViewModel(){
         if(binding.tournamentInputTeamName1.text.isNotEmpty()){
-            viewModel.teamName1.value = binding.tournamentInputTeamName1.text.toString()
+            viewModel.team1.value!!.name = binding.tournamentInputTeamName1.text.toString()
         }
-
         if(binding.tournamentInputTeamName2.text.isNotEmpty()){
-            viewModel.teamName2.value = binding.tournamentInputTeamName2.text.toString()
+            viewModel.team2.value!!.name = binding.tournamentInputTeamName2.text.toString()
         }
-
         if(binding.tournamentInputTeamName3.text.isNotEmpty()){
-            viewModel.teamName3.value = binding.tournamentInputTeamName3.text.toString()
+            viewModel.team3.value!!.name = binding.tournamentInputTeamName3.text.toString()
         }
-
         if(binding.tournamentInputTeamName4.text.isNotEmpty()){
-            viewModel.teamName4.value = binding.tournamentInputTeamName4.text.toString()
+            viewModel.team4.value!!.name = binding.tournamentInputTeamName4.text.toString()
         }
-
         if(binding.tournamentInputTeamName5.text.isNotEmpty()){
-            viewModel.teamName5.value = binding.tournamentInputTeamName5.text.toString()
+            viewModel.team5.value!!.name = binding.tournamentInputTeamName5.text.toString()
         }
-
         if(binding.tournamentInputTeamName6.text.isNotEmpty()){
-            viewModel.teamName6.value = binding.tournamentInputTeamName6.text.toString()
+            viewModel.team6.value!!.name = binding.tournamentInputTeamName6.text.toString()
         }
-
         if(binding.tournamentInputTeamName7.text.isNotEmpty()){
-            viewModel.teamName7.value = binding.tournamentInputTeamName7.text.toString()
+            viewModel.team7.value!!.name = binding.tournamentInputTeamName7.text.toString()
         }
-
         if(binding.tournamentInputTeamName8.text.isNotEmpty()){
-            viewModel.teamName8.value = binding.tournamentInputTeamName8.text.toString()
+            viewModel.team8.value!!.name = binding.tournamentInputTeamName8.text.toString()
         }
     }
-
-    private fun addDefaultTeams(){
-        viewModel.team1.value = Team(name = resources.getText(R.string.input_hint_team1).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team2.value = Team(name = resources.getText(R.string.input_hint_team2).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team3.value = Team(name = resources.getText(R.string.input_hint_team3).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team4.value = Team(name = resources.getText(R.string.input_hint_team4).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team5.value = Team(name = resources.getText(R.string.input_hint_team5).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team6.value = Team(name = resources.getText(R.string.input_hint_team6).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team7.value = Team(name = resources.getText(R.string.input_hint_team7).toString(), shirt = R.drawable.shirt_select)
-        viewModel.team8.value = Team(name = resources.getText(R.string.input_hint_team8).toString(), shirt = R.drawable.shirt_select)
-
-
-        viewModel.teamName1.value = resources.getText(R.string.input_hint_team1).toString()
-        viewModel.teamName2.value = resources.getText(R.string.input_hint_team2).toString()
-        viewModel.teamName3.value = resources.getText(R.string.input_hint_team3).toString()
-        viewModel.teamName4.value = resources.getText(R.string.input_hint_team4).toString()
-        viewModel.teamName5.value = resources.getText(R.string.input_hint_team5).toString()
-        viewModel.teamName6.value = resources.getText(R.string.input_hint_team6).toString()
-        viewModel.teamName7.value = resources.getText(R.string.input_hint_team7).toString()
-        viewModel.teamName8.value = resources.getText(R.string.input_hint_team8).toString()
-    }
-
-
 
     override fun onDestroy() {
         super.onDestroy()

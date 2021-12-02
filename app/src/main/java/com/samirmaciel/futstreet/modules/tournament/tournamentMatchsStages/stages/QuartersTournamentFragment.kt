@@ -26,7 +26,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.addTeamsToMatchsQuarters()
+        viewModel.addTeamsSortedToMatchsQuarters()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
 
         viewModel.matchQ1.observe(this){
             updateMatch(binding.stageTeamName11, binding.stageTeamName21, binding.score11, binding.score21, binding.stageTeamShirt11, binding.stageTeamShirt21, it)
-            Log.d("QUARTERSFRAGMENT", "QUARTERS " + viewModel.matchStateQ1.value!!)
+
         }
 
         viewModel.matchStateQ1.observe(this){
