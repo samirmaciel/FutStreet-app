@@ -14,14 +14,19 @@ import androidx.core.app.NotificationCompat
 import com.samirmaciel.futstreet.modules.MainActivity
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.modules.matchReady.MatchReadyFragment
+import com.samirmaciel.futstreet.modules.matchReady.MatchReadyTournamentFragment
 import com.samirmaciel.futstreet.shared.const.CHANNEL_ID
+import com.samirmaciel.futstreet.shared.const.MATCH_RUNNING
 import com.samirmaciel.futstreet.shared.const.NOTIFICATION_ID
+import com.samirmaciel.futstreet.shared.const.PENALTY
 import java.util.*
 import kotlin.math.roundToInt
 
 class BackgroundService : Service(){
 
     private val timer = Timer()
+
+    var gameState = MATCH_RUNNING
 
     var isTimeEnded : Boolean = false
 
@@ -59,11 +64,11 @@ class BackgroundService : Service(){
         const val IS_TIME_ENDED = "IS_TIME_ENDED"
     }
 
-
-
     override fun onCreate() {
         super.onCreate()
+
         registerReceiver(scoreObserve, IntentFilter(MatchReadyFragment.SCORE_OBSERVE))
+        registerReceiver(penaltyObserve, IntentFilter(MatchReadyTournamentFragment.PENALTY_NOTIFY))
 
     }
 
@@ -90,22 +95,43 @@ class BackgroundService : Service(){
         }
     }
 
+    private val penaltyObserve : BroadcastReceiver = object : BroadcastReceiver(){
+        override fun onReceive(context: Context, intent: Intent) {
+                gameState = PENALTY
+        }
+    }
+
     private inner class TimerLine : TimerTask(){
         override fun run() {
             if(timeLimit == 0.0) {
-                if(currentRound == roundLimit){
-                    callNotification(resources.getText(R.string.text_match_finish) as String, nameTeamOne, nameTeamTwo, scoreTeam1, scoreTeam2, shirtTeamOne, shirtTeamTwo)
-                }
-                if(!isTimeEnded){
-                    if(currentRound < roundLimit){
-                        currentRound++
-                        isTimeEnded = true
+                when(gameState){
+
+                    MATCH_RUNNING -> {
+                        if(currentRound == roundLimit){
+                            callNotification(resources.getText(R.string.text_match_finish) as String, nameTeamOne, nameTeamTwo, scoreTeam1, scoreTeam2, shirtTeamOne, shirtTeamTwo)
+                        }
+
+                        if(!isTimeEnded){
+                            if(currentRound < roundLimit){
+                                currentRound++
+                                isTimeEnded = true
+                            }
+                        }
+
+                        intentTimeEnd.putExtra(CURRENT_ROUND, currentRound)
+                        intentTimeEnd.putExtra(IS_TIME_ENDED, true)
+                        sendBroadcast(intentTimeEnd)
+                    }
+
+                    PENALTY ->{
+                        callNotification("Pênaltis", nameTeamOne, nameTeamTwo, scoreTeam1, scoreTeam2, shirtTeamOne, shirtTeamTwo)
+                        intentTimeEnd.putExtra(IS_TIME_ENDED, false)
+                        sendBroadcast(intentTimeEnd)
                     }
                 }
 
-                intentTimeEnd.putExtra(CURRENT_ROUND, currentRound)
-                intentTimeEnd.putExtra(IS_TIME_ENDED, true)
-                sendBroadcast(intentTimeEnd)
+
+
             }else{
                 timeLimit--
                 intentUpdate.putExtra(UPDATE_TIME, timeLimit)

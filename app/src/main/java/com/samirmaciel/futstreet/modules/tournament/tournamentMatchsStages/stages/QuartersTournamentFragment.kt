@@ -1,7 +1,6 @@
 package com.samirmaciel.futstreet.modules.tournament.tournamentMatchsStages.stages
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -15,6 +14,7 @@ import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentQuartersBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 import com.samirmaciel.futstreet.shared.const.*
+import com.samirmaciel.futstreet.shared.model.Team
 import com.samirmaciel.futstreet.shared.model.TournamentMatch
 
 class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarters) {
@@ -132,7 +132,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 backGroundMatch.setBackgroundResource(R.color.green)
                 matchTitle.setText(resources.getText(R.string.title_state_tournament_match_running))
                 matchCard.isClickable = false
-                if(!viewModel.isRunningMatch){
+                if(!viewModel.isMatchRunning){
                         requireActivity().findNavController(R.id.topFragment).navigate(R.id.action_waitingForMatchFragment_to_matchReadyTournamentFragment)
                     viewModel.timeLimit.value = viewModel.tournamentTimeLimit
                 }
@@ -142,7 +142,7 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
                 backGroundMatch.setBackgroundResource(R.color.red)
                 matchTitle.setText(R.string.title_state_tournament_match_ended)
                 matchCard.isClickable = false
-                if(!viewModel.isRunningMatch){
+                if(!viewModel.isMatchRunning){
                     updateStatusForOthersToReady(matchID)
                 }
             }
@@ -185,6 +185,10 @@ class QuartersTournamentFragment : Fragment(R.layout.fragment_tournament_quarter
         if(match.value!! == MATCH_READY){
             match.value = MATCH_WAITING
         }
+    }
+
+    private fun getWinnerTeamFromMatch(match : TournamentMatch) : Team {
+        return match.winner!!
     }
 
     override fun onDestroy() {

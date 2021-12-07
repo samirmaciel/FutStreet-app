@@ -2,18 +2,20 @@ package com.samirmaciel.futstreet.modules.matchReady
 
 import android.content.*
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.samirmaciel.futstreet.R
 import com.samirmaciel.futstreet.databinding.FragmentTournamentMatchreadyBinding
 import com.samirmaciel.futstreet.modules.tournament.TournamentViewModel
 import com.samirmaciel.futstreet.shared.const.*
+import com.samirmaciel.futstreet.shared.model.Team
 import com.samirmaciel.futstreet.shared.model.TournamentMatch
 import com.samirmaciel.futstreet.shared.service.BackgroundService
 
@@ -26,19 +28,29 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
     companion object {
         const val SCORE_OBSERVE = "SCORE_OBSERVE"
+        const val PENALTY_NOTIFY = "PENALTY_NOTIFY"
     }
 
     private val updateTime : BroadcastReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context, intent: Intent) {
-            val match = viewModel.currentMatchRunning.value!!.value!!
-            viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
-            match.scoreTeamOne = intent.getIntExtra(BackgroundService.SCORE_T1, match.scoreTeamOne)
-            match.scoreTeamTwo = intent.getIntExtra(BackgroundService.SCORE_T2, match.scoreTeamTwo)
-            viewModel.currentMatchRunning.value!!.value = match
+            val currentMatch = viewModel.currentMatchRunning.value!!.value!!
+            if(viewModel.gameState.value != PENALTY){
+                viewModel.timeLimit.value = intent.getDoubleExtra(BackgroundService.UPDATE_TIME, 0.0)
+            }
+            currentMatch.scoreTeamOne = intent.getIntExtra(BackgroundService.SCORE_T1, currentMatch.scoreTeamOne)
+            currentMatch.scoreTeamTwo = intent.getIntExtra(BackgroundService.SCORE_T2, currentMatch.scoreTeamTwo)
+            viewModel.currentMatchRunning.value!!.value = currentMatch
             if(intent.getBooleanExtra(BackgroundService.IS_TIME_ENDED, false)){
                 if(viewModel.roundsLimit.value == viewModel.currentRound.value){
-                    matchEndClean()
-                    match.status.value = MATCH_ENDED
+                    if(currentMatch.scoreTeamOne == currentMatch.scoreTeamTwo){
+                        setCurrentMatchToPenaltyShootout()
+                        val penaltyIntent = Intent(PENALTY_NOTIFY)
+                        penaltyIntent.putExtra(PENALTY_NOTIFY, PENALTY_NOTIFY)
+                        requireActivity().sendBroadcast(penaltyIntent)
+                    }else{
+                        currentMatchEndClean(currentMatch)
+                    }
+
                 }else{
                     viewModel.textTimeView.value = viewModel.getTimeStringFromDouble(viewModel.tournamentTimeLimit)
                     viewModel.timeLimit.value = viewModel.tournamentTimeLimit
@@ -46,7 +58,6 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                     viewModel.currentRound.value = intent.getIntExtra(BackgroundService.CURRENT_ROUND, viewModel.currentRound.value!!)
                     requireActivity().stopService(serviceIntent)
                 }
-
             }
         }
     }
@@ -62,7 +73,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTournamentMatchreadyBinding.bind(view)
         getSettings(viewModel.currentMatchRunning.value!!.value!!)
-        viewModel.isRunningMatch = true
+        viewModel.isMatchRunning = true
     }
 
     override fun onResume() {
@@ -106,6 +117,18 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                 FINISH -> {
                     restartBackgroundService()
                     viewModel.gameState.value = PREPLAY
+                }
+                PENALTY -> {
+                    if(viewModel.currentMatchRunning.value!!.value!!.scoreTeamOne != viewModel.currentMatchRunning.value!!.value!!.scoreTeamTwo){
+                        val currentMatch : TournamentMatch = viewModel.currentMatchRunning.value!!.value!!
+                        currentMatch.winner = getWinnerMath(currentMatch)
+                        currentMatchEndClean(currentMatch)
+                        viewModel.currentMatchRunning.value!!.value = currentMatch
+                        viewModel.currentMatchRunning.value!!.value!!.status.value = MATCH_ENDED
+
+                    }else{
+                        Snackbar.make(requireView(), "Encerramento apenas será feito com um vencedor!", Snackbar.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -183,30 +206,44 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
                     binding.motionLayoutButtonsGoals.transitionToStart()
                     binding.buttonStart.setText(resources.getText(R.string.title_button_restart))
                 }
+
+                PENALTY -> {
+                    binding.textCurrentTime.text  ="Pênaltis"
+                    binding.buttonStart.text = "Encerrar"
+                    binding.textCurrentRound.visibility = View.GONE
+                }
             }
         }
 
     }
 
-    private fun getWinnerMath(teamOne : Int, teamTwo : Int) : Int {
-        if(teamOne > teamTwo){
-            return 1
-        }else if(teamOne < teamTwo){
-            return 2
+    private fun setCurrentMatchToPenaltyShootout(){
+        viewModel.gameState.value = PENALTY
+    }
+
+    private fun getWinnerMath(match: TournamentMatch) : Team {
+        if(match.scoreTeamOne > match.scoreTeamTwo){
+            return Team(
+                name = match.nameTeamOne,
+                shirt = match.shirtTeamOne
+            )
         }else{
-            return 0
+            return Team(
+                name = match.nameTeamTwo,
+                shirt = match.shirtTeamTwo
+            )
         }
     }
 
-    private fun buttonAnimateVisibility(button : Button){
-        button.animate().apply {
-            duration = 100
-            scaleXBy(2f)
-            scaleY(2f)
-            setInterpolator(AccelerateDecelerateInterpolator())
-
-        }
-    }
+//    private fun buttonAnimateVisibility(button : Button){
+//        button.animate().apply {
+//            duration = 100
+//            scaleXBy(2f)
+//            scaleY(2f)
+//            setInterpolator(AccelerateDecelerateInterpolator())
+//
+//        }
+//    }
 
     private fun restartBackgroundService(){
         viewModel.scoreTeam1.value = 0
@@ -236,6 +273,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
         }.withEndAction {
             viewModel.scoreTeam1.value = viewModel.scoreTeam1.value!! + 1
+            viewModel.currentMatchRunning.value!!.value!!.scoreTeamOne = viewModel.currentMatchRunning.value!!.value!!.scoreTeamOne + 1
             binding.textScoreTeamOne.animate().apply {
                 duration = 150
                 scaleXBy(-0.5f)
@@ -252,6 +290,7 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
             scaleXBy(0.5f)
         }.withEndAction {
             viewModel.scoreTeam2.value = viewModel.scoreTeam2.value!! + 1
+            viewModel.currentMatchRunning.value!!.value!!.scoreTeamTwo = viewModel.currentMatchRunning.value!!.value!!.scoreTeamTwo + 1
             binding.textScoreTeamTwo.animate().apply {
                 duration = 150
                 scaleXBy(-0.5f)
@@ -277,15 +316,16 @@ class MatchReadyTournamentFragment : Fragment(R.layout.fragment_tournament_match
 
     }
 
-    private fun matchEndClean(){
+    private fun currentMatchEndClean(currentMatch : TournamentMatch){
         viewModel.textTimeView.value = resources.getText(R.string.text_end_game).toString()
         viewModel.gameState.value = PREPLAY
         viewModel.scoreTeam1.value = 0
         viewModel.scoreTeam2.value = 0
         viewModel.timeLimit.value = viewModel.tournamentTimeLimit
-        viewModel.isRunningMatch = false
+        viewModel.isMatchRunning = false
         requireActivity().stopService(serviceIntent)
         findNavController().navigateUp()
+        currentMatch.status.value = MATCH_ENDED
     }
 
     private fun cleanViewModelData(){

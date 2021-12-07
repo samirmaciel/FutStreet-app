@@ -31,15 +31,6 @@ class MatchReadyViewModel : ViewModel(){
         return makeTimeString( minutes, seconds)
     }
 
-    fun saveMatch(tournamentMatch : TournamentMatch){
-        when(tournamentMatch.winner){
-            0 -> println("EMPATE -----------")
-
-            1 -> println(tournamentMatch.nameTeamOne)
-
-            2 -> println(tournamentMatch.nameTeamTwo)
-        }
-    }
 
     private fun makeTimeString( minutes: Int, seconds: Int) : String{
 

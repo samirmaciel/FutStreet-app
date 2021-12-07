@@ -10,7 +10,7 @@ import kotlin.math.roundToInt
 
 class TournamentViewModel : ViewModel() {
 
-    var isRunningMatch = false
+    var isMatchRunning = false
 
     //Teams
     var team1 : MutableLiveData<Team> = MutableLiveData(Team(name = "team1", shirt = R.drawable.shirt_select ))
@@ -64,7 +64,7 @@ class TournamentViewModel : ViewModel() {
     var textTimeView : MutableLiveData<String> = MutableLiveData("00:00")
     var gameState : MutableLiveData<Int> = MutableLiveData(PREPLAY)
 
-    // Match current on MATCHREADY
+    // Match current on MATCH RUNNING
     var currentMatchRunning : MutableLiveData<MutableLiveData<TournamentMatch>> = MutableLiveData()
 
     fun addTeamsSortedToMatchsQuarters(){
@@ -79,7 +79,7 @@ class TournamentViewModel : ViewModel() {
         for(i in matchs.indices){
 
             matchs[i].value = TournamentMatch(
-                winner = 0,
+                winner = null,
                 nameTeamOne = teams[teamOneIndice].name,
                 nameTeamTwo = teams[teamTwoIndice].name,
                 shirtTeamOne = teams[teamOneIndice].shirt,
@@ -129,16 +129,6 @@ class TournamentViewModel : ViewModel() {
         return makeTimeString( minutes, seconds)
     }
 
-    fun saveMatch(tournamentMatch : TournamentMatch){
-        when(tournamentMatch.winner){
-            0 -> println("EMPATE -----------")
-
-            1 -> println(tournamentMatch.nameTeamOne)
-
-            2 -> println(tournamentMatch.nameTeamTwo)
-        }
-    }
-
     private fun makeTimeString( minutes: Int, seconds: Int) : String{
         return String.format("%02d:%02d", minutes, seconds)
     }
@@ -156,5 +146,4 @@ class TournamentViewModel : ViewModel() {
             909 to R.drawable.shirt_select
         )
     }
-
 }

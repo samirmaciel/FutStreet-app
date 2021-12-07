@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 data class TournamentMatch(
 
     val id : Long = 0,
-    var winner : Int,
+    var winner : Team?,
     val nameTeamOne : String,
     val nameTeamTwo : String,
     var scoreTeamOne : Int = 0,
